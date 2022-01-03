@@ -1,0 +1,3 @@
+@import 'npm:normalize.css/normalize.css';
+@import 'npm:@cds/city/css/bundles/default.min.css';
+@import 'npm:@cds/core/global.min.css';
