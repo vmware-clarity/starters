@@ -2,22 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Clarity Core - Snowpack App</title>
+    <title>Clarity + Snowpack</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link rel="stylesheet" href="https://unpkg.com/normalize.css/normalize.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@cds/core@next/global.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@cds/city/css/bundles/default.min.css" />
     <link rel="stylesheet" href="/index.css" />
   </head>
-  <body cds-text="body" cds-layout="p:lg">
-    <cds-button status="primary">hello there</cds-button>
+  <body cds-text="body" cds-theme="dark">
+    <main cds-layout="vertical gap:lg p:lg">
+      <h1 cds-text="heading">Clarity + Snowpack</h1>
 
-    <cds-alert-group status="danger" hidden>
-      <cds-alert closable>
-        General Kenobi. You are a bold one.
-      </cds-alert>
-    </cds-alert-group>
+      <div cds-layout="horizontal gap:sm">
+        <a cds-text="link" href="https://clarity.design/storybook/core">Clarity Docs</a>
+        <a cds-text="link" href="https://www.snowpack.dev/">Snowpack</a>
+      </div>
+
+      <cds-button action="outline">Hello There</cds-button>
+
+      <cds-alert-group status="info" hidden>
+        <cds-alert closable>
+          you are a bold one...
+        </cds-alert>
+      </cds-alert-group>
+    </main>
 
     <script type="module" src="/_dist_/index.js"></script>
   </body>

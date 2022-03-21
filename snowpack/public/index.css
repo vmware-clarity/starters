@@ -1,7 +1,4 @@
-/* todo: https://github.com/pikapkg/snowpack/issues/389 */
- @import 'normalize.css/normalize.css';
- @import '@cds/core/global.min.css';
- @import '@cds/city/css/bundles/default.min.css';
-
-body {
-}
+@import 'modern-normalize/modern-normalize.css';
+@import '@cds/core/global.min.css';
+@import '@cds/core/styles/theme.dark.min.css';
+@import '@cds/city/css/bundles/default.min.css';
