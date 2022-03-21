@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 
 import 'modern-normalize/modern-normalize.css'; // css reset
 import '@cds/core/global.css'; // pre-minified version breaks
+import '@cds/core/styles/theme.dark.css'; // pre-minified version breaks
 import '@cds/city/css/bundles/default.min.css'; // load base font
 import './index.css';
 

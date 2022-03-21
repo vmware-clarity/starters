@@ -1,3 +1,4 @@
-@import 'npm:normalize.css/normalize.css';
-@import 'npm:@cds/city/css/bundles/default.min.css';
+@import 'npm:modern-normalize/modern-normalize.css';
 @import 'npm:@cds/core/global.min.css';
+@import 'npm:@cds/core/styles/theme.dark.min.css';
+@import 'npm:@cds/city/css/bundles/default.min.css';

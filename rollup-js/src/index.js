@@ -1,7 +1,11 @@
 import './index.css';
-import '@cds/core/icon/register.js';
-import '@cds/core/badge/register.js';
-import { ClarityIcons, searchIcon, pencilIcon } from '@cds/core/icon';
+import '@cds/core/button/register.js';
+import '@cds/core/alert/register.js';
 
-ClarityIcons.addIcons(searchIcon, pencilIcon);
-document.querySelector('cds-badge').innerText = window.CDS.getDetails().versions[0];
+const button = document.querySelector('cds-button');
+const alertGroup = document.querySelector('cds-alert-group');
+const alert = document.querySelector('cds-alert');
+
+button.addEventListener('click', () => alertGroup.removeAttribute('hidden'));
+alert.addEventListener('closeChange', () => alertGroup.setAttribute('hidden', ''));
+
