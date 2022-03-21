@@ -1,0 +1,11 @@
+@import 'modern-normalize/modern-normalize.css';
+@import '@cds/core/global.min.css';
+@import '@cds/core/styles/theme.dark.min.css';
+@import '@cds/city/css/bundles/default.css';
+
+@import '@cds/core/styles/shim.clr-ui.min.css';
+@import '@clr/ui/clr-ui.min.css';
+
+[cds-card-remove-margin] {
+  --color: var(--cds-alias-object-container-border-color);
+}

@@ -1,0 +1,76 @@
+<!-- https://clarity.design/storybook/core -->
+<form [formGroup]="form" (ngSubmit)="submit()" cds-layout="vertical gap:lg p:lg">
+  <h1 cds-text="heading">Clarity + clr-ui/clr-angular Starter</h1>
+
+  <div cds-layout="horizontal gap:sm">
+    <a cds-text="link" href="https://clarity.design/storybook/core">Clarity Docs</a>
+    <a cds-text="link" href="https://angular.io">Angular Docs</a>
+  </div>
+
+  <p cds-text="body">
+    This is an minimal Angular application demonstrating how <code cds-text="code">@clr-ui</code>, <code cds-text="code">@clr/angular</code> and <code cds-text="code">@cds/core</code> work together.
+    <code cds-text="code">@clr/angular</code> consumes and use <code cds-text="code">@cds/core</code> themes. 
+  </p>
+
+  <cds-toggle>
+    <label>dark theme</label>
+    <input type="checkbox" formControlName="darkTheme" [checked]="form.value.darkTheme" />
+    <cds-control-message></cds-control-message>
+  </cds-toggle>
+
+  <section cds-layout="vertical gap:lg">
+    <cds-button action="outline" status="primary">button</cds-button>
+
+    <cds-input layout="vertical" control-width="shrink">
+      <label>input</label>
+      <input placeholder="input" formControlName="textInput" [value]="form.value.textInput" />
+    </cds-input>
+
+    <cds-alert-group status="info">
+      <cds-alert>alert message</cds-alert>
+    </cds-alert-group>
+  </section>
+
+  <cds-card>
+    <div cds-layout="vertical gap:md p-b:xs">
+      <h2 cds-text="section">Card Header</h2>
+      <cds-divider cds-card-remove-margin></cds-divider>
+      <p cds-text="body">Card Content</p>
+    </div>
+  </cds-card>
+  
+  <cds-divider></cds-divider>
+
+  <section cds-layout="vertical gap:lg">
+    <clr-toggle-wrapper>
+      <input type="checkbox" clrToggle formControlName="darkTheme" [checked]="form.value.darkTheme" />
+      <label>dark theme</label>
+    </clr-toggle-wrapper>
+
+    <button class="btn">button</button>
+
+    <clr-input-container style="margin: 0">
+      <label>input</label>
+      <input clrInput placeholder="input" formControlName="textInput" [value]="form.value.textInput" />
+    </clr-input-container>
+
+    <clr-alert [clrAlertClosable]="false" style="width: 100%">
+      <clr-alert-item>
+        <span class="alert-text">
+          alert message
+        </span>
+      </clr-alert-item>
+    </clr-alert>
+
+    <div class="card">
+      <div class="card-header">
+        Card Header
+      </div>
+      <div class="card-block">
+        <div class="card-text">
+          Card Content
+        </div>
+      </div>
+    </div>
+  </section>
+</form>
