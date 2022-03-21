@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "core-angular-universal": {
+    "starter-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,14 +23,19 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/core-angular-universal/browser",
+            "outputPath": "dist/starter-app/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -53,17 +58,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all",
-              "optimization": {
-                "scripts": true,
-                "fonts": {
-                  "inline": true
-                },
-                "styles": {
-                  "minify": true,
-                  "inlineCritical": false
-                }
-              }
+              "outputHashing": "all"
             },
             "development": {
               "buildOptimizer": false,
@@ -80,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "core-angular-universal:build:production"
+              "browserTarget": "starter-app:build:production"
             },
             "development": {
-              "browserTarget": "core-angular-universal:build:development"
+              "browserTarget": "starter-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -91,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "core-angular-universal:build"
+            "browserTarget": "starter-app:build"
           }
         },
         "test": {
@@ -102,15 +97,20 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
           }
         },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/core-angular-universal/server",
+            "outputPath": "dist/starter-app/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "inlineStyleLanguage": "scss"
@@ -137,12 +137,12 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "core-angular-universal:build:development",
-              "serverTarget": "core-angular-universal:server:development"
+              "browserTarget": "starter-app:build:development",
+              "serverTarget": "starter-app:server:development"
             },
             "production": {
-              "browserTarget": "core-angular-universal:build:production",
-              "serverTarget": "core-angular-universal:server:production"
+              "browserTarget": "starter-app:build:production",
+              "serverTarget": "starter-app:server:production"
             }
           },
           "defaultConfiguration": "development"
@@ -150,16 +150,18 @@
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "routes": ["/"]
+            "routes": [
+              "/"
+            ]
           },
           "configurations": {
             "production": {
-              "browserTarget": "core-angular-universal:build:production",
-              "serverTarget": "core-angular-universal:server:production"
+              "browserTarget": "starter-app:build:production",
+              "serverTarget": "starter-app:server:production"
             },
             "development": {
-              "browserTarget": "core-angular-universal:build:development",
-              "serverTarget": "core-angular-universal:server:development"
+              "browserTarget": "starter-app:build:development",
+              "serverTarget": "starter-app:server:development"
             }
           },
           "defaultConfiguration": "production"
@@ -167,5 +169,5 @@
       }
     }
   },
-  "defaultProject": "core-angular-universal"
+  "defaultProject": "starter-app"
 }

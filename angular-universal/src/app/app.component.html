@@ -1,11 +1,16 @@
-<main cds-text="body" cds-layout="vertical gap:lg p:lg">
-  <h1 cds-text="heading">Clarity Core in Angular Universal</h1>
+<main cds-layout="vertical gap:md p:lg">
+  <h1 cds-text="heading">Clarity + Angular Universal Starter</h1>
 
-  <cds-alert-group status="warning" *ngIf="show">
-    <cds-alert [closable]="true" (closeChange)="show = false">
-      Hello World
+  <div cds-layout="horizontal gap:sm">
+    <a cds-text="link" href="https://clarity.design/storybook/core">Clarity Docs</a>
+    <a cds-text="link" href="https://angular.io">Angular Docs</a>
+  </div>
+
+  <cds-button action="outline" (click)="showAlert = true">Hello There</cds-button>
+
+  <cds-alert-group status="info" *ngIf="showAlert">
+    <cds-alert [closable]="true" (closeChange)="showAlert = false">
+      you are a bold one...
     </cds-alert>
   </cds-alert-group>
-
-  <cds-button status="success" (click)="show = true">Open Alert</cds-button>
 </main>

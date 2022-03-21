@@ -8,16 +8,25 @@ angular.element(document).ready(() => angular.bootstrap(document, ['app']));
 
 angular.module('app').component('appRoot', {
   template: `
-    <cds-button status="primary" ng-click="$ctrl.showAlert = true">hello there</cds-button>
+  <main cds-layout="vertical gap:md p:lg">
+    <h1 cds-text="heading">Clarity + AngularJS Starter</h1>
+
+    <div cds-layout="horizontal gap:sm">
+      <a cds-text="link" href="https://clarity.design/storybook/core">Clarity Docs</a>
+      <a cds-text="link" href="https://angularjs.org/">AngularJS Docs</a>
+    </div>
+
+    <cds-button action="outline" ng-click="$ctrl.showAlert = true">hello there</cds-button>
 
     <cds-alert-group ng-if="$ctrl.showAlert" ng-prop-status="$ctrl.status">
       <cds-alert ng-on-close_change="$ctrl.showAlert = false" closable>
-        General Kenobi. You are a bold one.
+        you are a bold one...
       </cds-alert>
     </cds-alert-group>
+  </main>
   `,
   controller: function () {
-    this.status = 'danger';
+    this.status = 'info';
     this.showAlert = false;
   },
 });

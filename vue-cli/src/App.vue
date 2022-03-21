@@ -1,78 +1,51 @@
 <template>
-  <div>
-    <cds-accordion>
-      <cds-accordion-panel :expanded="panel1Expanded" @expandedChange="expandedChange($event)">
-        <cds-accordion-header>Item 1</cds-accordion-header>
-        <cds-accordion-content v-if="panel1Expanded">
-          <cds-accordion>
-            <cds-accordion-panel expanded>
-              <cds-accordion-header>Item 1-1</cds-accordion-header>
-              <cds-accordion-content>Content 1-1</cds-accordion-content>
-            </cds-accordion-panel>
-          </cds-accordion>
-        </cds-accordion-content>
-      </cds-accordion-panel>
-      <cds-accordion-panel>
-        <cds-accordion-header>Item 2</cds-accordion-header>
-        <cds-accordion-content>
-          <cds-accordion>
-            <cds-accordion-panel expanded>
-              <cds-accordion-header>Item 2-1</cds-accordion-header>
-              <cds-accordion-content>Content 2-1</cds-accordion-content>
-            </cds-accordion-panel>
-          </cds-accordion>
-        </cds-accordion-content>
-      </cds-accordion-panel>
-      <cds-accordion-panel>
-        <cds-accordion-header>Item 3</cds-accordion-header>
-        <cds-accordion-content>Content 3</cds-accordion-content>
-      </cds-accordion-panel>
-    </cds-accordion>
+  <main cds-layout="vertical gap:md p:lg">
+    <h1 cds-text="heading">Clarity + Vue</h1>
 
-    <cds-alert-group status="warning" v-if="show">
-      <cds-alert :closable="true" @closeChange="show = false">
-        Hello World
+    <cds-alert status="danger">
+      Currently this demo must use refs to listen to the <code cds-text="code">closeChange</code> event due to Vue 3 not supporting native HTML events which are case sensitive. <a cds-text="link" href="https://custom-elements-everywhere.com">Compatibility Issues</a>
+    </cds-alert>
+
+    <div cds-layout="horizontal gap:sm">
+      <a cds-text="link" href="https://clarity.design/storybook/core">Clarity Docs</a>
+      <a cds-text="link" href="https://v3.vuejs.org/">Vue</a>
+    </div>
+
+    <cds-button action="outline" @click="showAlert = !showAlert">Hello There</cds-button>
+
+    <cds-alert-group status="info" :hidden="!showAlert" @closeChange="showAlert = false">
+      <cds-alert ref="alert" closable>
+        you are a bold one...
       </cds-alert>
     </cds-alert-group>
-
-    <cds-button status="success" @click="show = true">Open Alert</cds-button>
-
-    <cds-input validate>
-      <label>text input</label>
-      <input placeholder="placeholder text" required />
-      <cds-control-message error="valueMissing">required</cds-control-message>
-    </cds-input>
-  </div>
+  </main>
 </template>
 
 <script>
-import 'modern-normalize/modern-normalize.css';
-import '@cds/core/global.min.css';
-import '@cds/city/css/bundles/default.min.css';
-import '@cds/core/accordion/register.js';
-import '@cds/core/input/register.js';
+import '@cds/core/alert/register.js';
+import '@cds/core/button/register.js';
 
 export default {
-  data: function () {
-    return {
-      show: false,
-      panel1Expanded: true,
-    };
+  name: 'App',
+  data: () => ({
+    showAlert: false
+  }),
+  mounted: function() {
+    // ref is needed due to Vue not supporting standard Custom Events which are case sensitive
+    // https://github.com/vuejs/vue-next/issues/2460
+    this.$refs.alert.addEventListener('closeChange', () => this.showAlert = false);
   },
   methods: {
-    log: function (event) {
-      this.show = event.detail;
-    },
-    expandedChange: function (event) {
-      this.panel1Expanded = event.detail;
-    },
-  },
-};
+    closeAlert() {
+      this.showAlert = false;
+    }
+  }
+}
 </script>
 
 <style>
-cds-alert {
-  --background: #f5e5bf;
-  --color: #2d2d2d;
-}
+  @import 'modern-normalize/modern-normalize.css';
+  @import '@cds/core/global.min.css';
+  @import '@cds/core/styles/theme.dark.min.css';
+  @import '@cds/city/css/bundles/default.min.css';
 </style>

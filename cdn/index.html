@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Clarity Core - CDN Starter</title>
+    <title>Clarity - CDN Starter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://unpkg.com/modern-normalize@1.1.0/modern-normalize.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@cds/core@5.5.0/global.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@cds/core@6.0.0-next.6/global.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@cds/core@6.0.0-next.6/styles/theme.dark.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/@cds/city@1.1.0/css/bundles/default.min.css" />
   </head>
-  <body cds-text="body">
+  <body cds-text="body" cds-theme="dark">
     <main cds-layout="vertical gap:lg p:lg">
-      <h1 cds-text="heading">Clarity Core Demo - CDN Starter</h1>
+      <h1 cds-text="heading">Clarity Demo - CDN Starter</h1>
 
-      <cds-button status="primary">Hello There</cds-button>
+      <div cds-layout="horizontal gap:sm">
+        <a cds-text="link" href="https://clarity.design/storybook/core">Clarity Docs</a>
+      </div>
 
-      <cds-alert-group status="danger" hidden>
+      <cds-button action="outline">Hello There</cds-button>
+
+      <cds-alert-group status="info" hidden>
         <cds-alert closable>
-          This is an example of Clarity with no build step or bundling required.
+          you are a bold one...
         </cds-alert>
       </cds-alert-group>
     </main>
     <script type="module">
-      import 'https://cdn.skypack.dev/@cds/core@v5.5.0/button/register.js';
-      import 'https://cdn.skypack.dev/@cds/core@v5.5.0/alert/register.js';
+      import 'https://cdn.skypack.dev/@cds/core@v6.0.0-next.6/button/register.js';
+      import 'https://cdn.skypack.dev/@cds/core@v6.0.0-next.6/alert/register.js';
 
       const button = document.querySelector('cds-button');
       const alertGroup = document.querySelector('cds-alert-group');
