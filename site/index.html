@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Clarity Design System - Where to Find...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Directory of example Clarity Design demos.">
+  <meta name="keywords" content="HTML, CSS, JavaScript, Clarity Design">
+  <link rel="dns-prefetch" href="//cdn.skypack.dev">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://unpkg.com/@cds/core@6.0.0-beta.3/global.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@cds/core@6.0.0-beta.3/list/list.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://unpkg.com/@cds/core@6.0.0-beta.3/styles/theme.dark.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://unpkg.com/@cds/city@1.1.0/css/bundles/default.min.css" media="print" onload="this.media='all'">
+  <noscript><style>:not(:defined) { visibility: visible }</style></noscript>
+  <style>
+    :not(:defined) {
+      visibility: hidden
+    }
+
+    pre {
+      margin: 0;
+      background: var(--cds-global-color-construction-50);
+      padding: var(--cds-global-space-6);
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    [spin] { animation: spin 3s infinite }
+    @keyframes spin { from { transform:rotate(0deg) } to { transform:rotate(360deg) } }
+
+    [cds-theme='dark'] pre {
+      background: var(--cds-global-color-construction-900);
+    }
+
+    [cds-theme='dark'] cds-alert-group a {
+      color: var(--cds-global-color-gray-0) !important; /* temp fix */
+    }
+
+    body {
+      padding: 0;
+    }
+
+    main {
+      padding: 36px 24px 36px 64px;
+    }
+
+    main[expanded] {
+      padding: 36px 24px 24px 264px;
+      z-index: -1;
+    }
+
+    cds-navigation {
+      box-shadow: var(--cds-alias-object-shadow-300);
+      overflow: auto;
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 999;
+    }
+
+    cds-navigation:not([expanded]) cds-navigation-start svg {
+      display: none;
+    }
+
+    main {
+      max-width: 1490px;
+    }
+
+    .demos .icon-font {
+      font-size: 18px;
+    }
+
+    .demos li cds-icon {
+      --width: 18px;
+      --height: 18px;
+    }
+  </style>
+</head>
+<body cds-text="body" cds-theme="">
+  <!--
+    Hello there, you are a curious one! 🔍
+    Where is the source code for this site, you may ask? Well, you are looking at it.
+    Yup, this entire site works off of a single HTML file. Don't believe me? Try it, 
+    download the webpage locally! 😀
+  -->
+  <cds-navigation role="list" expanded>
+    <cds-navigation-start>
+      <div cds-layout="horizontal align:vertical-center p-x:xs" style="max-width: 40px">
+        <svg width="25" height="25"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cds-svg"></use></svg>
+      </div>
+    </cds-navigation-start>
+    <cds-navigation-item>
+      <a href="/">
+        <cds-icon shape="code" inner-offset="4"></cds-icon> Demos</cds-icon>
+      </a>
+    </cds-navigation-item>
+    <cds-navigation-item>
+      <a href="/version">
+        <cds-icon shape="bundle"></cds-icon> Version</cds-icon>
+      </a>
+    </cds-navigation-item>
+    <cds-navigation-item>
+      <a href="/documentation" target="_blank" rel="noopener">
+        <cds-icon shape="search"></cds-icon> Documentation
+      </a>
+    </cds-navigation-item>
+    <cds-navigation-item>
+      <a href="/support">
+        <cds-icon shape="talk-bubbles"></cds-icon> Support
+      </a>
+    </cds-navigation-item>
+    <cds-navigation-item>
+      <a href="/open-source" target="_blank" rel="noopener">
+        <cds-icon shape="bug"></cds-icon> Open Source
+      </a>
+    </cds-navigation-item>
+    <cds-navigation-item>
+      <a href="/about"><cds-icon shape="info-standard"></cds-icon> About</a>
+    </cds-navigation-item>
+    <cds-navigation-item slot="cds-navigation-end">
+      <button id="settings-button"><cds-icon shape="cog"></cds-icon> Settings</button>
+    </cds-navigation-item>
+  </cds-navigation>
+  <main expanded>
+    <div router-outlet></div>
+  </main>
+  <template route="/">
+    <div cds-layout="vertical gap:lg">
+      <div cds-layout="vertical gap:xxl align:stretch">
+        <h1 cds-text="display">Clarity Design System - Where to find...</h1>
+        <h2 cds-text="heading"><span id="counter" style="width: 46px; display: inline-block; font-size: 42px">34</span> integrations and counting</h2>
+      </div>
+
+      <section cds-layout="vertical gap:xxl m-t:md">
+        <p cds-text="subsection">
+          Clarity is designed to work with existing UI frameworks, making it easy to adopt seamlessly into any environment.
+          This is a micro-site to easily find all available demos and intefrations for the <a cds-text="link" href="https://clarity.design">Clarity Design System</a>.
+        </p>
+
+        <div cds-layout="grid cols@xs:6 cols@md:4 cols@lg:3 gap:lg" class="demos">
+          <section cds-layout="vertical gap:lg">
+            <div cds-layout="horizontal gap:sm">
+              <h4 cds-text="section">Frameworks</h3>
+              <cds-button-action aria-label="framework details" id="framework-anchor" shape="info-standard"></cds-button-action>
+            </div>
+            <cds-signpost hidden anchor="framework-details" id="framework-signpost" orientation="right bottom">
+              <p cds-text="body" cds-layout="m-b:md">
+                Using Web Components Clarity supports all major UI frameworks. Choose what makes sense for your team and project without being restricted by your design system.
+              </p>
+            </cds-signpost>
+            <ul cds-list="unstyled" cds-layout="vertical gap:md">
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#blazor-svg"></use></svg>
+                <a href="https://github.com/coryrylan/clarity-blazor" target="_blank" rel="noopener" cds-text="link body">.NET Blazor Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#angular-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-angular-demo" target="_blank" rel="noopener" cds-text="link body">Angular Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#angularjs-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-angularjs" target="_blank" rel="noopener" cds-text="link body">AngularJS Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#preact-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-preact" target="_blank" rel="noopener" cds-text="link body">Preact Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#react-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-react" target="_blank" rel="noopener" cds-text="link body">React Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#react-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-react-experimental" target="_blank" rel="noopener" cds-text="link body">React (experimental)</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svelte-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-svelte" target="_blank" rel="noopener" cds-text="link body">Svelte Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ember-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-ember" target="_blank" rel="noopener" cds-text="link body">Ember Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#vue-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-vue" target="_blank" rel="noopener" cds-text="link body">Vue 3 Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#vue-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-vue-2" target="_blank" rel="noopener" cds-text="link body">Vue 2 Demo</a>
+              </li>
+            </ul>
+          </section>
+
+          <section cds-layout="vertical gap:lg">
+            <div cds-layout="horizontal gap:sm">
+              <h4 cds-text="section">Tooling</h3>
+              <cds-button-action aria-label="tooling details" id="tooling-anchor" shape="info-standard"></cds-button-action>
+            </div>
+            <cds-signpost hidden anchor="tooling-details" id="tooling-signpost" orientation="right bottom">
+              <p cds-text="body" cds-layout="m-b:md">
+               Clarity supports all standard Web based UI tooling. Use the latest web tooling for optimal performance.
+              </p>
+            </cds-signpost>
+            <ul cds-list="unstyled" cds-layout="vertical gap:md">
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ts-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-typescript" target="_blank" rel="noopener" cds-text="link body">TypeScript Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#js-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-javascript" target="_blank" rel="noopener" cds-text="link body">JavaScript Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <span class="icon-font">🌐</span>
+                <a href="https://stackblitz.com/edit/clarity-cdn" target="_blank" rel="noopener" cds-text="link body">JavaScript Demo (CDN)</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lit-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-lit" target="_blank" rel="noopener" cds-text="link body">Lit Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <span class="icon-font">📦</span>
+                <a href="https://github.com/vmware-clarity/starters/tree/main/parcel-js" target="_blank" rel="noopener" cds-text="link body">Parcel Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20" id="rollup-svg" xmlns="http://www.w3.org/2000/svg" viewBox="100 100 800 800"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="444.469" y1="526.051" x2="598.469" y2="562.051"><stop offset="0" stop-color="#FF6533"/><stop offset=".157" stop-color="#FF5633"/><stop offset=".434" stop-color="#FF4333"/><stop offset=".714" stop-color="#FF3733"/><stop offset="1" stop-color="#F33"/></linearGradient><path d="M721 410c0-33.6-8.8-65.1-24.3-92.4-41.1-42.3-130.5-52.1-152.7-.2-22.8 53.2 38.3 112.4 65 107.7 34-6-6-84-6-84 52 98 40 68-54 158S359 779 345 787c-.6.4-1.2.7-1.9 1h368.7c6.5 0 10.7-6.9 7.8-12.7l-96.4-190.8c-2.1-4.1-.6-9.2 3.4-11.5C683 540.6 721 479.8 721 410z" style="fill:url(#a)"/><linearGradient id="b" gradientUnits="userSpaceOnUse" x1="420.382" y1="475.002" x2="696.383" y2="689.002"><stop offset="0" stop-color="#BF3338"/><stop offset="1" stop-color="#F33"/></linearGradient><path d="M721 410c0-33.6-8.8-65.1-24.3-92.4-41.1-42.3-130.5-52.1-152.7-.2-22.8 53.2 38.3 112.4 65 107.7 34-6-6-84-6-84 52 98 40 68-54 158S359 779 345 787c-.6.4-1.2.7-1.9 1h368.7c6.5 0 10.7-6.9 7.8-12.7l-96.4-190.8c-2.1-4.1-.6-9.2 3.4-11.5C683 540.6 721 479.8 721 410z" style="fill:url(#b)"/><linearGradient id="c" gradientUnits="userSpaceOnUse" x1="429.386" y1="517.156" x2="469.386" y2="559.156"><stop offset="0" stop-color="#FF6533"/><stop offset=".157" stop-color="#FF5633"/><stop offset=".434" stop-color="#FF4333"/><stop offset=".714" stop-color="#FF3733"/><stop offset="1" stop-color="#F33"/></linearGradient><path d="M345 787c14-8 110-198 204-288s106-60 54-158c0 0-199 279-271 417" style="fill:url(#c)"/><linearGradient id="d" gradientUnits="userSpaceOnUse" x1="502.111" y1="589.457" x2="490.111" y2="417.457"><stop offset="0" stop-color="#FF6533"/><stop offset=".157" stop-color="#FF5633"/><stop offset=".434" stop-color="#FF4333"/><stop offset=".714" stop-color="#FF3733"/><stop offset="1" stop-color="#F33"/></linearGradient><path d="M373 537c134.4-247.1 152-272 222-272 36.8 0 73.9 16.6 97.9 46.1-32.7-52.7-90.6-88-156.9-89H307.7c-4.8 0-8.7 3.9-8.7 8.7V691c13.6-35.1 36.7-85.3 74-154z" style="fill:url(#d)"/><linearGradient id="e" gradientUnits="userSpaceOnUse" x1="450.125" y1="514.209" x2="506.943" y2="552.846"><stop offset="0" stop-color="#FBB040"/><stop offset="1" stop-color="#FB8840"/></linearGradient><path d="M549 499c-94 90-190 280-204 288s-37.5 9-50-5c-13.3-14.9-34-39 78-245 134.4-247.1 152-272 222-272 36.8 0 73.9 16.6 97.9 46.1 1.3 2.1 2.6 4.3 3.9 6.5-41.1-42.3-130.5-52.1-152.7-.2-22.8 53.2 38.3 112.4 65 107.7 34-6-6-84-6-84C655 439 643 409 549 499z" style="fill:url(#e)"/><linearGradient id="f" gradientUnits="userSpaceOnUse" x1="508.333" y1="295.758" x2="450.333" y2="933.758"><stop offset="0" stop-color="#FFF"/><stop offset="1" stop-color="#FFF" stop-opacity="0"/></linearGradient><path d="M384 548c134.4-247.1 152-272 222-272 30.3 0 60.8 11.3 84 31.7-24-27.4-59.6-42.7-95-42.7-70 0-87.6 24.9-222 272-112 206-91.3 230.1-78 245 1.9 2.1 4.1 3.9 6.4 5.4-11.7-17-16.9-56.5 82.6-239.4z" style="opacity:.3;fill:url(#f)"/></svg>
+                <a href="https://stackblitz.com/edit/clarity-rollupjs" target="_blank" rel="noopener" cds-text="link body">Rollup Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#webpack-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-webpack" target="_blank" rel="noopener" cds-text="link body">Webpack Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#vite-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-vite" target="_blank" rel="noopener" cds-text="link body">Vite Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><g><path fill="currentColor" d="m634.92 462.7-288-448A32.006 32.006 0 0 0 320 0c-10.89 0-21.03 5.54-26.92 14.7l-288 448a32.001 32.001 0 0 0-1.17 32.64A32.007 32.007 0 0 0 32 512h576c11.71 0 22.48-6.39 28.09-16.67a31.983 31.983 0 0 0-1.17-32.63ZM320 91.18 405.39 224H320l-64 64-38.06-38.06L320 91.18Z" class="astro-ahFEmudE"/></g></svg>
+                <a href="https://github.com/vmware-clarity/starters/tree/main/snowpack" target="_blank" rel="noopener" cds-text="link body">Snowpack Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#github-svg"></use></svg>
+                <a href="https://github.com/vmware-clarity/starters" target="_blank" rel="noopener" cds-text="link body">Github Repos</a>
+              </li>
+            </ul>
+          </section>
+          <section cds-layout="vertical gap:lg">
+            <div cds-layout="horizontal gap:sm">
+              <h4 cds-text="section">Mobile/SSR</h3>
+              <cds-button-action  aria-label="mobile and ssr app details" id="mobile-anchor" shape="info-standard"></cds-button-action>
+            </div>
+            <cds-signpost hidden anchor="mobile-details" id="mobile-signpost" orientation="right bottom">
+              <p cds-text="body" cds-layout="m-b:md">
+                Leverage Server Side Rendering for content focused static sites such as API documentation or marketing pages.
+              </p>
+              <p cds-text="body">
+                Clarity enables Mobile development with tools like Ionic and deisgn tokens for native UI platforms.
+              </p>
+            </cds-signpost>
+            <ul cds-list="unstyled" cds-layout="vertical gap:md">
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#hugo-svg"></use></svg>
+                <a href="https://github.com/coryrylan/clarity-hugo" target="_blank" rel="noopener" cds-text="link body">Hugo Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20" style="background: #2d2d2d; color: #fff"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#11ty-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-11ty" target="_blank" rel="noopener" cds-text="link body">11ty Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nextjs-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-next-js" target="_blank" rel="noopener" cds-text="link body">NEXT.js Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M128.152.001c20.777 0 40.34 4.854 58.692 14.257l2.426 1.214-2.123 1.668c-5.156 4.095-9.251 9.403-11.83 15.469l-.758 1.668-1.516-.758c-14.105-6.673-29.119-10.161-44.74-10.161-57.782 0-104.644 47.014-104.644 104.644s46.71 104.645 104.493 104.645c57.782 0 104.644-47.014 104.644-104.645 0-13.8-2.578-27.298-8.038-40.038L224 86.296l1.668-.758c6.218-2.275 11.678-6.066 16.076-10.92l1.668-2.123 1.062 2.427C252.209 91.756 256 109.652 256 127.699c0 70.521-57.479 128-128 128S0 198.22 0 127.7 57.479-.3 128.152.001Zm0 69.764c32 0 58.237 26.086 58.388 58.389 0 32.303-26.085 58.389-58.388 58.389-32.304 0-58.389-26.086-58.389-58.389 0-32.303 26.237-58.389 58.389-58.389Zm83.564-48.227c14.741 0 26.692 11.95 26.692 26.692 0 14.741-11.95 26.692-26.692 26.692s-26.692-11.95-26.692-26.692 11.95-26.692 26.692-26.692Z" fill="#3880FF"/></svg>
+                <a href="https://stackblitz.com/edit/clarity-ionic-mobile" target="_blank" rel="noopener" cds-text="link body">Ionic Demo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#apple-svg"></use></svg>
+                <a href="https://clarity.design/storybook/core/?path=/story/foundation-platforms--page" target="_blank" rel="noopener" cds-text="link body">iOS Design Tokens</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#android-svg"></use></svg>
+                <a href="https://clarity.design/storybook/core/?path=/story/foundation-platforms--page" target="_blank" rel="noopener" cds-text="link body">Android Design Tokens</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#angular-svg"></use></svg>
+                <a href="https://github.com/vmware-clarity/starters/tree/main/angular-universal" target="_blank" rel="noopener" cds-text="link body">Angular Universal Demo</a>
+              </li>
+            </ul>
+          </section>
+
+          <section cds-layout="vertical gap:lg">
+            <div cds-layout="horizontal gap:sm">
+              <h4 cds-text="section">Hybrid UI</h3>
+              <cds-button-action  aria-label="hybrid app details" id="hybrid-anchor" shape="info-standard"></cds-button-action>
+            </div>
+            <cds-signpost hidden anchor="hybrid-details" id="hybrid-signpost" orientation="right bottom">
+              <p cds-text="body">Hybrid apps are common for teams migrating or mixing UI technologies. Clarity Web Components ensure teams have full flexibility to update incrementally.</p>
+            </cds-signpost>
+            <ul cds-list="unstyled" cds-layout="vertical gap:md">
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cds-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-with-clr-angular" target="_blank" rel="noopener" cds-text="link body">Clarity + clr-angular</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#bootstrap-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-with-bootstrap" target="_blank" rel="noopener" cds-text="link body">Clarity + Bootstrap</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#material-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-with-material" target="_blank" rel="noopener" cds-text="link body">Clarity + Material</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#foundation-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-with-foundation" target="_blank" rel="noopener" cds-text="link body">Clarity + Foundation UI</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#bulma-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-with-bulma" target="_blank" rel="noopener" cds-text="link body">Clarity + Bulma</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#kendo-svg"></use></svg>
+                <a href="https://stackblitz.com/edit/clarity-with-kendo" target="_blank" rel="noopener" cds-text="link body">Clarity + Kendo</a>
+              </li>
+              <li cds-layout="horizontal gap:md align:vertical-center">
+                <cds-icon shape="exclamation-triangle" status="warning" inner-offset="3" style="width: 18px; height: 18px"></cds-icon>
+                <a href="https://stackblitz.com/edit/clarity-multi-version" target="_blank" rel="noopener" cds-text="link body">Scoped (multi-version app)</a>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </section>
+    </div>
+  </template>
+
+  <template route="/about">
+    <div cds-layout="vertical gap:lg">
+      <h2 cds-text="heading">About</h2>
+      <p cds-text="body">
+        This is a micro site for finding simple example applications using the
+        Clarity Design System. These examples can be used for debugging issues or
+        a starting point for creating a new project.
+      </p>
+    </div>
+  </template>
+
+  <template route="/documentation">
+    <div cds-layout="vertical gap:lg">
+      <h2 cds-text="heading">Documentation</h2>
+      
+      <p cds-text="body">
+        Find Developer documentation, code demos and getting started demos in our <a href="https://clarity.design/storybook/core" target="_blank" rel="noopener" cds-text="link">Storybook</a> and <a href="https://beta--core-demo.netlify.app/" cds-text="link">Storybook Beta</a> Developer Guide</a>.
+      </p>
+
+      <p cds-text="body">
+        Find UX and a11y guidance and examples at our website <a href="https://clarity.design" target="_blank" rel="noopener" cds-text="link">Design/UX Guides</a>
+      </p>
+
+      <div cds-layout="horizontal gap:md">
+        <a href="https://beta--core-demo.netlify.app/" target="_blank" rel="noopener" cds-text="link"><cds-button action="outline">Developer Guide Beta</cds-button></a>
+        <a href="https://clarity.design/storybook/core" target="_blank" rel="noopener" cds-text="link"><cds-button action="outline">Developer Guide</cds-button></a>
+        <a href="https://clarity.design" target="_blank" rel="noopener" cds-text="link"><cds-button action="outline">Design/UX Guide</cds-button></a>
+      </div>
+    </div>
+  </template>
+
+  <template route="/support">
+    <div cds-layout="vertical gap:lg">
+      <h2 cds-text="heading">Support</h2>
+      
+      <p cds-text="body">
+        Find support in our Github discussions and learn whats new in Clarity at our Blog.
+      </p>
+
+      <div cds-layout="horizontal gap:md">
+        <a href="https://github.com/vmware-clarity/core/discussions" target="_blank" rel="noopener" cds-text="link"><cds-button action="outline">Github Discussions</cds-button></a>
+        <a href="https://medium.com/claritydesignsystem" target="_blank" rel="noopener" cds-text="link"><cds-button action="outline">Clarity Blog/News</cds-button></a>
+      </div>
+    </div>
+  </template>
+
+  <template route="/open-source">
+    <div cds-layout="vertical gap:lg">
+      <h2 cds-text="heading">Open Source</h2>
+      
+      <p cds-text="body">
+        Clarity is Open Source and available on Github. We also have contribution guidelines available.
+      </p>
+
+      <div cds-layout="horizontal gap:md">
+        <a href="https://github.com/vmware-clarity/core" target="_blank" rel="noopener" cds-text="link"><cds-button action="outline">Github Repository</cds-button></a>
+        <a href="https://beta--core-demo.netlify.app/" target="_blank" rel="noopener" cds-text="link"><cds-button action="outline">Contribution Guidelines</cds-button></a>
+      </div>
+    </div>
+  </template>
+
+  <template route="/version">
+    <section cds-layout="vertical gap:lg">
+      <div cds-layout="horizontal gap:md align:vertical-center">
+        <h2 cds-text="heading">Current Version</h2>
+        <cds-tag id="latest-stable-loading" status="default" disabled aria-live="polite" aria-label="Checking for the latest Clarity Core package version.">
+          checking latest... <cds-icon shape="sync" spin></cds-icon>
+        </cds-tag>
+
+        <cds-tag id="latest-stable" status="success" aria-label="check for latest version" hidden>
+          @cds/core <cds-badge></cds-badge>
+        </cds-tag>
+      </div>
+
+      <p cds-text="body">
+        Not sure what version you are using? Run the following in your browser/application console to find out.
+        Install via the <a href="https://www.npmjs.com/package/@cds/core" target="_blank" rel="noopener" cds-text="link">NPM package</a>.
+      </p>
+
+      <pre cds-layout="horizontal gap:md align:vertical-center">
+        <code cds-text="code">window.CDS.getDetails()</code>
+        <cds-icon-button action="outline" size="sm" aria-label="Copy code for checking Clarity version" cds-layout="align:right" id="copy">
+          <cds-icon shape="copy"></cds-icon>
+        </cds-icon-button>
+      </pre>
+
+      <small cds-text="body">This site is currently uses version <span cds-text="code" id="site-version"></span></small>
+      <pre id="version-details"></pre>
+    </section>
+    <script type="module">
+      import 'https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/tag/register.js';
+
+      setupLatestVersionButton();
+      setupVersionCodeSnippet();
+      getLatestVersion();
+      getCurrentSiteVersion();
+
+      function getCurrentSiteVersion() {
+        const versionDetails = document.querySelector('#version-details');
+        const currentSiteVersionBadge = document.querySelector('#site-version');
+        const currentVersion = { ...window.CDS.getDetails() };
+        currentVersion.userAgent = '...'; // truncate temp for axe-core
+        currentVersion.state.i18nRegistry = { };
+        currentSiteVersionBadge.innerText = currentVersion.versions[0];
+        versionDetails.innerText = JSON.stringify(currentVersion, undefined, 2);
+      }
+
+      function setupLatestVersionButton() {
+        document.querySelector('#latest-stable').addEventListener('click', () => getLatestVersion());
+      }
+
+      function setupVersionCodeSnippet() {
+        const copyButton = document.querySelector('#copy');
+        copyButton.addEventListener('click', () => {
+          navigator.clipboard.writeText('window.CDS.getDetails()');
+          copyButton.loadingState = 'success';
+          setTimeout(() => copyButton.loadingState = 'default', 1000);
+        });
+      }
+
+      function getLatestVersion() {
+        const latestStableVersion = document.querySelector('#latest-stable');
+        const latestStableVersionLoading = document.querySelector('#latest-stable-loading');
+        latestStableVersion.setAttribute('hidden', '');
+        latestStableVersionLoading.removeAttribute('hidden');
+
+        fetch('https://unpkg.com/@cds/core/package.json')
+          .then(res => res.json())
+          .then(({ version }) => {
+            latestStableVersion.querySelector('cds-badge').textContent = version;
+
+            setTimeout(() => {
+              latestStableVersion.removeAttribute('hidden');
+              latestStableVersionLoading.setAttribute('hidden', '');
+            }, 2000);
+          });
+      }
+    </script>
+  </template>
+
+  <cds-modal hidden>
+    <cds-modal-header>
+      <h3 cds-text="title">Settings</h3>
+    </cds-modal-header>
+    <cds-modal-content>
+      <section cds-layout="vertical gap:lg m-b:lg">
+        <cds-toggle>
+          <label>Dark Theme</label>
+          <input type="checkbox" id="dark-theme-toggle" />
+        </cds-toggle>
+
+        <cds-toggle>
+          <label>Layout Debugger</label>
+          <input type="checkbox" id="layout-theme-toggle" />
+          <cds-control-message>(experimental)</cds-control-message>
+        </cds-toggle>
+      </section>
+    </cds-modal-content>
+  </cds-modal>
+
+  <div hidden>
+    <svg hidden id="cds-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><g fill="none" fill-rule="evenodd"><path fill="#0095D3" d="M24.702 4.583l11.278 6.679-.019 13.563-11.26 6.66-6.684-3.97 11.652-6.541v-5.898l-4.747-2.604-6.89-3.938"/><path fill="#F38B00" d="M11.331 4.583L.054 11.262l.018 13.563 11.26 6.66 6.685-3.97-10.663-6.541v-5.898l10.678-6.542"/><path fill="#004B70" d="M18.017 27.515L11.5 23.516l6.522-3.845 6.93 3.952"/><path fill="#98441E" d="M18.031 8.533l-6.504 3.985 6.517 3.884 6.862-3.94"/></g></svg>
+    <svg hidden id="blazor-svg" fill="none" viewBox="-10.12 -53.61 339.954 343.022"  xmlns="http://www.w3.org/2000/svg"><path d="M303.935 88.479c-6.598 41.362-27.653 79.041-59.42 106.335s-72.185 42.433-114.064 42.723c-8.483.326-16.977-.19-25.358-1.539a77.723 77.723 0 0 1-64.63-73.266 75.479 75.479 0 0 1 22.14-52.762 75.46 75.46 0 0 1 105.885-.748 75.478 75.478 0 0 1 22.884 52.443c.317 12.51-5.102 23.483-16.239 23.8-11.899 0-17.477-8.491-17.477-19.934v-31.797a19.478 19.478 0 0 0-19.323-19.494H111.68a46.386 46.386 0 0 0-39.119 20.961 46.399 46.399 0 0 0 31.587 71.268 46.392 46.392 0 0 0 41.8-14.911l.932-1.39.933 1.543a32.82 32.82 0 0 0 27.986 13.328 36.992 36.992 0 0 0 34.268-38.671 100.64 100.64 0 0 0-2.761-24.577 94.164 94.164 0 0 0-37.008-56.423A94.153 94.153 0 0 0 45.062 99.086a94.175 94.175 0 0 0-23.92 63.097 95.352 95.352 0 0 0 27.473 65.824 95.331 95.331 0 0 0 65.448 28.344s6.98.635 14.849.454a200.94 200.94 0 0 0 107.769-32.155c.457-.318.914.317.61.78a158.177 158.177 0 0 1-123.225 50.396 111.185 111.185 0 0 1-80.961-32.871A111.215 111.215 0 0 1 .89 161.723a115.099 115.099 0 0 1 46.223-92.17A112.704 112.704 0 0 1 113.61 47.6h35.772a100.637 100.637 0 0 0 74.247-32.784 1.39 1.39 0 0 1 .755-.431 1.418 1.418 0 0 1 1.52.663c.153.257.222.555.197.854a100.93 100.93 0 0 1-15.608 45.14 1.386 1.386 0 0 0 .115 1.511 1.387 1.387 0 0 0 1.424.507A108.158 108.158 0 0 0 287.23 1.047c.173-.277.411-.507.695-.67a1.902 1.902 0 0 1 1.869 0c.284.162.523.392.694.67a137.098 137.098 0 0 1 13.447 87.432zm-189.964 44.858a27.823 27.823 0 0 0-27.293 33.255 27.83 27.83 0 0 0 21.862 21.865 27.824 27.824 0 0 0 33.251-27.296v-25.977a2.007 2.007 0 0 0-1.904-1.904z" fill="#702af7"/></svg>
+    <svg hidden id="angular-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 272" preserveAspectRatio="xMidYMid"><path d="M.1 45.522L125.908.697l129.196 44.028-20.919 166.45-108.277 59.966-106.583-59.169L.1 45.522z" fill="#E23237"/><path d="M255.104 44.725L125.908.697v270.444l108.277-59.866 20.919-166.55z" fill="#B52E31"/><path d="M126.107 32.274L47.714 206.693l29.285-.498 15.739-39.347h70.325l17.233 39.845 27.99.498-82.179-174.917zm.2 55.882l26.496 55.383h-49.806l23.31-55.383z" fill="#FFF"/></svg>
+    <svg hidden id="vue-svg" viewBox="0 0 261.76 226.69" xmlns="http://www.w3.org/2000/svg"><path d="M161.096.001l-30.224 52.35L100.647.002H-.005L130.872 226.69 261.749 0z" fill="#41b883"/><path d="M161.096.001l-30.224 52.35L100.647.002H52.346l78.526 136.01L209.398.001z" fill="#34495e"/></svg>
+    <svg hidden id="react-svg" viewBox="0 0 1001.13 890.65" xmlns="http://www.w3.org/2000/svg"><circle cx="504.59" cy="444.48" fill="#00d8ff" r="89.57"/><g fill="none" stroke="#00d8ff" stroke-miterlimit="10" stroke-width="24"><path d="M504.59 262.37c120.25 0 232 17.26 316.2 46.26 101.49 34.94 163.88 87.9 163.88 135.85 0 50-66.13 106.24-175.11 142.35-82.4 27.3-190.82 41.55-305 41.55-117 0-227.87-13.38-311.18-41.85-105.42-36-168.91-93-168.91-142 0-47.57 59.57-100.11 159.64-135 84.57-29.53 199.05-47.16 320.48-47.16z"/><path d="M346.06 354c60.07-104.17 130.83-192.32 198-250.81 81-70.46 158-98 199.56-74.1 43.29 25 59 110.36 35.83 222.81-17.52 85-59.34 186-116.37 284.95-58.44 101.33-125.39 190.66-191.68 248.6-83.87 73.32-165 99.85-207.43 75.37-41.2-23.77-57-101.63-37.2-205.74 16.71-87.97 58.62-195.93 119.29-301.08z"/><path d="M346.21 537.06C286 433 244.92 327.66 227.82 240.23c-20.61-105.33-6-185.87 35.46-209.9 43.25-25 125.08 4 210.93 80.24C539.12 168.2 605.77 254.89 663 353.69 721.6 455 765.55 557.59 782.65 644c21.63 109.29 4.12 192.79-38.31 217.35-41.16 23.83-116.49-1.4-196.81-70.52-67.87-58.44-140.48-148.68-201.32-253.77z"/></g></svg>
+    <svg hidden id="lit-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 200"><path fill="#324fff" d="M0 80v80a70.3 70.3 0 0040-40z"/><path fill="#283198" d="M40 120c5.7 27.3 5.3 47 0 80L0 160z"/><path fill="#0ff" d="M40 120v80l40-40a149.9 149.9 0 00-40-40z"/><path fill="#324fff" d="M80 0v80S48.3 55.7 40 40z"/><path fill="#324fff" d="M40 40v80a84.8 84.8 0 0040-40z"/><path fill="#00e8ff" d="M80 80a182 182 0 010 80l-40-40z"/><path fill="#283198" d="M80 80v80c17-7.5 31.5-19 40-40-5.9-17-18.1-30.9-40-40z"/><path fill="#283198" d="M120 40v80L80 80z"/><path fill="#00e8ff" d="M120 120c6.1 27 4.9 53.6 0 80l-40-40z"/><path fill="#324fff" d="M120 120v80l40-40c-5.4-15-18.3-27.9-40-40z"/><path fill="#324fff" d="M160 80v80l-40-40z"/></svg>
+    <svg hidden id="11ty-svg" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1569.4 2186" xml:space="preserve"><path class="st0" d="M562.2 1410.1c-9 0-13.5-12-13.5-36.1V778.9c0-11.5-2.3-16.9-7-16.2-28.4 7.2-42.7 10.8-43.1 10.8-7.9.7-11.8-7.2-11.8-23.7v-51.7c0-14.3 4.3-22.4 12.9-24.2l142.2-36.6c1.1-.3 2.7-.5 4.8-.5 7.9 0 11.8 8.4 11.8 25.3v712c0 24.1-4.7 36.1-14 36.1l-82.3-.1zm368.3 1.1c-14.4 0-26.8-1-37.4-3-10.6-2-21.6-6.5-33.1-13.5s-20.9-16.6-28.3-28.8-13.4-29.3-18-51.2-7-47.9-7-78.1V960.4c0-7.2-2-10.8-5.9-10.8h-33.4c-9 0-13.5-8.6-13.5-25.8v-29.1c0-17.6 4.5-26.4 13.5-26.4h33.4c3.9 0 5.9-4.8 5.9-14.5l9.7-209.5c1.1-19 5.7-28.5 14-28.5h53.9c9 0 13.5 9.5 13.5 28.5v209.5c0 9.7 2.1 14.5 6.5 14.5H973c9 0 13.5 8.8 13.5 26.4v29.1c0 17.2-4.5 25.8-13.5 25.8h-68.9c-2.5 0-4.2.6-5.1 1.9-.9 1.2-1.3 4.2-1.3 8.9v277.9c0 20.8 1.3 38.2 4 52s6.6 24 11.8 30.4 10.4 10.8 15.6 12.9c5.2 2.2 11.6 3.2 19.1 3.2h38.2c9.7 0 14.5 6.7 14.5 19.9v32.3c0 14.7-5.2 22.1-15.6 22.1l-54.8.1zm206.7 64.6c8.2 0 15.4-6.7 21.5-20.2s9.2-32.6 9.2-57.4c0-5.8-3.6-25.7-10.8-59.8l-105.6-438.9c-.7-5-1.1-9-1.1-11.9 0-12.9 2.7-19.4 8.1-19.4h65.2c5 0 9.1 1.7 12.4 5.1s5.8 10.3 7.5 20.7l70 370.5c1.4 4.3 2.3 6.5 2.7 6.5 1.4 0 2.2-2 2.2-5.9l54.9-369.5c1.4-10.8 3.7-18 6.7-21.8s6.9-5.7 11.6-5.7h45.2c6.1 0 9.2 7 9.2 21 0 3.2-.4 7.4-1.1 12.4l-95.9 499.3c-7.5 41.3-15.8 72.9-24.8 94.8s-19 36.8-30.2 44.7c-11.1 7.9-25.8 12-44.2 12.4h-5.4c-29.1 0-48.8-7.7-59.2-23.2-2.9-3.2-4.3-11.5-4.3-24.8 0-26.6 4.3-39.9 12.9-39.9.7 0 7.2 1.8 19.4 5.4 12.4 3.8 20.3 5.6 23.9 5.6zM291.2 1411.1c-9 0-13.5-12-13.5-36.1V779.9c0-11.5-2.3-16.9-7-16.2-28.4 7.2-42.7 10.8-43.1 10.8-7.9.7-11.8-7.2-11.8-23.7v-51.7c0-14.3 4.3-22.4 12.9-24.2L371 638.2c1.1-.3 2.7-.5 4.8-.5 7.9 0 11.8 8.4 11.8 25.3v712c0 24.1-4.7 36.1-14 36.1h-82.4z"/></svg>
+    <svg hidden id="hugo-svg" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" stroke-width="27" aria-label="Logo" viewBox="0 0 350 390"><path fill="#ff4088" stroke="#c9177e" d="m195.81 24.13 114.41 66.54a44 44 0 0 1 21.88 38.04v136.43a48 48 0 0 1-24.45 41.82L194.1 370.9a49 49 0 0 1-48.48-.23L41.05 310.48a53 53 0 0 1-26.56-45.93V135.08a55 55 0 0 1 26.1-46.8l102.8-63.46a51 51 0 0 1 52.42-.69z"/></svg>
+    <svg hidden id="js-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 630 630"><path fill="#f7df1e" d="M0 0h630v630H0z"/><path d="M423.2 492.19c12.69 20.72 29.2 35.95 58.4 35.95 24.53 0 40.2-12.26 40.2-29.2 0-20.3-16.1-27.49-43.1-39.3l-14.8-6.35c-42.72-18.2-71.1-41-71.1-89.2 0-44.4 33.83-78.2 86.7-78.2 37.64 0 64.7 13.1 84.2 47.4l-46.1 29.6c-10.15-18.2-21.1-25.37-38.1-25.37-17.34 0-28.33 11-28.33 25.37 0 17.76 11 24.95 36.4 35.95l14.8 6.34c50.3 21.57 78.7 43.56 78.7 93 0 53.3-41.87 82.5-98.1 82.5-54.98 0-90.5-26.2-107.88-60.54zm-209.13 5.13c9.3 16.5 17.76 30.45 38.1 30.45 19.45 0 31.72-7.61 31.72-37.2v-201.3h59.2v202.1c0 61.3-35.94 89.2-88.4 89.2-47.4 0-74.85-24.53-88.81-54.075z"/></svg>
+    <svg hidden id="ts-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 512 512"><rect fill="#3178c6" height="512" rx="50" width="512"/><rect fill="#3178c6" height="512" rx="50" width="512"/><path clip-rule="evenodd" d="M316.939 407.424v50.061c8.138 4.172 17.763 7.3 28.875 9.386S368.637 470 380.949 470c11.999 0 23.397-1.147 34.196-3.442 10.799-2.294 20.268-6.075 28.406-11.342 8.138-5.266 14.581-12.15 19.328-20.65S470 415.559 470 403.044c0-9.074-1.356-17.026-4.069-23.857s-6.625-12.906-11.738-18.225c-5.112-5.319-11.242-10.091-18.389-14.315s-15.207-8.213-24.18-11.967c-6.573-2.712-12.468-5.345-17.685-7.9-5.217-2.556-9.651-5.163-13.303-7.822-3.652-2.66-6.469-5.476-8.451-8.448-1.982-2.973-2.974-6.336-2.974-10.091 0-3.441.887-6.544 2.661-9.308s4.278-5.136 7.512-7.118c3.235-1.981 7.199-3.52 11.894-4.615 4.696-1.095 9.912-1.642 15.651-1.642 4.173 0 8.581.313 13.224.938 4.643.626 9.312 1.591 14.008 2.894a97.514 97.514 0 0113.694 4.928c4.434 1.982 8.529 4.276 12.285 6.884v-46.776c-7.616-2.92-15.937-5.084-24.962-6.492S415.797 238 404.112 238c-11.895 0-23.163 1.278-33.805 3.833s-20.006 6.544-28.093 11.967c-8.086 5.424-14.476 12.333-19.171 20.729-4.695 8.395-7.043 18.433-7.043 30.114 0 14.914 4.304 27.638 12.912 38.172 8.607 10.533 21.675 19.45 39.204 26.751 6.886 2.816 13.303 5.579 19.25 8.291s11.086 5.528 15.415 8.448c4.33 2.92 7.747 6.101 10.252 9.543 2.504 3.441 3.756 7.352 3.756 11.733 0 3.233-.783 6.231-2.348 8.995s-3.939 5.162-7.121 7.196-7.147 3.624-11.894 4.771c-4.748 1.148-10.303 1.721-16.668 1.721-10.851 0-21.597-1.903-32.24-5.71-10.642-3.806-20.502-9.516-29.579-17.13zM232.78 284.082H297V243H118v41.082h63.906V467h50.874z" fill="#fff" fill-rule="evenodd"/></svg>
+    <svg hidden id="angularjs-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 335.881 355.809"><path d="M167.404 0L0 58.913 26.453 278.24l141.127 77.57 141.857-78.619L335.88 57.87 167.404 0z" fill="#b3b3b3"/><path d="M319.185 70.545L167.012 18.654v318.622L294.54 266.7l24.645-196.154z" fill="#af2b2d"/><path d="M18.785 71.482l22.667 196.153 125.56 69.641V18.647L18.784 71.482z" fill="#df2e31"/><path d="M202.285 177.131l-34.995-73.08-30.807 73.08h65.802zm13.343 30.729h-92.764l-20.753 51.907-38.602.714L167.014 30.224 274.126 260.48h-35.778l-22.72-52.621z" fill="#f2f2f2"/><path d="M167.012 30.224l.277 73.827 34.959 73.136H167.09l-.079 30.625 48.613.048 22.721 52.63 36.936.685-108.27-230.951z" fill="#b3b3b3"/></svg>
+    <svg hidden id="preact-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#673AB8"><path d="m8 0 6.93 4v8L8 16l-6.93-4V4L8 0z"/><path d="M2.99 11.91c.92 1.18 3.84.28 6.6-1.87 2.76-2.16 4.34-4.78 3.42-5.95-.92-1.18-3.84-.28-6.6 1.87-2.76 2.16-4.34 4.78-3.42 5.95zm.4-.3c-.31-.4-.18-1.16.4-2.12a12.31 12.31 0 0 1 2.92-3.14C8 5.36 9.33 4.62 10.46 4.28c1.08-.33 1.85-.28 2.16.11.3.4.17 1.16-.41 2.12a12.31 12.31 0 0 1-2.92 3.14 12.3 12.3 0 0 1-3.75 2.07c-1.08.33-1.85.28-2.16-.11zm9.62.3c.92-1.17-.66-3.8-3.42-5.95C6.83 3.81 3.91 2.91 3 4.1c-.92 1.17.66 3.8 3.42 5.95 2.76 2.15 5.68 3.05 6.6 1.87zm-.4-.3c-.3.39-1.07.44-2.15.11A12.3 12.3 0 0 1 6.7 9.65c-1.27-1-2.3-2.12-2.92-3.14-.58-.96-.71-1.73-.4-2.12.3-.39 1.07-.44 2.15-.11C6.66 4.62 8 5.36 9.28 6.35c1.27 1 2.3 2.12 2.92 3.14.58.96.71 1.73.4 2.12zM8 9.06a1.06 1.06 0 1 0 0-2.12 1.06 1.06 0 0 0 0 2.12z" fill="#fff"/></svg>
+    <svg hidden id="svelte-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 139"><path fill="#ff3e00" d="M110.23 28.39C99.83 13.51 79.29 9.1 64.44 18.56L38.36 35.18a29.9 29.9 0 0 0-13.52 20 31.53 31.53 0 0 0 3.1 20.24 29.94 29.94 0 0 0-4.47 11.18 31.86 31.86 0 0 0 5.45 24.12c10.4 14.88 30.94 19.29 45.79 9.83L100.79 104a30 30 0 0 0 13.52-20 31.52 31.52 0 0 0-3.11-20.23 30.13 30.13 0 0 0 4.48-11.18 31.9 31.9 0 0 0-5.45-24.12"/><path fill="#fff" d="M61.89 112.16a20.73 20.73 0 0 1-22.24-8.25 19.14 19.14 0 0 1-3.27-14.5A17 17 0 0 1 37 87l.49-1.5 1.34 1A33.78 33.78 0 0 0 49 91.56l1 .29-.09 1A5.9 5.9 0 0 0 51 96.7a6.25 6.25 0 0 0 6.7 2.48 5.85 5.85 0 0 0 1.6-.7l26.04-16.62a5.42 5.42 0 0 0 2.45-3.64 5.77 5.77 0 0 0-1-4.37 6.25 6.25 0 0 0-6.7-2.48 5.72 5.72 0 0 0-1.6.7l-10 6.35a19.1 19.1 0 0 1-5.29 2.32A20.72 20.72 0 0 1 41 72.5 19.16 19.16 0 0 1 37.75 58a18 18 0 0 1 8.13-12.06L72 29.32A19.05 19.05 0 0 1 77.26 27a20.71 20.71 0 0 1 22.23 8.25 19.14 19.14 0 0 1 3.28 14.5 20.15 20.15 0 0 1-.62 2.43l-.5 1.5-1.33-1a33.78 33.78 0 0 0-10.2-5.1l-1-.29.09-1a5.86 5.86 0 0 0-1.06-3.88A6.23 6.23 0 0 0 81.49 40a5.72 5.72 0 0 0-1.6.7L53.8 57.29a5.45 5.45 0 0 0-2.45 3.63 5.84 5.84 0 0 0 1 4.38A6.25 6.25 0 0 0 59 67.78a6 6 0 0 0 1.6-.7l10-6.34a18.61 18.61 0 0 1 5.3-2.33 20.7 20.7 0 0 1 22.23 8.24 19.16 19.16 0 0 1 3.28 14.5 18 18 0 0 1-8.13 12.06l-26.09 16.62a19.18 19.18 0 0 1-5.3 2.33"/></svg>
+    <svg hidden id="ember-svg" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 130 130"><g fill="none" fill-rule="evenodd"><path d="M64 0c35.346 0 64 28.654 64 64 0 35.346-28.654 64-64 64-35.346 0-64-28.654-64-64C0 28.654 28.654 0 64 0z" fill="#E05C43" fill-rule="nonzero"/><path d="M65.265 24.128c8.246-.163 14.073 2.073 19.087 9.19 10.934 27.109-28.147 41.1-29.714 41.65l-.049.016s-1.18 7.363 10.028 7.08c13.793 0 28.294-10.691 33.81-15.21a3.293 3.293 0 0 1 4.468.265l4.13 4.29a3.291 3.291 0 0 1 .085 4.491c-3.59 3.997-12.014 12.203-24.696 17.504 0 0-21.16 9.798-35.42.52-8.503-5.53-10.842-12.151-11.793-19.038.005 0-10.324-.524-16.957-3.114-6.635-2.592.049-10.411.049-10.411s2.04-3.233 5.92 0c3.883 3.228 11.13 1.772 11.13 1.772.646-5.099 1.72-11.828 4.884-18.93 6.632-14.885 16.789-19.915 25.038-20.075zm4.853 14.915c-4.369-4.21-16.984 4.202-17.471 23.45 0 0 3.724 1.134 11.97-4.53 8.25-5.661 9.87-14.718 5.501-18.92z" fill="#FFF"/></g></svg>
+    <svg hidden id="nextjs-svg" viewBox=".5 -.2 1023 1024.1" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="m478.5.6c-2.2.2-9.2.9-15.5 1.4-145.3 13.1-281.4 91.5-367.6 212-48 67-78.7 143-90.3 223.5-4.1 28.1-4.6 36.4-4.6 74.5s.5 46.4 4.6 74.5c27.8 192.1 164.5 353.5 349.9 413.3 33.2 10.7 68.2 18 108 22.4 15.5 1.7 82.5 1.7 98 0 68.7-7.6 126.9-24.6 184.3-53.9 8.8-4.5 10.5-5.7 9.3-6.7-.8-.6-38.3-50.9-83.3-111.7l-81.8-110.5-102.5-151.7c-56.4-83.4-102.8-151.6-103.2-151.6-.4-.1-.8 67.3-1 149.6-.3 144.1-.4 149.9-2.2 153.3-2.6 4.9-4.6 6.9-8.8 9.1-3.2 1.6-6 1.9-21.1 1.9h-17.3l-4.6-2.9c-3-1.9-5.2-4.4-6.7-7.3l-2.1-4.5.2-200.5.3-200.6 3.1-3.9c1.6-2.1 5-4.8 7.4-6.1 4.1-2 5.7-2.2 23-2.2 20.4 0 23.8.8 29.1 6.6 1.5 1.6 57 85.2 123.4 185.9s157.2 238.2 201.8 305.7l81 122.7 4.1-2.7c36.3-23.6 74.7-57.2 105.1-92.2 64.7-74.3 106.4-164.9 120.4-261.5 4.1-28.1 4.6-36.4 4.6-74.5s-.5-46.4-4.6-74.5c-27.8-192.1-164.5-353.5-349.9-413.3-32.7-10.6-67.5-17.9-106.5-22.3-9.6-1-75.7-2.1-84-1.3zm209.4 309.4c4.8 2.4 8.7 7 10.1 11.8.8 2.6 1 58.2.8 183.5l-.3 179.8-31.7-48.6-31.8-48.6v-130.7c0-84.5.4-132 1-134.3 1.6-5.6 5.1-10 9.9-12.6 4.1-2.1 5.6-2.3 21.3-2.3 14.8 0 17.4.2 20.7 2z"/><path d="m784.3 945.1c-3.5 2.2-4.6 3.7-1.5 2 2.2-1.3 5.8-4 5.2-4.1-.3 0-2 1-3.7 2.1zm-6.9 4.5c-1.8 1.4-1.8 1.5.4.4 1.2-.6 2.2-1.3 2.2-1.5 0-.8-.5-.6-2.6 1.1zm-5 3c-1.8 1.4-1.8 1.5.4.4 1.2-.6 2.2-1.3 2.2-1.5 0-.8-.5-.6-2.6 1.1zm-5 3c-1.8 1.4-1.8 1.5.4.4 1.2-.6 2.2-1.3 2.2-1.5 0-.8-.5-.6-2.6 1.1zm-7.6 4c-3.8 2-3.6 2.8.2.9 1.7-.9 3-1.8 3-2 0-.7-.1-.6-3.2 1.1z"/></svg>
+    <svg hidden id="bulma-svg" viewBox="0 0 256 373" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path fill="#00D1B2" d="M0 256 23.273 93.091 116.364 0l116.363 116.364-69.818 69.818L256 279.273l-139.636 93.091z"/></svg>
+    <svg hidden id="foundation-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46.2 46.2" xml:space="preserve"><path d="M23.1 2.2c-11.6 0-20.9 9.4-20.9 20.9S11.6 44 23.1 44C34.7 44 44 34.6 44 23.1S34.7 2.2 23.1 2.2zm8 17.9L16.1 37l4.7-11.6h-5.5l5.5-14.7h10l-6.6 9.4h6.9z" fill="#a1d2e6"/></svg>
+    <svg hidden id="material-svg" style="color: var(--cds-global-typography-color-400); width: 20px; height: 20px;" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve"><path d="M256 0C114.8 0 0 114.8 0 256s114.8 256 256 256 256-114.8 256-256S397.3 0 256 0zm0 16c61.3 0 116.9 23.1 159.3 60.8H96.7C140.5 37.6 197.1 16 256 16zM102.7 92.8h306.7L256 399.4 102.7 92.8zm-25.9 3.9v318.7C37.6 371.5 16 314.9 16 256c0-61.2 23.1-116.9 60.8-159.3zm358.4 0C474.4 140.5 496 197.2 496 256c0 61.3-23.1 116.9-60.8 159.3V96.7zM92.8 108.8 248 419.2H92.8V108.8zm326.4 0v310.3H264l155.2-310.3zM96.7 435.2h318.7C371.5 474.4 314.8 496 256 496s-115.5-21.6-159.3-60.8z"/></svg>
+    <svg hidden id="bootstrap-svg" style="color: hsl(264deg 39% 51%)" xmlns="http://www.w3.org/2000/svg" class="d-block my-1" viewBox="0 0 118 94" role="img"><title>Bootstrap</title><path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z" fill="currentColor"></path></svg>
+    <svg hidden id="webpack-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 774 875.7"><title>icon</title><path fill="#FFF" d="M387 0l387 218.9v437.9L387 875.7 0 656.8V218.9z"/><path fill="#8ed6fb" d="M704.9 641.7L399.8 814.3V679.9l190.1-104.6 115 66.4zm20.9-18.9V261.9l-111.6 64.5v232l111.6 64.4zM67.9 641.7L373 814.3V679.9L182.8 575.3 67.9 641.7zM47 622.8V261.9l111.6 64.5v232L47 622.8zm13.1-384.3L373 61.5v129.9L172.5 301.7l-1.6.9-110.8-64.1zm652.6 0l-312.9-177v129.9l200.5 110.2 1.6.9 110.8-64z"/><path fill="#1c78c0" d="M373 649.3L185.4 546.1V341.8L373 450.1v199.2zm26.8 0l187.6-103.1V341.8L399.8 450.1v199.2zm-13.4-207zM198.1 318.2l188.3-103.5 188.3 103.5-188.3 108.7-188.3-108.7z"/></svg>
+    <svg hidden id="vite-svg" viewBox="0 0 410 404" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m399.641 59.525-183.998 329.02c-3.799 6.793-13.559 6.833-17.415.073L10.582 59.556C6.38 52.19 12.68 43.266 21.028 44.76l184.195 32.923c1.175.21 2.378.208 3.553-.006l180.343-32.87c8.32-1.517 14.649 7.337 10.522 14.719Z" fill="url(#a)"/><path d="M292.965 1.574 156.801 28.255a5 5 0 0 0-4.03 4.611l-8.376 141.464c-.197 3.332 2.863 5.918 6.115 5.168l37.91-8.749c3.547-.818 6.752 2.306 6.023 5.873l-11.263 55.153c-.758 3.712 2.727 6.886 6.352 5.785l23.415-7.114c3.63-1.102 7.118 2.081 6.35 5.796l-17.899 86.633c-1.12 5.419 6.088 8.374 9.094 3.728l2.008-3.103 110.954-221.428c1.858-3.707-1.346-7.935-5.418-7.15l-39.022 7.532c-3.667.707-6.787-2.708-5.752-6.296l25.469-88.291c1.036-3.594-2.095-7.012-5.766-6.293Z" fill="url(#b)"/><defs><linearGradient id="a" x1="6" y1="33" x2="235" y2="344" gradientUnits="userSpaceOnUse"><stop stop-color="#41D1FF"/><stop offset="1" stop-color="#BD34FE"/></linearGradient><linearGradient id="b" x1="194.651" y1="8.818" x2="236.076" y2="292.989" gradientUnits="userSpaceOnUse"><stop stop-color="#FFEA83"/><stop offset=".083" stop-color="#FFDD35"/><stop offset="1" stop-color="#FFA800"/></linearGradient></defs></svg>
+    <svg hidden id="github-svg" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" transform="scale(64)" fill="currentColor"/></svg>
+    <svg hidden id="apple-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 842.32 1000"><path d="M824.666 779.304c-15.123 34.937-33.023 67.096-53.763 96.663-28.271 40.308-51.419 68.208-69.258 83.702-27.653 25.43-57.282 38.455-89.01 39.196-22.776 0-50.245-6.481-82.219-19.63-32.08-13.085-61.56-19.566-88.516-19.566-28.27 0-58.59 6.48-91.022 19.567-32.48 13.148-58.646 20-78.652 20.678-30.425 1.296-60.75-12.098-91.022-40.245-19.32-16.852-43.486-45.74-72.436-86.665-31.06-43.702-56.597-94.38-76.602-152.155C10.74 658.443 0 598.013 0 539.509c0-67.017 14.481-124.818 43.486-173.255 22.796-38.906 53.122-69.596 91.078-92.126 37.955-22.53 78.967-34.012 123.132-34.746 24.166 0 55.856 7.475 95.238 22.166 39.27 14.74 64.485 22.215 75.54 22.215 8.266 0 36.277-8.74 83.764-26.166 44.906-16.16 82.806-22.85 113.854-20.215 84.133 6.79 147.341 39.955 189.377 99.707-75.245 45.59-112.466 109.447-111.725 191.364.68 63.807 23.827 116.904 69.319 159.063 20.617 19.568 43.64 34.69 69.257 45.431-5.555 16.11-11.42 31.542-17.654 46.357zM631.71 20.006c0 50.011-18.27 96.707-54.69 139.928-43.949 51.38-97.108 81.071-154.754 76.386-.735-6-1.16-12.314-1.16-18.95 0-48.01 20.9-99.392 58.016-141.403 18.53-21.271 42.098-38.957 70.677-53.066C578.316 9.002 605.29 1.316 630.66 0c.74 6.686 1.05 13.372 1.05 20.005z" style="stroke-width:.84231985;fill:#b3b3b3;fill-opacity:1"/></svg>
+    <svg hidden id="android-svg" xmlns="http://www.w3.org/2000/svg" viewBox="32.163 68.509 203.691 228.155"><path d="M101.885 207.092c7.865 0 14.241 6.376 14.241 14.241v61.09c0 7.865-6.376 14.24-14.241 14.24-7.864 0-14.24-6.375-14.24-14.24v-61.09c0-7.864 6.376-14.24 14.24-14.24z" fill="#a4c639"/><path d="M69.374 133.645c-.047.54-.088 1.086-.088 1.638v92.557c0 9.954 7.879 17.973 17.66 17.973h94.124c9.782 0 17.661-8.02 17.661-17.973v-92.557c0-.552-.02-1.1-.066-1.638H69.374z" fill="#a4c639"/><path d="M166.133 207.092c7.865 0 14.241 6.376 14.241 14.241v61.09c0 7.865-6.376 14.24-14.241 14.24-7.864 0-14.24-6.375-14.24-14.24v-61.09c0-7.864 6.376-14.24 14.24-14.24zm-119.728-65.21c7.864 0 14.24 6.376 14.24 14.241v61.09c0 7.865-6.376 14.241-14.24 14.241-7.865 0-14.241-6.376-14.241-14.24v-61.09c-.001-7.865 6.375-14.242 14.241-14.242zm175.209 0c7.864 0 14.24 6.376 14.24 14.241v61.09c0 7.865-6.376 14.241-14.24 14.241-7.865 0-14.241-6.376-14.241-14.24v-61.09c0-7.865 6.376-14.242 14.241-14.242zM69.79 127.565c.396-28.43 25.21-51.74 57.062-54.812h14.312c31.854 3.073 56.666 26.384 57.062 54.812H69.79z" fill="#a4c639"/><path d="m74.743 70.009 15.022 26.02m103.511-26.02-15.023 26.02" fill="none" stroke="#a4c639" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M114.878 102.087c.012 3.974-3.277 7.205-7.347 7.216-4.068.01-7.376-3.202-7.388-7.176v-.04c-.011-3.975 3.278-7.205 7.347-7.216 4.068-.011 7.376 3.2 7.388 7.176v.04zm54.996 0c.012 3.974-3.277 7.205-7.347 7.216-4.068.01-7.376-3.202-7.388-7.176v-.04c-.011-3.975 3.278-7.205 7.347-7.216 4.068-.011 7.376 3.2 7.388 7.176v.04z" fill="#fff"/></svg>
+    <svg hidden id="kendo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 60.3"><path fill="#5ce500" d="M11.2 14.9 0 21.3l17.4 10.1v20.1l11.2-6.4c.5-.3.9-1 .9-1.6V24.4L13 14.9c-.5-.3-1.3-.3-1.8 0z"/><path fill="#5ce500" d="M12.1 48.4V34.5L0 41.5zM25 .2c-.5-.3-1.3-.3-1.8 0L10.7 7.4l24.1 13.9v27.9L47.3 42c.5-.3.9-1 .9-1.6V13.6L25 .2z"/></svg>
+    <svg hidden id="warning" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path class="clr-i-outline clr-i-outline-path-1" d="M18 21.32a1.3 1.3 0 001.3-1.3V14a1.3 1.3 0 10-2.6 0v6a1.3 1.3 0 001.3 1.32z"/><circle class="clr-i-outline clr-i-outline-path-2" cx="17.95" cy="24.27" r="1.5"/><path class="clr-i-outline clr-i-outline-path-3" d="M30.33 25.54L20.59 7.6a3 3 0 00-5.27 0L5.57 25.54A3 3 0 008.21 30h19.48a3 3 0 002.64-4.43zm-1.78 1.94a1 1 0 01-.86.49H8.21a1 1 0 01-.88-1.48l9.74-17.94a1 1 0 011.76 0l9.74 17.94a1 1 0 01-.02.99z"/><path fill="none" d="M0 0h36v36H0z"/></svg>
+  </div>
+
+  <script type="module" id="components">
+    import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/navigation/register.js');
+    import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/toggle/register.js');
+    import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/tag/register.js');
+    import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/button/register.js');
+    import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/alert/register.js');
+    import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/icon/register.js');
+    import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/badge/register.js');
+    import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/modal/register.js');
+    import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/signpost/register.js');
+    import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/button-action/register.js');
+  </script>
+  <script type="module" id="nav">
+    const nav = document.querySelector('cds-navigation');
+    const main = document.querySelector('main');
+    setNavSize();
+
+    nav.addEventListener('expandedChange', () => {
+      nav.expanded = !nav.expanded;
+      nav.expanded && document.documentElement.clientWidth > 1024 ? main.setAttribute('expanded', '') : main.removeAttribute('expanded');
+    });
+
+    window.addEventListener('resize', () => setNavSize());
+
+    function setNavSize() {
+      if (document.documentElement.clientWidth > 1024) {
+        main.setAttribute('expanded', '');
+        nav.expanded = true;
+      } else {
+        main.removeAttribute('expanded');
+        nav.expanded = false;
+      }
+    }
+  </script>
+  <script type="module" id="settings-modal">
+    const modal = document.querySelector('cds-modal');
+    const button = document.querySelector('#settings-button');
+    button.addEventListener('click', () => modal.removeAttribute('hidden'));
+    modal.addEventListener('closeChange', () => modal.setAttribute('hidden', ''));
+
+    const themeToggle = document.querySelector('#dark-theme-toggle');
+    themeToggle.addEventListener('change', () => toggleTheme());
+
+    const layoutDebugger = document.querySelector('#layout-theme-toggle');
+    layoutDebugger.addEventListener('change', () => document.querySelector('[cds-layout~="?"]') ? document.body.removeAttribute('cds-layout') : document.body.setAttribute('cds-layout', '?'));
+
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      toggleTheme();
+    }
+
+    function toggleTheme() {
+      if (document.body.getAttribute('cds-theme') === 'dark') {
+        document.body.setAttribute('cds-theme', '');
+        themeToggle.checked = false;
+      } else {
+        document.body.setAttribute('cds-theme', 'dark');
+        themeToggle.checked = true;
+      }
+    }
+  </script>
+  <script type="module" id="router">
+    route(location.pathname);
+
+    document.addEventListener('click', e => {
+      const anchor =  e.target.tagName === 'a' ? e.target : e.target.closest('a');
+      const path = anchor?.getAttribute('href');
+
+      if (anchor && isLocalPath(path) && !path.includes('http')) {
+        e?.preventDefault();
+        route(path);
+      }
+    });
+
+    function route(path) {
+      setActivePath(path);
+      history.pushState({}, '', path);
+      const template = document.querySelector(`template[route="${path}"]`);
+      const outlet = document.querySelector('[router-outlet]');
+      outlet.innerHTML = '';
+      outlet.appendChild(template.content.cloneNode(true));
+    }
+
+    function setActivePath(path) {
+      Array.from(document.querySelectorAll('a')).forEach(e => e.closest('cds-navigation-item')?.removeAttribute('active'));
+      document.querySelector(`cds-navigation-item a[href="${path}"]`).parentElement.setAttribute('active', '');
+    }
+
+    function isLocalPath(path) {
+      const test = document.createElement('a');
+      test.href = path;
+      return test.host === location.host;
+    }
+  </script>
+  <script type="module" id="icons">
+    import { ClarityIcons } from 'https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/icon/icon.service.js';
+
+    Promise.all([
+      import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/icon/shapes/info-standard.js'),  
+      import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/icon/shapes/search.js'),
+      import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/icon/shapes/talk-bubbles.js'),
+      import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/icon/shapes/copy.js'),
+      import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/icon/shapes/sync.js'),
+      import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/icon/shapes/bug.js'),
+      import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/icon/shapes/exclamation-triangle.js'),
+      import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/icon/shapes/cog.js'),
+      import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/icon/shapes/code.js'),
+      import('https://cdn.skypack.dev/pin/@cds/core@v6.0.0-beta.3-K2ve2UNto762WvLKJ08l/mode=imports,min/optimized/@cds/core/icon/shapes/bundle.js')
+    ]).then(([infoStandard, search, talkBubbles, copy, sync, bug, exclamationTriangle, cog, code, bundle]) => {
+      ClarityIcons.addIcons(infoStandard.infoStandardIcon, search.searchIcon, talkBubbles.talkBubblesIcon, copy.copyIcon, sync.syncIcon, bug.bugIcon, exclamationTriangle.exclamationTriangleIcon, cog.cogIcon, code.codeIcon, bundle.bundleIcon);
+    });
+  </script>
+  <script type="module" id="signposts">
+    // todo: refactor to use targeting
+    const signpost = document.querySelector('#hybrid-signpost');
+    const anchor = document.querySelector('#hybrid-anchor');
+    signpost.anchor = anchor;
+    anchor.addEventListener('click', () => signpost.hidden = false);
+    signpost.addEventListener('closeChange', () => signpost.hidden = true);
+
+    const signpostMobile = document.querySelector('#mobile-signpost');
+    const anchorMobile = document.querySelector('#mobile-anchor');
+    signpostMobile.anchor = anchorMobile;
+    anchorMobile.addEventListener('click', () => signpostMobile.hidden = false);
+    signpostMobile.addEventListener('closeChange', () => signpostMobile.hidden = true);
+
+    const signpostTooling = document.querySelector('#tooling-signpost');
+    const anchorTooling = document.querySelector('#tooling-anchor');
+    signpostTooling.anchor = anchorTooling;
+    anchorTooling.addEventListener('click', () => signpostTooling.hidden = false);
+    signpostTooling.addEventListener('closeChange', () => signpostTooling.hidden = true);
+
+    const signpostFramework = document.querySelector('#framework-signpost');
+    const anchorFramework = document.querySelector('#framework-anchor');
+    signpostFramework.anchor = anchorFramework;
+    anchorFramework.addEventListener('click', () => signpostFramework.hidden = false);
+    signpostFramework.addEventListener('closeChange', () => signpostFramework.hidden = true);
+  </script>
+  <script type="module" id="counter">
+    const counter = document.getElementById('counter');
+    const count = document.querySelectorAll('.demos li').length;
+    const start = 0;
+    let current = start;
+
+    const timer = setInterval(() => {
+      current += (count > start ? 1 : -1);
+      counter.textContent = current;
+      if (current == count) {
+        clearInterval(timer);
+      }
+    }, Math.abs(Math.floor(3000 / count - start)));
+  </script>
+</body>
+</html>
