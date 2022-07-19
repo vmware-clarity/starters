@@ -1,1 +1,24 @@
-Angular - Advanced Row Selection
+<div>Requires ^13.5.0 or ^12.3.0</div>
+
+<clr-datagrid
+  *ngIf="{ vms: vms | async }; let data"
+  [clrDgLoading]="data.vms === null"
+  [clrDgSelected]="[]"
+  [clrDgRowSelection]="true"
+  clrAdvancedSelection
+>
+  <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field">
+    <ng-container *clrDgHideableColumn>{{ column.displayName }}</ng-container>
+  </clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let vm of data.vms!" [clrDgItem]="vm">
+    <clr-dg-cell *ngFor="let column of columns">{{ vm[column.field] }}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination>
+      <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]"> Elements per page </clr-dg-page-size>
+      {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of {{ pagination.totalItems }} elements
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
