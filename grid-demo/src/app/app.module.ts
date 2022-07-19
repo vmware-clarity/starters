@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ClarityModule } from '@clr/angular';
 import { loadCoreIconSet, loadEssentialIconSet } from '@cds/core/icon';
+import { CdsModule } from '@cds/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,7 +39,8 @@ const directives = [AdvancedSelectionDirective];
 
 @NgModule({
   declarations: [...components, ...directives],
-  imports: [AppRoutingModule, BrowserModule, ClarityModule],
+  imports: [AppRoutingModule, BrowserModule, CdsModule, ClarityModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
