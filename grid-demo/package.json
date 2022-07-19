@@ -21,7 +21,9 @@
     "@cds/core": "^6.0.0",
     "@clr/angular": "~13.5.0",
     "@clr/ui": "~13.5.0",
+    "@faker-js/faker": "^7.3.0",
     "normalize.css": "^8.0.1",
+    "readable-bytes": "^2.0.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
