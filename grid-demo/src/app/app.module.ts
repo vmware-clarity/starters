@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { CdsModule } from '@cds/angular';
 import { ClarityModule } from '@clr/angular';
 import { loadCoreIconSet, loadEssentialIconSet } from '@cds/core/icon';
 import { AngularAdvancedRowSelectionComponent } from './angular/advanced-row-selection/advanced-row-selection.component';
@@ -15,6 +17,7 @@ import { CoreColumnDomPerformanceComponent } from './core/column-dom-performance
 import { CoreColumnOrderingComponent } from './core/column-ordering/column-ordering.component';
 import { CoreLazyLoadingRowsComponent } from './core/lazy-loading-rows/lazy-loading-rows.component';
 import { CoreRowDomPerformanceComponent } from './core/row-dom-performance/row-dom-performance.component';
+import { HttpClientModule } from '@angular/common/http';
 
 loadCoreIconSet();
 loadEssentialIconSet();
@@ -35,8 +38,9 @@ const components = [
 
 @NgModule({
   declarations: [...components],
-  imports: [AppRoutingModule, BrowserModule, ClarityModule],
+  imports: [AppRoutingModule, BrowserModule, HttpClientModule, ClarityModule, CdsModule],
   providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
