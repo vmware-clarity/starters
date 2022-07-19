@@ -1,0 +1,78 @@
+<clr-main-container *ngIf="url | async; let url">
+  <clr-header>
+    <div class="branding">
+      <a [routerLink]="[]" class="nav-link">
+        <img class="logo" src="/assets/logo.png" />
+        <span class="title">Clarity Grid Demo</span>
+      </a>
+    </div>
+    <div class="header-nav">
+      <a
+        [routerLink]="['angular', url[url.length - 1]]"
+        class="nav-link nav-text"
+        [ngClass]="{ active: url[0] === 'angular' }"
+      >
+        Angular
+      </a>
+      <a
+        [routerLink]="['core', url[url.length - 1]]"
+        class="nav-link nav-text"
+        [ngClass]="{ active: url[0] === 'core' }"
+      >
+        Core
+      </a>
+    </div>
+  </clr-header>
+  <nav class="subnav">
+    <ul class="nav">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [ngClass]="{ active: url[1] === 'advanced-row-selection' }"
+          [routerLink]="[url[0], 'advanced-row-selection']"
+        >
+          Advanced Row Selection
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [ngClass]="{ active: url[1] === 'lazy-loading-rows' }"
+          [routerLink]="[url[0], 'lazy-loading-rows']"
+        >
+          Lazy Loading Rows
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [ngClass]="{ active: url[1] === 'column-dom-performance' }"
+          [routerLink]="[url[0], 'column-dom-performance']"
+        >
+          Column DOM Performance
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [ngClass]="{ active: url[1] === 'row-dom-performance' }"
+          [routerLink]="[url[0], 'row-dom-performance']"
+        >
+          Row DOM Performance
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [ngClass]="{ active: url[1] === 'column-ordering' }"
+          [routerLink]="[url[0], 'column-ordering']"
+        >
+          Column Ordering
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="wrapper">
+    <router-outlet></router-outlet>
+  </div>
+</clr-main-container>
