@@ -36,7 +36,6 @@ const components = [
 @NgModule({
   declarations: [...components],
   imports: [AppRoutingModule, BrowserModule, ClarityModule],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
