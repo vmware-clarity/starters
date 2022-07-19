@@ -9,7 +9,7 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  url: Observable<string[]>;
+  readonly url: Observable<string[]>;
 
   constructor(router: Router) {
     this.url = router.events.pipe(
