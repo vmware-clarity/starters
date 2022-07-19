@@ -22,6 +22,19 @@ export interface Vm {
   usedSpace: string;
 }
 
+export const columns: { field: keyof Vm; displayName: string }[] = [
+  { field: 'id', displayName: 'Id' },
+  { field: 'name', displayName: 'Name' },
+  { field: 'state', displayName: 'State' },
+  { field: 'status', displayName: 'Status' },
+  { field: 'managedBy', displayName: 'Managed By' },
+  { field: 'host', displayName: 'Host' },
+  { field: 'cluster', displayName: 'Cluster' },
+  { field: 'faultDomain', displayName: 'Fault Domain' },
+  { field: 'provisionedSpace', displayName: 'Provisioned Space' },
+  { field: 'usedSpace', displayName: 'Used Space' },
+];
+
 const defaultQuery: VmQuery = {
   pageIndex: 0,
   pageSize: 10,
