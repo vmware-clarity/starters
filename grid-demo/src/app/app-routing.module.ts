@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AngularAdvancedRowSelectionComponent } from './angular/advanced-row-selection/advanced-row-selection.component';
 import { AngularColumnDomPerformanceComponent } from './angular/column-dom-performance/column-dom-performance.component';
 import { AngularColumnOrderingComponent } from './angular/column-ordering/column-ordering.component';
