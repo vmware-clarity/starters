@@ -11,7 +11,7 @@ import { filter, map } from 'rxjs/operators';
 export class AppComponent {
   url: Observable<string[]>;
 
-  constructor(private readonly router: Router) {
+  constructor(router: Router) {
     this.url = router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       map(() => router.url.substring(1).split('/'))
