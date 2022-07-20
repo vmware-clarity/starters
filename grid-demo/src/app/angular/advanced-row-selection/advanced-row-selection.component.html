@@ -3,8 +3,6 @@
 <clr-datagrid
   *ngIf="{ vms: vms | async }; let data"
   [clrDgLoading]="data.vms === null"
-  [clrDgSelected]="[]"
-  [clrDgRowSelection]="true"
   clrAdvancedSelection
 >
   <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field">

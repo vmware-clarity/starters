@@ -1,11 +1,16 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostListener, OnInit } from '@angular/core';
 import { ClrDatagrid } from '@clr/angular';
 
 @Directive({
   selector: 'clr-datagrid[clrAdvancedSelection]',
 })
-export class AdvancedSelectionDirective {
+export class AdvancedSelectionDirective implements OnInit {
   constructor(private readonly elementRef: ElementRef, private readonly datagrid: ClrDatagrid) {}
+
+  ngOnInit() {
+    this.datagrid.selected = [];
+    this.datagrid.rowSelectionMode = true;
+  }
 
   @HostListener('click', ['$event']) overrideSelection(evt: MouseEvent) {
     const target = evt.target as HTMLElement;
