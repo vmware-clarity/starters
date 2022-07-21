@@ -4,7 +4,7 @@ import { debounceTime, first, map, publishReplay, refCount, shareReplay, switchM
 import '@cds/core/grid/register.js';
 import '@cds/core/checkbox/register.js';
 
-import { columns, Vm, generateVms } from './../../data/vm.generator';
+import { columns, Vm, generateVms } from '../../data/vm.generator';
 
 @Component({
   templateUrl: './advanced-row-selection.component.html',
