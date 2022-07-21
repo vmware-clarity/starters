@@ -1,1 +1,27 @@
-Angular - Column Ordering
+<clr-datagrid
+  *ngIf="{ vms: vms | async, columns: columns | async }; let data"
+  [clrDgLoading]="data.vms === null"
+  (cdkDropListDropped)="columnDropped($event)"
+  cdkDropList
+  cdkDropListOrientation="horizontal"
+>
+  <clr-dg-column
+    *ngFor="let column of data.columns"
+    [clrDgField]="column.field"
+    cdkDrag
+    cdkDragPreviewContainer="parent"
+  >
+    <ng-container *clrDgHideableColumn>{{ column.displayName }}</ng-container>
+  </clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let vm of data.vms!" [clrDgItem]="vm">
+    <clr-dg-cell *ngFor="let column of data.columns">{{ vm[column.field] }}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination>
+      <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]"> Elements per page </clr-dg-page-size>
+      {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of {{ pagination.totalItems }} elements
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>

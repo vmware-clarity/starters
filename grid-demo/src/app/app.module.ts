@@ -1,4 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserModule } from '@angular/platform-browser';
 import { ClarityModule } from '@clr/angular';
 import { loadCoreIconSet, loadEssentialIconSet } from '@cds/core/icon';
@@ -39,7 +40,7 @@ const directives = [CustomClrAdvancedSelectionDirective];
 
 @NgModule({
   declarations: [...components, ...directives],
-  imports: [AppRoutingModule, BrowserModule, CdsModule, ClarityModule],
+  imports: [AppRoutingModule, BrowserModule, CdsModule, ClarityModule, DragDropModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
