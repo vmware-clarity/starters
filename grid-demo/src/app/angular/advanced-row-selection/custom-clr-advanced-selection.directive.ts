@@ -2,9 +2,9 @@ import { Directive, ElementRef, HostListener, OnInit } from '@angular/core';
 import { ClrDatagrid } from '@clr/angular';
 
 @Directive({
-  selector: 'clr-datagrid[clrAdvancedSelection]',
+  selector: 'clr-datagrid[customClrAdvancedSelection]',
 })
-export class ClrAdvancedSelectionDirective implements OnInit {
+export class CustomClrAdvancedSelectionDirective implements OnInit {
   constructor(private readonly elementRef: ElementRef, private readonly datagrid: ClrDatagrid) {}
 
   ngOnInit() {
