@@ -1,1 +1,26 @@
-Angular - Lazy Loading Rows
+<clr-datagrid *ngIf="{ data: data | async }; let data" [clrDgLoading]="!data.data">
+  <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field">
+    <ng-container *clrDgHideableColumn>{{ column.displayName }}</ng-container>
+  </clr-dg-column>
+
+  <ng-template
+    customClrVirtualRows
+    let-vm
+    [customClrVirtualRowsOf]="data.data?.vms"
+    [customClrVirtualRowsMinBufferPx]="200"
+    [customClrVirtualRowsMaxBufferPx]="400"
+    (renderedRangeChange)="renderRangeChange($event)"
+  >
+    <clr-dg-row *ngIf="vm" [clrDgItem]="vm">
+      <clr-dg-cell *ngFor="let column of columns">{{ vm[column.field] }}</clr-dg-cell>
+    </clr-dg-row>
+    <clr-dg-row *ngIf="!vm" [clrDgItem]="{}">
+      <clr-dg-cell>LOADING...</clr-dg-cell>
+    </clr-dg-row>
+  </ng-template>
+
+  <clr-dg-footer>
+    {{ data.data?.totalResults }} total results ({{ data.data?.loadedCount }}
+    loaded)
+  </clr-dg-footer>
+</clr-datagrid>
