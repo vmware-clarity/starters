@@ -4,7 +4,7 @@ import { ClrDatagrid } from '@clr/angular';
 @Directive({
   selector: 'clr-datagrid[clrAdvancedSelection]',
 })
-export class AdvancedSelectionDirective implements OnInit {
+export class ClrAdvancedSelectionDirective implements OnInit {
   constructor(private readonly elementRef: ElementRef, private readonly datagrid: ClrDatagrid) {}
 
   ngOnInit() {
