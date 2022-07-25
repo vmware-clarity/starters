@@ -1,1 +1,11 @@
-Angular - Row DOM Performance
+<clr-datagrid *ngIf="{ vms: vms | async }; let data" [clrDgLoading]="data.vms === null">
+  <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field">
+    <ng-container *clrDgHideableColumn>{{ column.displayName }}</ng-container>
+  </clr-dg-column>
+
+  <clr-dg-row *customClrVirtualRows="let vm of data.vms" [clrDgItem]="vm">
+    <clr-dg-cell *ngFor="let column of columns">{{ vm[column.field] }}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>{{ data.vms?.length }} vms total</clr-dg-footer>
+</clr-datagrid>
