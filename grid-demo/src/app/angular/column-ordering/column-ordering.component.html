@@ -1,21 +1,23 @@
 <clr-datagrid
-  *ngIf="{ vms: vms | async, columns: columns | async }; let data"
+  id="grid"
+  *ngIf="{ vms: vms | async }; let data"
   [clrDgLoading]="data.vms === null"
-  (cdkDropListDropped)="columnDropped($event)"
   cdkDropList
-  cdkDropListOrientation="horizontal"
+  customClrColumnOrderingGrid
+  [(columns)]="columns"
 >
   <clr-dg-column
-    *ngFor="let column of data.columns"
+    *ngFor="let column of columns; let index = index"
     [clrDgField]="column.field"
     cdkDrag
-    cdkDragPreviewContainer="parent"
+    [customClrColumnOrderingColumn]="column"
+    [columnIndex]="index"
   >
     <ng-container *clrDgHideableColumn>{{ column.displayName }}</ng-container>
   </clr-dg-column>
 
   <clr-dg-row *clrDgItems="let vm of data.vms!" [clrDgItem]="vm">
-    <clr-dg-cell *ngFor="let column of data.columns">{{ vm[column.field] }}</clr-dg-cell>
+    <clr-dg-cell *ngFor="let column of columns">{{ vm[column.field] }}</clr-dg-cell>
   </clr-dg-row>
 
   <clr-dg-footer>
