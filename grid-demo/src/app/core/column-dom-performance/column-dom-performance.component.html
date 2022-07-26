@@ -1,1 +1,50 @@
-Core - Column DOM Performance
+<cds-grid *ngIf="
+    {
+      vms: vms | async,
+      pageIndex: pageIndex | async,
+      pageCount: pageCount | async,
+      pageSize: pageSize | async,
+      columns: columns | async
+    };
+    let data
+  " aria-label="basic datagrid demo" height="400">
+
+    <ng-container *ngFor="let column of data.columns">
+        <cds-grid-column *ngIf="column.visible">{{ column.displayName }}</cds-grid-column>
+    </ng-container>
+
+    <ng-container *ngIf="data.vms === null">
+        <cds-grid-placeholder>
+            <cds-progress-circle size="xl" status="info"></cds-progress-circle>
+            <p cds-text="subsection">Loading Data</p>
+        </cds-grid-placeholder>
+    </ng-container>
+
+    <cds-grid-row *ngFor="let vm of data.vms">
+        <ng-container *ngFor="let column of data.columns">
+            <cds-grid-cell *ngIf="column.visible">
+                {{ vm[column.field] }}</cds-grid-cell>
+        </ng-container>
+    </cds-grid-row>
+
+    <cds-grid-footer>
+        <custom-column-picker>
+            <cds-checkbox-group layout="vertical">
+                <label>Visible Columns</label>
+                <cds-checkbox *ngFor="let column of data.columns">
+                    <label>{{column.displayName}}</label>
+                    <input type="checkbox" [value]="column.field" [checked]="column.visible"
+                        (change)="columnVisibleChange($event)" />
+                </cds-checkbox>
+                <cds-checkbox>
+                    <label>All Columns</label>
+                    <input type="checkbox" value="all" [indeterminate]="someColumnsVisible"
+                        [checked]="allColumnsVisible" (change)="columnVisibleChange($event)" />
+                </cds-checkbox>
+            </cds-checkbox-group>
+        </custom-column-picker>
+        <cds-grid-pagination [page]="data.pageIndex" [pageCount]="data.pageCount" [pageSize]="data.pageSize"
+            (pageChange)="pageChange($event)" (pageSizeChange)="pageSizeChange($event)">
+        </cds-grid-pagination>
+    </cds-grid-footer>
+</cds-grid>

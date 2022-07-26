@@ -14,6 +14,7 @@ import { AngularLazyLoadingRowsComponent } from './angular/lazy-loading-rows/laz
 import { AngularRowDomPerformanceComponent } from './angular/row-dom-performance/row-dom-performance.component';
 import { CoreAdvancedRowSelectionComponent } from './core/advanced-row-selection/advanced-row-selection.component';
 import { CoreColumnDomPerformanceComponent } from './core/column-dom-performance/column-dom-performance.component';
+import { CoreColumnPickerComponent } from './core/column-dom-performance/column-picker.component';
 import { CoreColumnOrderingComponent } from './core/column-ordering/column-ordering.component';
 import { CoreLazyLoadingRowsComponent } from './core/lazy-loading-rows/lazy-loading-rows.component';
 import { CoreRowDomPerformanceComponent } from './core/row-dom-performance/row-dom-performance.component';
@@ -34,6 +35,7 @@ const components = [
   CoreColumnOrderingComponent,
   CoreLazyLoadingRowsComponent,
   CoreRowDomPerformanceComponent,
+  CoreColumnPickerComponent,
 ];
 
 const directives = [CustomClrAdvancedSelectionDirective];

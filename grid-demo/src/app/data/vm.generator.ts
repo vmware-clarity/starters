@@ -22,7 +22,12 @@ export interface Vm {
   usedSpace: string;
 }
 
-export const columns: { field: keyof Vm; displayName: string }[] = [
+export interface Column {
+  field: keyof Vm;
+  displayName: string;
+}
+
+export const columns: Column[] = [
   { field: 'id', displayName: 'Id' },
   { field: 'name', displayName: 'Name' },
   { field: 'state', displayName: 'State' },
