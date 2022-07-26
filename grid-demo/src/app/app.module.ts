@@ -17,6 +17,7 @@ import { AngularRowDomPerformanceComponent } from './angular/row-dom-performance
 import { AngularScreenReaderColumnsComponent } from './angular/screen-reader-columns/screen-reader-columns.component';
 import { CoreAdvancedRowSelectionComponent } from './core/advanced-row-selection/advanced-row-selection.component';
 import { CoreColumnDomPerformanceComponent } from './core/column-dom-performance/column-dom-performance.component';
+import { CoreColumnPickerComponent } from './core/column-dom-performance/column-picker.component';
 import { CoreColumnOrderingComponent } from './core/column-ordering/column-ordering.component';
 import { CoreFinalDemoComponent } from './core/final-demo/final-demo.component';
 import { CoreLazyLoadingRowsComponent } from './core/lazy-loading-rows/lazy-loading-rows.component';
@@ -47,6 +48,7 @@ const components = [
   CoreLazyLoadingRowsComponent,
   CoreRowDomPerformanceComponent,
   CoreScreenReaderColumnsComponent,
+  CoreColumnPickerComponent,
 ];
 
 const directives = [
