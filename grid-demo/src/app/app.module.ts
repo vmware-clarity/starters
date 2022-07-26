@@ -19,6 +19,8 @@ import { CoreColumnOrderingComponent } from './core/column-ordering/column-order
 import { CoreLazyLoadingRowsComponent } from './core/lazy-loading-rows/lazy-loading-rows.component';
 import { CoreRowDomPerformanceComponent } from './core/row-dom-performance/row-dom-performance.component';
 import { CustomClrAdvancedSelectionDirective } from './angular/advanced-row-selection/custom-clr-advanced-selection.directive';
+import { CustomClrColumnOrderingGridDirective } from './angular/column-ordering/custom-clr-column-ordering-grid.directive';
+import { CustomClrColumnOrderingColumnDirective } from './angular/column-ordering/custom-clr-column-ordering-column.directive';
 
 loadCoreIconSet();
 loadEssentialIconSet();
@@ -37,7 +39,11 @@ const components = [
   CoreRowDomPerformanceComponent,
 ];
 
-const directives = [CustomClrAdvancedSelectionDirective];
+const directives = [
+  CustomClrAdvancedSelectionDirective,
+  CustomClrColumnOrderingColumnDirective,
+  CustomClrColumnOrderingGridDirective,
+];
 
 @NgModule({
   declarations: [...components, ...directives],
