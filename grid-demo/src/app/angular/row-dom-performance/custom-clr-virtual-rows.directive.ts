@@ -1,6 +1,6 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
-import { _RecycleViewRepeaterStrategy } from '@angular/cdk/collections';
+import { ListRange, _RecycleViewRepeaterStrategy } from '@angular/cdk/collections';
 import {
   CdkFixedSizeVirtualScroll,
   CdkVirtualForOf,
@@ -15,15 +15,18 @@ import {
   Directive,
   DoCheck,
   ElementRef,
+  EventEmitter,
   Input,
   IterableDiffers,
   NgZone,
   OnDestroy,
   OnInit,
+  Output,
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
 import { ClrDatagrid } from '@clr/angular';
+import { Subscription } from 'rxjs';
 
 type CdkVirtualForInputKey =
   | 'cdkVirtualForOf'
@@ -108,6 +111,8 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
     this.updateFixedSizeVirtualScrollInputs();
   }
 
+  @Output() renderedRangeChange = new EventEmitter<ListRange>();
+
   private _cdkVirtualForInputs: CdkVirtualForInputs<T> = {};
   private _cdkFixedSizeVirtualScrollInputs = { ...defaultCdkFixedSizeVirtualScrollInputs };
 
@@ -116,6 +121,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   private virtualScrollStrategy: FixedSizeVirtualScrollStrategy | undefined;
   private virtualScrollViewport: CdkVirtualScrollViewport | undefined;
   private cdkVirtualFor: CdkVirtualForOf<T> | undefined;
+  private renderedRangeChangeSubscription: Subscription | undefined;
 
   constructor(
     private readonly changeDetectorRef: ChangeDetectorRef,
@@ -160,6 +166,10 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
     this.updateCdkVirtualForInputs();
 
     this.virtualScrollViewport.ngOnInit();
+
+    this.renderedRangeChangeSubscription = this.virtualScrollViewport.renderedRangeStream.subscribe(renderedRange => {
+      this.renderedRangeChange.emit(renderedRange);
+    });
   }
 
   ngDoCheck() {
@@ -169,6 +179,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   ngOnDestroy() {
     this.cdkVirtualFor?.ngOnDestroy();
     this.virtualScrollViewport?.ngOnDestroy();
+    this.renderedRangeChangeSubscription?.unsubscribe();
   }
 
   private updateCdkVirtualForInputs() {
