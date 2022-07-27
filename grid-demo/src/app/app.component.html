@@ -70,6 +70,15 @@
           Column Ordering
         </a>
       </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [ngClass]="{ active: url[1] === 'screen-reader-columns' }"
+          [routerLink]="[url[0], 'screen-reader-columns']"
+        >
+          Screen Reader Columns
+        </a>
+      </li>
     </ul>
   </nav>
   <div class="wrapper">
