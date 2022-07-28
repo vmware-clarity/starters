@@ -26,6 +26,11 @@
   <nav class="subnav">
     <ul class="nav">
       <li class="nav-item">
+        <a class="nav-link" [ngClass]="{ active: url[1] === 'final-demo' }" [routerLink]="[url[0], 'final-demo']">
+          Final Demo
+        </a>
+      </li>
+      <li class="nav-item">
         <a
           class="nav-link"
           [ngClass]="{ active: url[1] === 'advanced-row-selection' }"

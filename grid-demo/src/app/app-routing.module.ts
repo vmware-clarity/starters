@@ -4,12 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularAdvancedRowSelectionComponent } from './angular/advanced-row-selection/advanced-row-selection.component';
 import { AngularColumnDomPerformanceComponent } from './angular/column-dom-performance/column-dom-performance.component';
 import { AngularColumnOrderingComponent } from './angular/column-ordering/column-ordering.component';
+import { AngularFinalDemoComponent } from './angular/final-demo/final-demo.component';
 import { AngularLazyLoadingRowsComponent } from './angular/lazy-loading-rows/lazy-loading-rows.component';
 import { AngularRowDomPerformanceComponent } from './angular/row-dom-performance/row-dom-performance.component';
 import { AngularScreenReaderColumnsComponent } from './angular/screen-reader-columns/screen-reader-columns.component';
 import { CoreAdvancedRowSelectionComponent } from './core/advanced-row-selection/advanced-row-selection.component';
 import { CoreColumnDomPerformanceComponent } from './core/column-dom-performance/column-dom-performance.component';
 import { CoreColumnOrderingComponent } from './core/column-ordering/column-ordering.component';
+import { CoreFinalDemoComponent } from './core/final-demo/final-demo.component';
 import { CoreLazyLoadingRowsComponent } from './core/lazy-loading-rows/lazy-loading-rows.component';
 import { CoreRowDomPerformanceComponent } from './core/row-dom-performance/row-dom-performance.component';
 import { CoreScreenReaderColumnsComponent } from './core/screen-reader-columns/screen-reader-columns.component';
@@ -17,12 +19,16 @@ import { CoreScreenReaderColumnsComponent } from './core/screen-reader-columns/s
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/angular/advanced-row-selection',
+    redirectTo: '/angular/final-demo',
     pathMatch: 'full',
   },
   {
     path: 'angular',
     children: [
+      {
+        path: 'final-demo',
+        component: AngularFinalDemoComponent,
+      },
       {
         path: 'advanced-row-selection',
         component: AngularAdvancedRowSelectionComponent,
@@ -52,6 +58,10 @@ const routes: Routes = [
   {
     path: 'core',
     children: [
+      {
+        path: 'final-demo',
+        component: CoreFinalDemoComponent,
+      },
       {
         path: 'advanced-row-selection',
         component: CoreAdvancedRowSelectionComponent,
