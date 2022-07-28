@@ -15,7 +15,6 @@ import {
   Directive,
   DoCheck,
   ElementRef,
-  Inject,
   Input,
   IterableDiffers,
   NgZone,
