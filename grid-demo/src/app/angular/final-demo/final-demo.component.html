@@ -1,0 +1,44 @@
+<clr-datagrid
+  *ngIf="{ data: data | async }; let data"
+  cdkDropList
+  customClrAdvancedSelection
+  customClrColumnOrderingGrid
+  customClrScreenReaderColumns
+  [(columns)]="columns"
+  [clrDgLoading]="!data.data"
+>
+  <clr-dg-column
+    *ngFor="let column of columns; let index = index"
+    cdkDrag
+    [customClrColumnOrderingColumn]="column"
+    [columnIndex]="index"
+    [clrDgField]="column.field"
+  >
+    <ng-template [clrDgHideableColumn]="{ hidden: column.hidden }" (clrDgHiddenChange)="column.hidden = $event">
+      {{ column.displayName }}
+    </ng-template>
+  </clr-dg-column>
+
+  <ng-template
+    customClrVirtualRows
+    let-vm
+    [customClrVirtualRowsOf]="data.data?.vms"
+    [customClrVirtualRowsMinBufferPx]="200"
+    [customClrVirtualRowsMaxBufferPx]="400"
+    (renderedRangeChange)="renderRangeChange($event)"
+  >
+    <clr-dg-row *ngIf="vm" [clrDgItem]="vm">
+      <clr-dg-cell *ngFor="let column of columns">
+        <ng-container *ngIf="!column.hidden">{{ vm[column.field] }}</ng-container>
+      </clr-dg-cell>
+    </clr-dg-row>
+    <clr-dg-row *ngIf="!vm" [clrDgItem]="{}">
+      <clr-dg-cell>LOADING...</clr-dg-cell>
+    </clr-dg-row>
+  </ng-template>
+
+  <clr-dg-footer>
+    {{ data.data?.totalResults }} total results ({{ data.data?.loadedCount }}
+    loaded)
+  </clr-dg-footer>
+</clr-datagrid>
