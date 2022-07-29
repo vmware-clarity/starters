@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { Vm, columns } from 'src/app/data/vm.generator';
+import { Vm, columns } from './../../data/vm.generator';
 import { LazyLoadService } from './../lazy-loading-rows/lazy-load.service';
 
 @Component({
