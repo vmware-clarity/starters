@@ -2,6 +2,7 @@ import { ListRange } from '@angular/cdk/collections';
 import { Injectable } from '@angular/core';
 import { from, Subject } from 'rxjs';
 import { debounceTime, distinct, map, scan, mergeMap, startWith, switchMap } from 'rxjs/operators';
+
 import { Vm, generateVms } from './../../data/vm.generator';
 
 const pageSize = 10;
