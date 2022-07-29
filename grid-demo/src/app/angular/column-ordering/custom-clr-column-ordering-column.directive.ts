@@ -26,8 +26,9 @@ export class CustomClrColumnOrderingColumnDirective {
     const isSpace = event.code === 'Space';
     const isLeft = event.code === 'ArrowLeft';
     const isRight = event.code === 'ArrowRight';
+    const isMovingColumn = this.gridDirective.grabbedColumn && (isLeft || isRight);
 
-    if (isSpace || (this.gridDirective.grabbedColumn && (isLeft || isRight))) {
+    if (isSpace || isMovingColumn) {
       event.stopImmediatePropagation();
       event.preventDefault();
 
