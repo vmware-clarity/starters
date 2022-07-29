@@ -5,7 +5,7 @@ on:
     branches:
       - 'main'
     paths:
-      - './grid-demo/**'
+      - 'grid-demo/**'
 
 jobs:
   deploy:
