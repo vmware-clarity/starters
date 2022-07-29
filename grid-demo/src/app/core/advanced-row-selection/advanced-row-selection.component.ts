@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, first, map, publishReplay, refCount, shareReplay, switchMap } from 'rxjs/operators';
+import { debounceTime, first, map, shareReplay, switchMap } from 'rxjs/operators';
 import '@cds/core/grid/register.js';
 import '@cds/core/checkbox/register.js';
 

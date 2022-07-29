@@ -1,5 +1,5 @@
 import { ListRange } from '@angular/cdk/collections';
-import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 

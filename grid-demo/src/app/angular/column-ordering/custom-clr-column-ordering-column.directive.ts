@@ -1,5 +1,5 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
-import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
 import { ClrDatagrid } from '@clr/angular';
 import { CustomClrColumnOrderingGridDirective } from './custom-clr-column-ordering-grid.directive';
 
