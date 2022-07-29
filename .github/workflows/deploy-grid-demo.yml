@@ -1,0 +1,33 @@
+name: Deploy Grid Demo
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - './grid-demo/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.repository == 'vmware-clarity/starters'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: './grid-demo/.nvmrc'
+      - name: Install modules
+        working-directory: ./grid-demo
+        run: npm ci
+      - name: Build
+        working-directory: ./grid-demo
+        run: npm run build
+      - name: Deploy
+        working-directory: ./grid-demo
+        run: npx netlify deploy --prod
+        env:
+          NETLIFY_SITE_ID: 6202dd7a-ab4a-46e5-bb05-02bcfd7c57b1
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
