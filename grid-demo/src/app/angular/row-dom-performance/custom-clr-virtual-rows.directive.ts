@@ -111,6 +111,8 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   private _cdkVirtualForInputs: CdkVirtualForInputs<T> = {};
   private _cdkFixedSizeVirtualScrollInputs = { ...defaultCdkFixedSizeVirtualScrollInputs };
 
+  private datagridElementRef: ElementRef<HTMLElement> = (this.datagrid as any).el;
+
   private virtualScrollStrategy: FixedSizeVirtualScrollStrategy | undefined;
   private virtualScrollViewport: CdkVirtualScrollViewport | undefined;
   private cdkVirtualFor: CdkVirtualForOf<T> | undefined;
@@ -140,7 +142,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
       this.directionality,
       this.scrollDispatcher,
       this.viewportRuler,
-      this.datagrid,
+      this.datagridElementRef,
       this.virtualScrollStrategy
     );
 
@@ -196,10 +198,9 @@ function createVirtualScrollViewportForDatagrid(
   directionality: Directionality,
   scrollDispatcher: ScrollDispatcher,
   viewportRuler: ViewportRuler,
-  datagrid: ClrDatagrid,
+  datagridElementRef: ElementRef<HTMLElement>,
   virtualScrollStrategy: FixedSizeVirtualScrollStrategy
 ) {
-  const datagridElementRef: ElementRef<HTMLElement> = (datagrid as any).el;
   const datagridDivElement = datagridElementRef.nativeElement.querySelector<HTMLElement>('.datagrid')!;
   const datagridTableElement = datagridElementRef.nativeElement.querySelector<HTMLElement>('.datagrid-table')!;
   const datagridHeaderElement = datagridElementRef.nativeElement.querySelector<HTMLElement>('.datagrid-header')!;
