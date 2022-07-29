@@ -28,7 +28,7 @@ jobs:
         run: npm run build
       - name: Deploy
         working-directory: ./grid-demo
-        run: npx netlify deploy --prod
+        run: npx netlify-cli deploy --prod
         env:
           NETLIFY_SITE_ID: 6202dd7a-ab4a-46e5-bb05-02bcfd7c57b1
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
