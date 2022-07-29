@@ -14,7 +14,10 @@
     [columnIndex]="index"
     [clrDgField]="column.field"
   >
-    <ng-template [clrDgHideableColumn]="{ hidden: column.hidden }" (clrDgHiddenChange)="column.hidden = $event">
+    <ng-template
+      [clrDgHideableColumn]="{ hidden: column.hidden }"
+      (clrDgHiddenChange)="updateColumnVisibility(column, $event)"
+    >
       {{ column.displayName }}
     </ng-template>
   </clr-dg-column>
@@ -27,13 +30,11 @@
     [customClrVirtualRowsMaxBufferPx]="400"
     (renderedRangeChange)="renderRangeChange($event)"
   >
-    <clr-dg-row *ngIf="vm" [clrDgItem]="vm">
+    <clr-dg-row [clrDgItem]="vm || {}">
       <clr-dg-cell *ngFor="let column of columns">
-        <ng-container *ngIf="!column.hidden">{{ vm[column.field] }}</ng-container>
+        <ng-container *ngIf="vm && !column.hidden">{{ vm[column.field] }}</ng-container>
+        <ng-container *ngIf="!vm && column === firstVisibleColumn">LOADING...</ng-container>
       </clr-dg-cell>
-    </clr-dg-row>
-    <clr-dg-row *ngIf="!vm" [clrDgItem]="{}">
-      <clr-dg-cell>LOADING...</clr-dg-cell>
     </clr-dg-row>
   </ng-template>
 

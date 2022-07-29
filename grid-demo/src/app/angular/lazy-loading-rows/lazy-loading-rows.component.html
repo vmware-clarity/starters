@@ -1,6 +1,11 @@
 <clr-datagrid *ngIf="{ data: data | async }; let data" [clrDgLoading]="!data.data">
   <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field">
-    <ng-container *clrDgHideableColumn>{{ column.displayName }}</ng-container>
+    <ng-template
+      [clrDgHideableColumn]="{ hidden: column.hidden }"
+      (clrDgHiddenChange)="updateColumnVisibility(column, $event)"
+    >
+      {{ column.displayName }}
+    </ng-template>
   </clr-dg-column>
 
   <ng-template
@@ -11,11 +16,11 @@
     [customClrVirtualRowsMaxBufferPx]="400"
     (renderedRangeChange)="renderRangeChange($event)"
   >
-    <clr-dg-row *ngIf="vm" [clrDgItem]="vm">
-      <clr-dg-cell *ngFor="let column of columns">{{ vm[column.field] }}</clr-dg-cell>
-    </clr-dg-row>
-    <clr-dg-row *ngIf="!vm" [clrDgItem]="{}">
-      <clr-dg-cell>LOADING...</clr-dg-cell>
+    <clr-dg-row [clrDgItem]="vm || {}">
+      <clr-dg-cell *ngFor="let column of columns">
+        <ng-container *ngIf="vm">{{ vm[column.field] }}</ng-container>
+        <ng-container *ngIf="!vm && column === firstVisibleColumn">LOADING...</ng-container>
+      </clr-dg-cell>
     </clr-dg-row>
   </ng-template>
 
