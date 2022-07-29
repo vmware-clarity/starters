@@ -5,6 +5,7 @@ on:
     branches:
       - 'main'
     paths:
+      - '.github/workflows/deploy-grid-demo.yml'
       - 'grid-demo/**'
 
 jobs:
