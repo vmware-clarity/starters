@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { moveItemInArray } from '@angular/cdk/drag-drop';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, first, map, publishReplay, refCount, shareReplay, switchMap } from 'rxjs/operators';
 import '@cds/core/grid/register.js';
 import '@cds/core/checkbox/register.js';
 import '@cds/core/dropdown/register.js';
+
+import { Component } from '@angular/core';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { debounceTime, map, shareReplay, switchMap } from 'rxjs/operators';
 
 import { columns, Vm, generateVms } from '../../data/vm.generator';
 
