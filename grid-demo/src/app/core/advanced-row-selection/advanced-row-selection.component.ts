@@ -1,8 +1,9 @@
+import '@cds/core/grid/register.js';
+import '@cds/core/checkbox/register.js';
+
 import { Component } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { debounceTime, first, map, shareReplay, switchMap } from 'rxjs/operators';
-import '@cds/core/grid/register.js';
-import '@cds/core/checkbox/register.js';
 
 import { columns, Vm, generateVms } from './../../data/vm.generator';
 
