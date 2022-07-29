@@ -23,12 +23,13 @@ export class CustomClrColumnOrderingColumnDirective {
   }
 
   @HostListener('keydown', ['$event']) keydown(event: KeyboardEvent) {
+    const isColumnTarget = (event.target as HTMLElement)?.tagName === 'CLR-DG-COLUMN';
     const isSpace = event.code === 'Space';
     const isLeft = event.code === 'ArrowLeft';
     const isRight = event.code === 'ArrowRight';
     const isMovingColumn = this.gridDirective.grabbedColumn && (isLeft || isRight);
 
-    if (isSpace || isMovingColumn) {
+    if (isColumnTarget && (isSpace || isMovingColumn)) {
       event.stopImmediatePropagation();
       event.preventDefault();
 
