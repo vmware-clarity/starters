@@ -113,7 +113,10 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
 
   @Output() renderedRangeChange = new EventEmitter<ListRange>();
 
-  private _cdkVirtualForInputs: CdkVirtualForInputs<T> = {};
+  private _cdkVirtualForInputs: CdkVirtualForInputs<T> = {
+    cdkVirtualForTrackBy: index => index,
+  };
+
   private _cdkFixedSizeVirtualScrollInputs = { ...defaultCdkFixedSizeVirtualScrollInputs };
 
   private datagridElementRef: ElementRef<HTMLElement> = (this.datagrid as any).el;
