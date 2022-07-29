@@ -14,7 +14,6 @@ import { LazyLoadService } from './lazy-load.service';
 export class AngularLazyLoadingRowsComponent {
   readonly columns = columns;
   readonly data: Observable<{ vms: Vm[]; totalResults: number; loadedCount: number }>;
-  clrDgSelectable = true;
 
   constructor(private readonly lazyLoadService: LazyLoadService, changeDetectorRef: ChangeDetectorRef) {
     this.data = this.lazyLoadService.getVms().pipe(
