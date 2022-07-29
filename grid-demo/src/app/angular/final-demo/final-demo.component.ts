@@ -14,6 +14,7 @@ import { LazyLoadService } from './../lazy-loading-rows/lazy-load.service';
 export class AngularFinalDemoComponent {
   readonly data: Observable<{ vms: Vm[]; totalResults: number; loadedCount: number }>;
   columns = columns.map(column => ({ ...column, hidden: false }));
+  firstVisibleColumn = columns[0];
 
   constructor(private readonly lazyLoadService: LazyLoadService, changeDetectorRef: ChangeDetectorRef) {
     this.data = this.lazyLoadService.getVms().pipe(
@@ -21,6 +22,11 @@ export class AngularFinalDemoComponent {
         changeDetectorRef.detectChanges();
       })
     );
+  }
+
+  updateColumnVisibility(column: { hidden: boolean }, hidden: boolean) {
+    column.hidden = hidden;
+    this.firstVisibleColumn = this.columns.find(column => !column.hidden)!;
   }
 
   renderRangeChange($event: ListRange) {
