@@ -117,7 +117,9 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   private _cdkFixedSizeVirtualScrollInputs = { ...defaultCdkFixedSizeVirtualScrollInputs };
 
   private datagridElementRef: ElementRef<HTMLElement> = (this.datagrid as any).el;
+  private datagridKeyNavigationController = (this.datagrid as any).keyNavigation;
 
+  private activeCellElement: HTMLElement | undefined;
   private virtualScrollStrategy: FixedSizeVirtualScrollStrategy | undefined;
   private virtualScrollViewport: CdkVirtualScrollViewport | undefined;
   private cdkVirtualFor: CdkVirtualForOf<T> | undefined;
@@ -136,6 +138,8 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   ) {}
 
   ngOnInit() {
+    this.patchKeyNavigationControllerSetActiveCell();
+
     this.virtualScrollStrategy = new FixedSizeVirtualScrollStrategy(
       this._cdkFixedSizeVirtualScrollInputs.itemSize,
       this._cdkFixedSizeVirtualScrollInputs.minBufferPx,
@@ -169,6 +173,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
 
     this.renderedRangeChangeSubscription = this.virtualScrollViewport.renderedRangeStream.subscribe(renderedRange => {
       this.renderedRangeChange.emit(renderedRange);
+      this.restoreActiveCellAfterRenderedRangeUpdate();
     });
   }
 
@@ -180,6 +185,23 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
     this.cdkVirtualFor?.ngOnDestroy();
     this.virtualScrollViewport?.ngOnDestroy();
     this.renderedRangeChangeSubscription?.unsubscribe();
+  }
+
+  private patchKeyNavigationControllerSetActiveCell() {
+    const _setActiveCell = this.datagridKeyNavigationController.setActiveCell;
+
+    this.datagridKeyNavigationController.setActiveCell = (activeCellElement: HTMLElement) => {
+      _setActiveCell.call(this.datagridKeyNavigationController, activeCellElement);
+      this.activeCellElement = activeCellElement;
+    };
+  }
+
+  private restoreActiveCellAfterRenderedRangeUpdate() {
+    if (this.activeCellElement && this.activeCellElement.tabIndex === 0) {
+      setTimeout(() => {
+        this.datagridKeyNavigationController.setActiveCell(this.activeCellElement);
+      });
+    }
   }
 
   private updateCdkVirtualForInputs() {
