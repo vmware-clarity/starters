@@ -39,16 +39,21 @@ export class CoreColumnOrderingComponent {
   }
 
   sortColumns(e: any) {
+    console.log(e.detail.type, e);
+
     if (e.detail.type === 'reordered') {
       const value = [...this.columns.value];
 
       const fromIndex = value.findIndex(i => `${i.field}` === e.detail.from.getAttribute('cds-field'));
       const targetIndex = value.findIndex(i => `${i.field}` === e.detail.target.getAttribute('cds-field'));
 
-      // if the item is moving further in the array, everything else will shift back 1, so subtract 1
-      const offset = fromIndex > targetIndex ? 0 : -1;
+      console.log('reorder logic', fromIndex, targetIndex);
+
+      // when moving items to the right (later in the array), everything else will shift back
+      const offset = fromIndex + 1 < targetIndex ? -1 : 0;
       moveItemInArray(value, fromIndex, targetIndex + offset);
 
+      console.log(value);
       this.columns.next(value);
       this.ariaLiveMessage.next(`${e.detail.from.textContent} moved to column ${e.detail.target.ariaColIndex}`);
     } else {
