@@ -1,4 +1,27 @@
-<div>Requires ^13.5.0 or ^12.3.0</div>
+<clr-accordion>
+  <clr-accordion-panel [clrAccordionPanelOpen]="true">
+    <clr-accordion-title>Demo Explanation</clr-accordion-title>
+    <clr-accordion-content>
+      <p>
+        This demo allows for using the shift and command/control keys to allow users to more easily and quickly select
+        the rows they want. The shift key allows multiple rows to be selected with a single click. The command/control
+        key allows for selecting multiple rows. Essentially, this works very similar to how file explorers work.
+      </p>
+
+      <p>
+        This behavior can be added to an angular datagrid (requires ^13.5.0 or ^12.3.0) by adding the new
+        <code>customClrAdvancedSelection</code> directive to the datagrid. For a full example, see the
+        <a
+          target="_blank"
+          href="https://github.com/vmware-clarity/starters/tree/main/grid-demo/src/app/angular/advanced-row-selection"
+        >
+          demo code on GitHub
+        </a>
+        .
+      </p>
+    </clr-accordion-content>
+  </clr-accordion-panel>
+</clr-accordion>
 
 <clr-datagrid *ngIf="{ vms: vms | async }; let data" [clrDgLoading]="data.vms === null" customClrAdvancedSelection>
   <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field">

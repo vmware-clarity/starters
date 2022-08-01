@@ -1,3 +1,25 @@
+<clr-accordion>
+  <clr-accordion-panel [clrAccordionPanelOpen]="true">
+    <clr-accordion-title>Demo Explanation</clr-accordion-title>
+    <clr-accordion-content>
+      <p>
+        This demo is a composite of all six individual demos included in the project. The goal of this project was to
+        implement the most requested features of the angular datagrid without modifying the source code for the
+        datagrid. All features in this demo can be implemented without upgrading your version of Clarity (with a
+        possible exception for the range selection behavior which requires ^13.5.0 or ^12.3.0).
+      </p>
+
+      <p>
+        For full examples of these demos, see the
+        <a target="_blank" href="https://github.com/vmware-clarity/starters/tree/main/grid-demo/src/app/angular">
+          demo code on GitHub
+        </a>
+        .
+      </p>
+    </clr-accordion-content>
+  </clr-accordion-panel>
+</clr-accordion>
+
 <clr-datagrid
   *ngIf="{ data: data | async }; let data"
   cdkDropList

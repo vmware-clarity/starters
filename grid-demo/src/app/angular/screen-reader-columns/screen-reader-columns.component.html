@@ -1,3 +1,30 @@
+<clr-accordion>
+  <clr-accordion-panel [clrAccordionPanelOpen]="true">
+    <clr-accordion-title>Demo Explanation</clr-accordion-title>
+    <clr-accordion-content>
+      <p>
+        This demo improves the accessibility of the angular datagrid, specifically when reading columns with NVDA screen
+        readers. By default, the NVDA screen reader reads all aria labels in a column's header (filtering, sorting,
+        resizing) for each cell in the grid. This provides quite a poor experience for users that rely on NVDA screen
+        readers. This demo makes it so that the screen reader will not read the extra aria labels in a header's column
+        when focused on a cell in a data row.
+      </p>
+
+      <p>
+        This behavior can be added to an angular datagrid by adding the new
+        <code>customClrScreenReaderColumns</code> directive to the datagrid. For a full example, see the
+        <a
+          target="_blank"
+          href="https://github.com/vmware-clarity/starters/tree/main/grid-demo/src/app/angular/screen-reader-columns"
+        >
+          demo code on GitHub
+        </a>
+        .
+      </p>
+    </clr-accordion-content>
+  </clr-accordion-panel>
+</clr-accordion>
+
 <clr-datagrid *ngIf="{ vms: vms | async }; let data" [clrDgLoading]="data.vms === null" customClrScreenReaderColumns>
   <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field">
     <ng-container *clrDgHideableColumn>{{ column.displayName }}</ng-container>

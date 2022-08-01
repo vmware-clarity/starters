@@ -1,3 +1,33 @@
+<clr-accordion>
+  <clr-accordion-panel [clrAccordionPanelOpen]="true">
+    <clr-accordion-title>Demo Explanation</clr-accordion-title>
+    <clr-accordion-content>
+      <p>
+        This demo allows for the datagrid to load rows lazily. At first all rows will show a loading indication, but
+        after scrolling to a row that is loading, the data will load in. The data will not attempt to load while the
+        datagrid is scrolling, but instead waits for a pause in the scrolling to load the data. Overtime, more and more
+        rows will be loaded until all rows all loaded. You can see how many rows are loaded in the bottom right corner
+        of the footer. This demo also uses virtual scrolling to ensure good performance.
+      </p>
+
+      <p>
+        This behavior can be added to an angular datagrid by applying a fixed height to the datagrid and adding the new
+        <code>customClrVirtualRows</code> directive and listening to the <code>renderedRangeChange</code> event to load
+        more data. In this demo we use a lazy-load data service and rxjs operators such as <code>switchmap</code>,
+        <code>from</code>, <code>distinct</code>, <code>mergemap</code> and <code>scan</code> to manage which rows are
+        loaded. For a full example, see the
+        <a
+          target="_blank"
+          href="https://github.com/vmware-clarity/starters/tree/main/grid-demo/src/app/angular/lazy-loading-rows"
+        >
+          demo code on GitHub
+        </a>
+        .
+      </p>
+    </clr-accordion-content>
+  </clr-accordion-panel>
+</clr-accordion>
+
 <clr-datagrid *ngIf="{ data: data | async }; let data" [clrDgLoading]="!data.data">
   <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field">
     <ng-template
