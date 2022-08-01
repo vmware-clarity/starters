@@ -27,7 +27,6 @@
 </clr-accordion>
 
 <clr-datagrid
-  id="grid"
   *ngIf="{ vms: vms | async }; let data"
   [clrDgLoading]="data.vms === null"
   cdkDropList
