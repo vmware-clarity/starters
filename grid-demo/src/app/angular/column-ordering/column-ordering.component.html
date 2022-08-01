@@ -1,3 +1,31 @@
+<clr-accordion>
+  <clr-accordion-panel [clrAccordionPanelOpen]="true">
+    <clr-accordion-title>Demo Explanation</clr-accordion-title>
+    <clr-accordion-content>
+      <p>
+        This demo allows users to order columns. There are two ways to order columns. One option is to drag and drop the
+        columns with the mouse. Another option is to focus on the column with the keyboard, press space to grab the
+        column, use the keyboard arrows to move the column, and finally, press space again to drop the column.
+      </p>
+
+      <p>
+        This behavior can be added to an angular datagrid by adding the new
+        <code>customClrColumnOrderingGrid</code> directive and then angular cdk directive <code>cdkDropList</code> to
+        the datagrid. Also, you will need to add the new <code>customClrColumnOrderingColumn</code> directive and the
+        angular cdk directive <code>cdkDrag</code> to the datagrid columns. Also, you will need to provide styling for
+        the new <code>.grabbed</code> class applied to the <code>clr-dg-column</code>. For a full example, see the
+        <a
+          target="_blank"
+          href="https://github.com/vmware-clarity/starters/tree/main/grid-demo/src/app/angular/column-ordering"
+        >
+          demo code on GitHub
+        </a>
+        .
+      </p>
+    </clr-accordion-content>
+  </clr-accordion-panel>
+</clr-accordion>
+
 <clr-datagrid
   id="grid"
   *ngIf="{ vms: vms | async }; let data"

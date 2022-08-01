@@ -1,3 +1,30 @@
+<clr-accordion>
+  <clr-accordion-panel [clrAccordionPanelOpen]="true">
+    <clr-accordion-title>Demo Explanation</clr-accordion-title>
+    <clr-accordion-content>
+      <p>
+        This demo improves performance when there are many rows on a page or when not using pagination. By default, the
+        datagrid would always render every row in the DOM, even rows that were out of view to the user. In this demo,
+        only rows that are visible to the user will be renedred (as well as a buffer of rows above and below this
+        visible space).
+      </p>
+
+      <p>
+        This behavior can be added to an angular datagrid by applying a fixed height to the datagrid and replacing the
+        <code>*ngFor</code> directive on the <code>clr-dg-row</code> with the new
+        <code>*customClrVirtualRows</code> directive. For a full example, see the
+        <a
+          target="_blank"
+          href="https://github.com/vmware-clarity/starters/tree/main/grid-demo/src/app/angular/row-dom-performance"
+        >
+          demo code on GitHub
+        </a>
+        .
+      </p>
+    </clr-accordion-content>
+  </clr-accordion-panel>
+</clr-accordion>
+
 <clr-datagrid *ngIf="{ vms: vms | async }; let data" [clrDgLoading]="data.vms === null">
   <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field">
     <ng-container *clrDgHideableColumn>{{ column.displayName }}</ng-container>

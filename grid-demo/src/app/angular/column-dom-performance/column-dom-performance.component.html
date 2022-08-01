@@ -1,3 +1,29 @@
+<clr-accordion>
+  <clr-accordion-panel [clrAccordionPanelOpen]="true">
+    <clr-accordion-title>Demo Explanation</clr-accordion-title>
+    <clr-accordion-content>
+      <p>
+        This demo improves performance when columns are hidden. By default, the datagrid would always render the
+        contents of all columns to the DOM, even columns that were hidden. In this demo, only columns that are visible
+        have their content rendered.
+      </p>
+
+      <p>
+        This behavior can be added to an angular datagrid by wrapping the contents of each column in an
+        <code>ng-container</code> and then showing or hiding the contents using an <code>*ngIf</code> directive. For a
+        full example, see the
+        <a
+          target="_blank"
+          href="https://github.com/vmware-clarity/starters/tree/main/grid-demo/src/app/angular/column-dom-performance"
+        >
+          demo code on GitHub
+        </a>
+        .
+      </p>
+    </clr-accordion-content>
+  </clr-accordion-panel>
+</clr-accordion>
+
 <clr-datagrid *ngIf="{ vms: vms | async }; let data" [clrDgLoading]="data.vms === null">
   <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field">
     <ng-template [clrDgHideableColumn]="{ hidden: column.hidden }" (clrDgHiddenChange)="column.hidden = $event">
