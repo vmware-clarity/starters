@@ -4,7 +4,7 @@ import { ClrDatagrid } from '@clr/angular';
 @Directive({
   selector: 'clr-datagrid',
 })
-export class SetActiveCellScrollFixDirective implements OnInit, OnDestroy {
+export class DatagridScrollPaddingDirective implements OnInit, OnDestroy {
   private resizeObserver: ResizeObserver | undefined;
 
   constructor(private readonly datagrid: ClrDatagrid) {}
