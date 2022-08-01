@@ -23,6 +23,7 @@ import { CoreFinalDemoComponent } from './core/final-demo/final-demo.component';
 import { CoreLazyLoadingRowsComponent } from './core/lazy-loading-rows/lazy-loading-rows.component';
 import { CoreRowDomPerformanceComponent } from './core/row-dom-performance/row-dom-performance.component';
 import { CoreScreenReaderColumnsComponent } from './core/screen-reader-columns/screen-reader-columns.component';
+import { DatagridScrollPaddingDirective } from './angular/fixes/datagrid-scroll-padding.directive';
 import { CustomClrAdvancedSelectionDirective } from './angular/advanced-row-selection/custom-clr-advanced-selection.directive';
 import { CustomClrColumnOrderingColumnDirective } from './angular/column-ordering/custom-clr-column-ordering-column.directive';
 import { CustomClrColumnOrderingGridDirective } from './angular/column-ordering/custom-clr-column-ordering-grid.directive';
@@ -52,6 +53,7 @@ const components = [
 ];
 
 const directives = [
+  DatagridScrollPaddingDirective,
   CustomClrAdvancedSelectionDirective,
   CustomClrColumnOrderingColumnDirective,
   CustomClrColumnOrderingGridDirective,
