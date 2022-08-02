@@ -15,6 +15,7 @@ import {
   Directive,
   DoCheck,
   ElementRef,
+  EmbeddedViewRef,
   EventEmitter,
   Input,
   IterableDiffers,
@@ -126,6 +127,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   private virtualScrollStrategy: FixedSizeVirtualScrollStrategy | undefined;
   private virtualScrollViewport: CdkVirtualScrollViewport | undefined;
   private cdkVirtualFor: CdkVirtualForOf<T> | undefined;
+  private dataStreamSubscription: Subscription | undefined;
   private renderedRangeChangeSubscription: Subscription | undefined;
 
   constructor(
@@ -174,6 +176,10 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
 
     this.virtualScrollViewport.ngOnInit();
 
+    this.dataStreamSubscription = this.cdkVirtualFor.dataStream.subscribe(data => {
+      this.updateAriaRowCount(data.length);
+    });
+
     this.renderedRangeChangeSubscription = this.virtualScrollViewport.renderedRangeStream.subscribe(renderedRange => {
       this.renderedRangeChange.emit(renderedRange);
       this.restoreActiveCellAfterRenderedRangeUpdate();
@@ -182,11 +188,13 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
 
   ngDoCheck() {
     this.cdkVirtualFor?.ngDoCheck();
+    this.updateAriaRowIndexes();
   }
 
   ngOnDestroy() {
     this.cdkVirtualFor?.ngOnDestroy();
     this.virtualScrollViewport?.ngOnDestroy();
+    this.dataStreamSubscription?.unsubscribe();
     this.renderedRangeChangeSubscription?.unsubscribe();
   }
 
@@ -224,6 +232,25 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
         this._cdkFixedSizeVirtualScrollInputs.minBufferPx,
         this._cdkFixedSizeVirtualScrollInputs.maxBufferPx
       );
+    }
+  }
+
+  private updateAriaRowCount(rowCount: number) {
+    const gridRoleElement = this.datagridElementRef.nativeElement.querySelector<HTMLElement>('[role="grid"]');
+
+    gridRoleElement?.setAttribute('aria-rowcount', rowCount.toString());
+  }
+
+  private updateAriaRowIndexes() {
+    for (let i = 0; i < this.viewContainerRef.length; i++) {
+      const viewRef = this.viewContainerRef.get(i) as EmbeddedViewRef<CdkVirtualForOfContext<T>>;
+
+      const rootElements: HTMLElement[] = viewRef.rootNodes;
+      const datagridRowElement = rootElements.find(rowElement => rowElement.tagName === 'CLR-DG-ROW');
+      const rowRoleElement = datagridRowElement?.querySelector('[role="row"]');
+
+      // aria-rowindex should start with one, not zero, so we have to add one to the zero-based index
+      rowRoleElement?.setAttribute('aria-rowindex', (viewRef.context.index + 1).toString());
     }
   }
 }
