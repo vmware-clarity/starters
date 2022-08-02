@@ -8,10 +8,10 @@ export class CustomClrScreenReaderColumnsDirective implements OnInit {
   constructor(private readonly datagrid: ClrDatagrid, private readonly elementRef: ElementRef<HTMLElement>) {}
 
   ngOnInit(): void {
-    this.monkeyPatchActiveCell();
+    this.patchSetActiveCell();
   }
 
-  private monkeyPatchActiveCell() {
+  private patchSetActiveCell() {
     let lastActive = true;
     const keyNavigationController = (this.datagrid as any).keyNavigation;
     const oldFunction: (activeCell: HTMLElement) => void = keyNavigationController.setActiveCell;
