@@ -12,21 +12,21 @@ export class CustomClrScreenReaderColumnsDirective implements OnInit {
   }
 
   private patchSetActiveCell() {
-    let lastActive = true;
+    let lastActiveCellWasColumn = true;
     const keyNavigationController = (this.datagrid as any).keyNavigation;
     const oldFunction: (activeCell: HTMLElement) => void = keyNavigationController.setActiveCell;
 
     keyNavigationController.setActiveCell = (activeCell: HTMLElement) => {
       oldFunction.call(keyNavigationController, activeCell);
-      const active = activeCell.tagName === 'CLR-DG-COLUMN';
+      const activeCellIsColumn = activeCell.tagName === 'CLR-DG-COLUMN';
 
-      if (active && !lastActive) {
+      if (activeCellIsColumn && !lastActiveCellWasColumn) {
         this.addAria();
-      } else if (!active && lastActive) {
+      } else if (!activeCellIsColumn && lastActiveCellWasColumn) {
         this.removeAria();
       }
 
-      lastActive = active;
+      lastActiveCellWasColumn = activeCellIsColumn;
     };
   }
 
