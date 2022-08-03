@@ -32,6 +32,7 @@
   cdkDropList
   customClrColumnOrderingGrid
   [(columns)]="columns"
+  (columnOrderChanged)="columnOrderChanged($event)"
 >
   <clr-dg-column
     *ngFor="let column of columns; let index = index"
@@ -41,6 +42,8 @@
     [customClrColumnOrderingColumn]="column"
     [columnIndex]="index"
     [ngStyle]="{ width: column.width ? column.width + 'px' : null }"
+    (columnPickedUp)="columnPickedUp(column.displayName)"
+    (columnDropped)="columnDropped(column.displayName)"
   >
     <ng-template [clrDgHideableColumn]="{ hidden: column.hidden }" (clrDgHiddenChange)="column.hidden = $event">
       {{ column.displayName }}

@@ -5,6 +5,12 @@ import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { CustomClrColumnOrderingService } from './custom-clr-column-ordering.service';
 
+export interface ColumnOrderChangedEvent<TColumn = any> {
+  column: any;
+  previousIndex: number;
+  currentIndex: number;
+}
+
 @Directive({
   selector: 'clr-datagrid[customClrColumnOrderingGrid]',
   providers: [CustomClrColumnOrderingService],
@@ -12,6 +18,7 @@ import { CustomClrColumnOrderingService } from './custom-clr-column-ordering.ser
 export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
   @Input() columns!: any[];
   @Output() columnsChange = new EventEmitter<any[]>();
+  @Output() columnOrderChanged = new EventEmitter<ColumnOrderChangedEvent>();
 
   private subscription: Subscription | undefined;
 
@@ -42,8 +49,10 @@ export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
   reorderColumn(event: { previousIndex: number; currentIndex: number }) {
     if (event.currentIndex !== event.previousIndex) {
       const value = [...this.columns];
+      const column = value[event.previousIndex];
       moveItemInArray(value, event.previousIndex, event.currentIndex);
       this.columnsChange.emit(value);
+      this.columnOrderChanged.emit({ ...event, column });
     }
   }
 
