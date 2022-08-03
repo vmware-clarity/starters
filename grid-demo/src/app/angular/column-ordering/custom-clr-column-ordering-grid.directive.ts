@@ -1,22 +1,29 @@
 import { CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ApplicationRef, Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ClrDatagrid } from '@clr/angular';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { CustomClrColumnOrderingService } from './custom-clr-column-ordering.service';
 
 @Directive({
   selector: 'clr-datagrid[customClrColumnOrderingGrid]',
+  providers: [CustomClrColumnOrderingService],
 })
 export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
   @Input() columns!: any[];
   @Output() columnsChange = new EventEmitter<any[]>();
 
-  grabbedColumn: any;
   private subscription: Subscription | undefined;
 
-  constructor(private readonly cdkDropList: CdkDropList, private readonly datagrid: ClrDatagrid) {}
+  constructor(
+    private readonly datagrid: ClrDatagrid,
+    private readonly cdkDropList: CdkDropList,
+    private readonly columnOrderingService: CustomClrColumnOrderingService,
+    private readonly applicationRef: ApplicationRef
+  ) {}
 
   ngOnInit(): void {
+    this.patchSetActiveCell();
     this.cdkDropList.orientation = 'horizontal';
     this.subscription = this.cdkDropList.dropped
       .pipe(
@@ -57,5 +64,20 @@ export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
     const currentIndex = mappedIndices.indexOf(event.currentIndex);
 
     return { previousIndex, currentIndex };
+  }
+
+  private patchSetActiveCell() {
+    const keyNavigationController = (this.datagrid as any).keyNavigation;
+    const oldFunction: (activeCell: HTMLElement) => void = keyNavigationController.setActiveCell;
+
+    keyNavigationController.setActiveCell = (activeCell: HTMLElement) => {
+      oldFunction.call(keyNavigationController, activeCell);
+      const activeCellIsColumn = activeCell.tagName === 'CLR-DG-COLUMN';
+
+      if (!activeCellIsColumn) {
+        this.columnOrderingService.grabbedColumn.next(null);
+        this.applicationRef.tick(); // hack, we shouldn't have to do this
+      }
+    };
   }
 }

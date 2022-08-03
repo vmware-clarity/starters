@@ -1,8 +1,18 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
-import { AfterViewInit, Directive, ElementRef, HostBinding, HostListener, Input, OnDestroy } from '@angular/core';
-import { ClrDatagrid } from '@clr/angular';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Directive,
+  ElementRef,
+  HostBinding,
+  HostListener,
+  Input,
+  OnDestroy,
+} from '@angular/core';
+import { ClrDatagrid, ClrDatagridColumn } from '@clr/angular';
 import { fromEvent, Subscription } from 'rxjs';
 import { CustomClrColumnOrderingGridDirective } from './custom-clr-column-ordering-grid.directive';
+import { CustomClrColumnOrderingService } from './custom-clr-column-ordering.service';
 
 @Directive({
   selector: 'clr-dg-column[customClrColumnOrderingColumn]',
@@ -12,6 +22,9 @@ export class CustomClrColumnOrderingColumnDirective implements AfterViewInit, On
     private readonly gridDirective: CustomClrColumnOrderingGridDirective,
     private readonly datagrid: ClrDatagrid,
     private readonly elementRef: ElementRef<HTMLElement>,
+    private readonly columnOrderingService: CustomClrColumnOrderingService,
+    private readonly changeDetectorRef: ChangeDetectorRef,
+    private readonly column: ClrDatagridColumn,
     private readonly cdkDrag: CdkDrag
   ) {
     cdkDrag.previewContainer = 'parent';
@@ -19,30 +32,29 @@ export class CustomClrColumnOrderingColumnDirective implements AfterViewInit, On
 
   private mouseEnterSubscription: Subscription | undefined;
   private mouseLeaveSubscription: Subscription | undefined;
-
+  private grabbedColumnSubscription: Subscription | undefined;
   @Input() customClrColumnOrderingColumn: any;
   @Input() columnIndex!: number;
-  @HostBinding('class.grabbed') get isGrabbed() {
-    return this.gridDirective.grabbedColumn === this.customClrColumnOrderingColumn;
-  }
+  @HostBinding('class.grabbed') isGrabbed = false;
 
   @HostListener('keydown', ['$event']) keydown(event: KeyboardEvent) {
     const isColumnTarget = (event.target as HTMLElement)?.tagName === 'CLR-DG-COLUMN';
     const isSpace = event.code === 'Space';
     const isLeft = event.code === 'ArrowLeft';
     const isRight = event.code === 'ArrowRight';
-    const isMovingColumn = this.gridDirective.grabbedColumn && (isLeft || isRight);
+    const isMovingColumn = this.columnOrderingService.grabbedColumn.value && (isLeft || isRight);
 
     if (isColumnTarget && (isSpace || isMovingColumn)) {
       event.stopImmediatePropagation();
       event.preventDefault();
 
       if (isSpace) {
-        this.gridDirective.grabbedColumn =
-          this.gridDirective.grabbedColumn === this.customClrColumnOrderingColumn
+        this.columnOrderingService.grabbedColumn.next(
+          this.columnOrderingService.grabbedColumn.value === this.customClrColumnOrderingColumn
             ? null
-            : this.customClrColumnOrderingColumn;
-      } else if (this.gridDirective.grabbedColumn) {
+            : this.customClrColumnOrderingColumn
+        );
+      } else if (this.columnOrderingService.grabbedColumn.value) {
         const newIndex = this.getNewIndex(isLeft);
 
         if (newIndex !== this.columnIndex) {
@@ -51,6 +63,16 @@ export class CustomClrColumnOrderingColumnDirective implements AfterViewInit, On
         }
       }
     }
+  }
+
+  ngOnInit(): void {
+    this.grabbedColumnSubscription = this.columnOrderingService.grabbedColumn.subscribe({
+      next: column => {
+        this.isGrabbed = column === this.customClrColumnOrderingColumn;
+        this.column.colType = (((this.column.colType as any) || 0) + 1) as any;
+        this.changeDetectorRef.detectChanges();
+      },
+    });
   }
 
   ngAfterViewInit(): void {
@@ -68,6 +90,7 @@ export class CustomClrColumnOrderingColumnDirective implements AfterViewInit, On
   ngOnDestroy(): void {
     this.mouseEnterSubscription?.unsubscribe();
     this.mouseLeaveSubscription?.unsubscribe();
+    this.grabbedColumnSubscription?.unsubscribe();
   }
 
   private setActiveCell() {
