@@ -8,13 +8,6 @@ import { AngularFinalDemoComponent } from './angular/final-demo/final-demo.compo
 import { AngularLazyLoadingRowsComponent } from './angular/lazy-loading-rows/lazy-loading-rows.component';
 import { AngularRowDomPerformanceComponent } from './angular/row-dom-performance/row-dom-performance.component';
 import { AngularScreenReaderColumnsComponent } from './angular/screen-reader-columns/screen-reader-columns.component';
-import { CoreAdvancedRowSelectionComponent } from './core/advanced-row-selection/advanced-row-selection.component';
-import { CoreColumnDomPerformanceComponent } from './core/column-dom-performance/column-dom-performance.component';
-import { CoreColumnOrderingComponent } from './core/column-ordering/column-ordering.component';
-import { CoreFinalDemoComponent } from './core/final-demo/final-demo.component';
-import { CoreLazyLoadingRowsComponent } from './core/lazy-loading-rows/lazy-loading-rows.component';
-import { CoreRowDomPerformanceComponent } from './core/row-dom-performance/row-dom-performance.component';
-import { CoreScreenReaderColumnsComponent } from './core/screen-reader-columns/screen-reader-columns.component';
 
 const routes: Routes = [
   {
@@ -52,39 +45,6 @@ const routes: Routes = [
       {
         path: 'screen-reader-columns',
         component: AngularScreenReaderColumnsComponent,
-      },
-    ],
-  },
-  {
-    path: 'core',
-    children: [
-      {
-        path: 'final-demo',
-        component: CoreFinalDemoComponent,
-      },
-      {
-        path: 'advanced-row-selection',
-        component: CoreAdvancedRowSelectionComponent,
-      },
-      {
-        path: 'lazy-loading-rows',
-        component: CoreLazyLoadingRowsComponent,
-      },
-      {
-        path: 'column-dom-performance',
-        component: CoreColumnDomPerformanceComponent,
-      },
-      {
-        path: 'row-dom-performance',
-        component: CoreRowDomPerformanceComponent,
-      },
-      {
-        path: 'column-ordering',
-        component: CoreColumnOrderingComponent,
-      },
-      {
-        path: 'screen-reader-columns',
-        component: CoreScreenReaderColumnsComponent,
       },
     ],
   },
