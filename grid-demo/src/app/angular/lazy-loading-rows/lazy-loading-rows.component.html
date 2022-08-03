@@ -44,6 +44,7 @@
     [customClrVirtualRowsOf]="data.data?.vms"
     [customClrVirtualRowsMinBufferPx]="200"
     [customClrVirtualRowsMaxBufferPx]="400"
+    [customClrVirtualRowsKeyboardScrollPageSize]="100"
     (renderedRangeChange)="renderRangeChange($event)"
   >
     <clr-dg-row [clrDgItem]="vm || {}">
