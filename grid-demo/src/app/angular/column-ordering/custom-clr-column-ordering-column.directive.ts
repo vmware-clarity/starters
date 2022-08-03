@@ -4,10 +4,12 @@ import {
   ChangeDetectorRef,
   Directive,
   ElementRef,
+  EventEmitter,
   HostBinding,
   HostListener,
   Input,
   OnDestroy,
+  Output,
 } from '@angular/core';
 import { ClrDatagrid, ClrDatagridColumn } from '@clr/angular';
 import { fromEvent, Subscription } from 'rxjs';
@@ -35,6 +37,8 @@ export class CustomClrColumnOrderingColumnDirective implements AfterViewInit, On
   private grabbedColumnSubscription: Subscription | undefined;
   @Input() customClrColumnOrderingColumn: any;
   @Input() columnIndex!: number;
+  @Output() columnPickedUp = new EventEmitter<void>();
+  @Output() columnDropped = new EventEmitter<void>();
   @HostBinding('class.grabbed') isGrabbed = false;
 
   @HostListener('keydown', ['$event']) keydown(event: KeyboardEvent) {
@@ -49,11 +53,13 @@ export class CustomClrColumnOrderingColumnDirective implements AfterViewInit, On
       event.preventDefault();
 
       if (isSpace) {
-        this.columnOrderingService.grabbedColumn.next(
-          this.columnOrderingService.grabbedColumn.value === this.customClrColumnOrderingColumn
-            ? null
-            : this.customClrColumnOrderingColumn
-        );
+        if (this.columnOrderingService.grabbedColumn.value === this.customClrColumnOrderingColumn) {
+          this.columnOrderingService.grabbedColumn.next(null);
+          this.columnDropped.next();
+        } else {
+          this.columnOrderingService.grabbedColumn.next(this.customClrColumnOrderingColumn);
+          this.columnPickedUp.next();
+        }
       } else if (this.columnOrderingService.grabbedColumn.value) {
         const newIndex = this.getNewIndex(isLeft);
 
