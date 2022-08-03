@@ -37,7 +37,7 @@
     </ng-template>
   </clr-dg-column>
 
-  <clr-dg-row *customClrVirtualRows="let vm of data.vms" [clrDgItem]="vm">
+  <clr-dg-row *customClrVirtualRows="let vm of data.vms; keyboardScrollPageSize: 100" [clrDgItem]="vm">
     <clr-dg-cell *ngFor="let column of columns">{{ vm[column.field] }}</clr-dg-cell>
   </clr-dg-row>
 

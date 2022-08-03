@@ -27,7 +27,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { ClrDatagrid } from '@clr/angular';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 
 type CdkVirtualForInputKey =
   | 'cdkVirtualForOf'
@@ -112,6 +112,8 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
     this.updateFixedSizeVirtualScrollInputs();
   }
 
+  @Input('customClrVirtualRowsKeyboardScrollPageSize') keyboardScrollPageSize = 10;
+
   @Output() renderedRangeChange = new EventEmitter<ListRange>();
 
   private _cdkVirtualForInputs: CdkVirtualForInputs<T> = {
@@ -129,7 +131,10 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   private cdkVirtualFor: CdkVirtualForOf<T> | undefined;
   private dataStreamSubscription: Subscription | undefined;
   private renderedRangeChangeSubscription: Subscription | undefined;
+  private keydownEventSubscription: Subscription | undefined;
+  private totalSize = 0;
   private activeCellElement: HTMLElement | undefined;
+  private nextActiveCellCoordinates: { itemIndex: number; columnIndex: number } | undefined;
 
   constructor(
     private readonly changeDetectorRef: ChangeDetectorRef,
@@ -180,12 +185,17 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
     this.virtualScrollViewport.ngOnInit();
 
     this.dataStreamSubscription = this.cdkVirtualFor.dataStream.subscribe(data => {
+      this.totalSize = data.length;
       this.updateAriaRowCount(data.length);
     });
 
     this.renderedRangeChangeSubscription = this.virtualScrollViewport.renderedRangeStream.subscribe(renderedRange => {
       this.renderedRangeChange.emit(renderedRange);
-      this.restoreActiveCellInNextFrame();
+      this.restoreOrUpdateActiveCellInNextFrame();
+    });
+
+    this.keydownEventSubscription = fromEvent<KeyboardEvent>(this.gridRoleElement!, 'keydown').subscribe(event => {
+      this.handlePageUpAndPageDownKeys(event);
     });
   }
 
@@ -199,6 +209,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
     this.virtualScrollViewport?.ngOnDestroy();
     this.dataStreamSubscription?.unsubscribe();
     this.renderedRangeChangeSubscription?.unsubscribe();
+    this.keydownEventSubscription?.unsubscribe();
   }
 
   private patchKeyNavigationControllerSetActiveCell() {
@@ -210,9 +221,10 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
     };
   }
 
-  private restoreActiveCellInNextFrame() {
+  private restoreOrUpdateActiveCellInNextFrame() {
     if (this.activeCellElement && this.activeCellElement.tabIndex === 0) {
       setTimeout(() => {
+        this.promoteNextActiveCell();
         this.datagridKeyNavigationController.setActiveCell(this.activeCellElement);
       });
     }
@@ -252,6 +264,47 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
 
       // aria-rowindex should start with one, not zero, so we have to add one to the zero-based index
       rowRoleElement?.setAttribute('aria-rowindex', (viewRef.context.index + 1).toString());
+    }
+  }
+
+  private handlePageUpAndPageDownKeys(event: KeyboardEvent) {
+    if (this.activeCellElement && (event.code === 'PageUp' || event.code === 'PageDown')) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      const rowElements = Array.from(this.datagridElementRef.nativeElement.querySelectorAll('clr-dg-row'));
+      const activeRowElement = rowElements.find(row => row.contains(this.activeCellElement!));
+      const activeRowRoleElement = activeRowElement?.querySelector('[aria-rowindex][aria-rowindex]');
+      const activeItemIndex = parseInt(activeRowRoleElement?.getAttribute('aria-rowindex')!) - 1;
+
+      if (!isNaN(activeItemIndex)) {
+        const nextItemIndex =
+          event.code === 'PageUp'
+            ? Math.max(0, activeItemIndex - this.keyboardScrollPageSize)
+            : Math.min(this.totalSize - 1, activeItemIndex + this.keyboardScrollPageSize);
+
+        const activeRowCellElements = Array.from(activeRowElement?.querySelectorAll('clr-dg-cell') || []);
+
+        this.nextActiveCellCoordinates = {
+          itemIndex: nextItemIndex,
+          columnIndex: activeRowCellElements.indexOf(this.activeCellElement),
+        };
+
+        this.virtualScrollViewport?.scrollToIndex(nextItemIndex);
+        this.restoreOrUpdateActiveCellInNextFrame();
+      }
+    }
+  }
+
+  private promoteNextActiveCell() {
+    if (this.nextActiveCellCoordinates) {
+      const nextRowIndex = this.nextActiveCellCoordinates.itemIndex + 1;
+      const nextRowElementSelector = `[role="row"][aria-rowindex="${nextRowIndex}"]`;
+      const nextRowElement = this.datagridElementRef.nativeElement?.querySelector<HTMLElement>(nextRowElementSelector);
+      const nextRowCellElements = Array.from(nextRowElement?.querySelectorAll<HTMLElement>('clr-dg-cell') || []);
+
+      this.activeCellElement = nextRowCellElements[this.nextActiveCellCoordinates.columnIndex];
+      this.nextActiveCellCoordinates = undefined;
     }
   }
 }
