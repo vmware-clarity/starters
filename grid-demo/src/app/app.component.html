@@ -1,3 +1,10 @@
+<clr-alert clrAlertType="warning" [clrAlertAppLevel]="true" [clrAlertClosable]="false">
+  <clr-alert-item>
+    These demos are experimental and still under code, accessibility, and design review. None of this code or
+    functionality should be used in any VMware products until further notice.
+  </clr-alert-item>
+</clr-alert>
+
 <clr-main-container *ngIf="url | async; let url">
   <clr-header>
     <div class="branding">
