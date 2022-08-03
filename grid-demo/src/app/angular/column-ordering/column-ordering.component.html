@@ -36,6 +36,7 @@
   <clr-dg-column
     *ngFor="let column of columns; let index = index"
     [clrDgField]="column.field"
+    [clrDgColType]="$any(null)"
     cdkDrag
     [customClrColumnOrderingColumn]="column"
     [columnIndex]="index"

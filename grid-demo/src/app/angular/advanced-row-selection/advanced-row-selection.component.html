@@ -24,7 +24,7 @@
 </clr-accordion>
 
 <clr-datagrid *ngIf="{ vms: vms | async }; let data" [clrDgLoading]="data.vms === null" customClrAdvancedSelection>
-  <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field">
+  <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field" [clrDgColType]="$any(null)">
     <ng-container *clrDgHideableColumn>{{ column.displayName }}</ng-container>
   </clr-dg-column>
 
