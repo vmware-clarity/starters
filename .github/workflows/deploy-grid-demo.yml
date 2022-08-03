@@ -8,6 +8,10 @@ on:
       - '.github/workflows/deploy-grid-demo.yml'
       - 'grid-demo/**'
 
+concurrency:
+  group: deploy-grid-demo
+  cancel-in-progress: true
+
 jobs:
   deploy-grid-demo:
     runs-on: ubuntu-latest
