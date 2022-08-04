@@ -47,6 +47,17 @@ const defaultQuery: VmQuery = {
   seed: 100,
 };
 
+const bytesPerGB = 1000000000;
+const bytesPerTB = 1000000000000;
+
+const stateOptions = [
+  ...Array.from(new Array(20)).map(() => 'Powered On'),
+  ...Array.from(new Array(10)).map(() => 'Powered Off'),
+  'Starting Up',
+  'Shutting Down',
+  'Suspended',
+];
+
 export function generateVms(partialQuery: Partial<VmQuery>) {
   const query = { ...defaultQuery, ...partialQuery };
 
@@ -76,17 +87,17 @@ export function generateVms(partialQuery: Partial<VmQuery>) {
 }
 
 function generateVm() {
-  const provisionedSpace = +faker.random.numeric(10);
-  const usedSpace = +`0.${faker.random.numeric(1)}` * provisionedSpace;
+  const provisionedSpace = faker.datatype.number(30 * bytesPerTB + bytesPerGB);
+  const usedSpace = faker.datatype.number(provisionedSpace);
 
   const vm: Omit<Vm, 'id'> = {
-    name: faker.name.firstName(),
-    state: faker.helpers.arrayElement(['Powered On', 'Powered Off']),
-    status: 'Normal',
-    managedBy: faker.helpers.arrayElement(['', '', '', 'vSphere ESX Agent Manager']),
+    name: `${faker.word.noun()}-${faker.datatype.uuid().substring(0, 8)}`,
+    state: faker.helpers.arrayElement(stateOptions),
+    status: faker.helpers.arrayElement(['Normal', 'Normal', 'Normal', 'Normal', 'Fault']),
+    managedBy: `vSphere ${faker.random.alpha(3).toUpperCase()} Agent Manager`,
     host: faker.internet.ipv4(),
-    cluster: faker.helpers.arrayElement(['Cluster1', 'Cluster2', 'Cluster3', 'Cluster4', 'Cluster5']),
-    faultDomain: '',
+    cluster: `Cluster ${Math.ceil(faker.datatype.number(99))}`,
+    faultDomain: faker.internet.domainName(),
     provisionedSpace: readableBytes(provisionedSpace),
     usedSpace: readableBytes(usedSpace),
   };
