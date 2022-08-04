@@ -10,7 +10,7 @@ import { Vm, generateVms, columns } from './../../data/vm.generator';
 })
 export class AngularRowDomPerformanceComponent {
   readonly vms: Observable<Vm[]>;
-  readonly columns = columns;
+  readonly columns = [...columns];
 
   constructor() {
     this.vms = generateVms({ pageIndex: 0, pageSize: 10000 }).pipe(map(data => data.vms));

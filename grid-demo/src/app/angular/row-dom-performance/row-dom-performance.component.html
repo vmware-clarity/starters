@@ -27,7 +27,9 @@
 
 <clr-datagrid *ngIf="{ vms: vms | async }; let data" [clrDgLoading]="data.vms === null">
   <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field" [clrDgColType]="$any(null)">
-    <ng-container *clrDgHideableColumn>{{ column.displayName }}</ng-container>
+    <ng-template [clrDgHideableColumn]="{ hidden: column.hidden }" (clrDgHiddenChange)="column.hidden = $event">
+      {{ column.displayName }}
+    </ng-template>
   </clr-dg-column>
 
   <clr-dg-row *customClrVirtualRows="let vm of data.vms" [clrDgItem]="vm">
