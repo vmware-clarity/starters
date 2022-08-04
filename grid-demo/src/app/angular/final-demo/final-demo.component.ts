@@ -13,7 +13,7 @@ import { LazyLoadService } from './../lazy-loading-rows/lazy-load.service';
 })
 export class AngularFinalDemoComponent {
   readonly data: Observable<{ vms: Vm[]; totalResults: number; loadedCount: number }>;
-  columns = columns.map(column => ({ ...column, hidden: false }));
+  columns = columns;
   firstVisibleColumn = columns[0];
 
   constructor(private readonly lazyLoadService: LazyLoadService, changeDetectorRef: ChangeDetectorRef) {

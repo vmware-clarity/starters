@@ -41,7 +41,9 @@
     [customClrColumnOrderingColumn]="column"
     [columnIndex]="index"
   >
-    <ng-container *clrDgHideableColumn>{{ column.displayName }}</ng-container>
+    <ng-template [clrDgHideableColumn]="{ hidden: column.hidden }" (clrDgHiddenChange)="column.hidden = $event">
+      {{ column.displayName }}
+    </ng-template>
   </clr-dg-column>
 
   <clr-dg-row *clrDgItems="let vm of data.vms!" [clrDgItem]="vm">

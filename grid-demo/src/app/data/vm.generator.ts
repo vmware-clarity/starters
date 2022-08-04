@@ -25,19 +25,20 @@ export interface Vm {
 export interface Column {
   field: keyof Vm;
   displayName: string;
+  hidden: boolean;
 }
 
 export const columns: Column[] = [
-  { field: 'id', displayName: 'Id' },
-  { field: 'name', displayName: 'Name' },
-  { field: 'state', displayName: 'State' },
-  { field: 'status', displayName: 'Status' },
-  { field: 'managedBy', displayName: 'Managed By' },
-  { field: 'host', displayName: 'Host' },
-  { field: 'cluster', displayName: 'Cluster' },
-  { field: 'faultDomain', displayName: 'Fault Domain' },
-  { field: 'provisionedSpace', displayName: 'Provisioned Space' },
-  { field: 'usedSpace', displayName: 'Used Space' },
+  { field: 'id', displayName: 'Id', hidden: false },
+  { field: 'name', displayName: 'Name', hidden: false },
+  { field: 'state', displayName: 'State', hidden: false },
+  { field: 'status', displayName: 'Status', hidden: false },
+  { field: 'managedBy', displayName: 'Managed By', hidden: true },
+  { field: 'host', displayName: 'Host', hidden: true },
+  { field: 'cluster', displayName: 'Cluster', hidden: true },
+  { field: 'faultDomain', displayName: 'Fault Domain', hidden: true },
+  { field: 'provisionedSpace', displayName: 'Provisioned Space', hidden: false },
+  { field: 'usedSpace', displayName: 'Used Space', hidden: false },
 ];
 
 const defaultQuery: VmQuery = {
