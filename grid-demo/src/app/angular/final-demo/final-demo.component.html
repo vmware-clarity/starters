@@ -43,6 +43,7 @@
     [columnIndex]="index"
     [clrDgField]="column.field"
     [clrDgColType]="$any(null)"
+    [ngStyle]="{ width: column.width ? column.width + 'px' : null }"
   >
     <ng-template
       [clrDgHideableColumn]="{ hidden: column.hidden }"

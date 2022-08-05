@@ -29,7 +29,12 @@
 </clr-accordion>
 
 <clr-datagrid *ngIf="{ data: data | async }; let data" [clrDgLoading]="!data.data">
-  <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field" [clrDgColType]="$any(null)">
+  <clr-dg-column
+    *ngFor="let column of columns"
+    [clrDgField]="column.field"
+    [clrDgColType]="$any(null)"
+    [ngStyle]="{ width: column.width ? column.width + 'px' : null }"
+  >
     <ng-template
       [clrDgHideableColumn]="{ hidden: column.hidden }"
       (clrDgHiddenChange)="updateColumnVisibility(column, $event)"

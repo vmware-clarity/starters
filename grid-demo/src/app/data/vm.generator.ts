@@ -55,6 +55,7 @@ export interface Column {
   field: keyof Vm;
   displayName: string;
   hidden: boolean;
+  width?: number;
 }
 
 export const columns: Column[] = [
@@ -62,7 +63,7 @@ export const columns: Column[] = [
   { field: 'name', displayName: 'Name', hidden: false },
   { field: 'state', displayName: 'State', hidden: false },
   { field: 'status', displayName: 'Status', hidden: false },
-  { field: 'managedBy', displayName: 'Managed By', hidden: true },
+  { field: 'managedBy', displayName: 'Managed By', hidden: true, width: 200 },
   { field: 'host', displayName: 'Host', hidden: true },
   { field: 'cluster', displayName: 'Cluster', hidden: true },
   { field: 'faultDomain', displayName: 'Fault Domain', hidden: true },
@@ -75,7 +76,7 @@ export const columns: Column[] = [
   { field: 'dramReadBandwidth', displayName: 'DRAM Read Bandwidth', hidden: true },
   { field: 'pMemReadBandwidth', displayName: 'PMem Read Bandwidth', hidden: true },
   { field: 'guestOS', displayName: 'Guest OS', hidden: true },
-  { field: 'compatibility', displayName: 'Compatibility', hidden: true },
+  { field: 'compatibility', displayName: 'Compatibility', hidden: true, width: 200 },
   { field: 'memorySize', displayName: 'Memory Size', hidden: true },
   { field: 'reservation', displayName: 'Reservation', hidden: true },
   { field: 'cpus', displayName: 'CPUs', hidden: true },
@@ -87,8 +88,8 @@ export const columns: Column[] = [
   { field: 'dnsName', displayName: 'DNS Name', hidden: true },
   { field: 'evcCpuMode', displayName: 'EVC CPU Mode', hidden: true },
   { field: 'evcGraphicsMode', displayName: 'EVC Graphics Mode (vSGA)', hidden: true },
-  { field: 'uuid', displayName: 'UUID', hidden: true },
-  { field: 'notes', displayName: 'Notes', hidden: true },
+  { field: 'uuid', displayName: 'UUID', hidden: true, width: 300 },
+  { field: 'notes', displayName: 'Notes', hidden: true, width: 400 },
   { field: 'alarmActions', displayName: 'Alarm Actions', hidden: true },
   { field: 'haProtection', displayName: 'HA Protection', hidden: true },
   { field: 'needsConsolidation', displayName: 'Needs Consolidation', hidden: true },

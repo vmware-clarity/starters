@@ -40,6 +40,7 @@
     cdkDrag
     [customClrColumnOrderingColumn]="column"
     [columnIndex]="index"
+    [ngStyle]="{ width: column.width ? column.width + 'px' : null }"
   >
     <ng-template [clrDgHideableColumn]="{ hidden: column.hidden }" (clrDgHiddenChange)="column.hidden = $event">
       {{ column.displayName }}
