@@ -26,7 +26,11 @@
 </clr-accordion>
 
 <clr-datagrid *ngIf="{ vms: vms | async }; let data" [clrDgLoading]="data.vms === null" customClrScreenReaderColumns>
-  <clr-dg-column *ngFor="let column of columns" [clrDgField]="column.field">
+  <clr-dg-column
+    *ngFor="let column of columns"
+    [clrDgField]="column.field"
+    [ngStyle]="{ width: column.width ? column.width + 'px' : null }"
+  >
     <ng-template [clrDgHideableColumn]="{ hidden: column.hidden }" (clrDgHiddenChange)="column.hidden = $event">
       {{ column.displayName }}
     </ng-template>
