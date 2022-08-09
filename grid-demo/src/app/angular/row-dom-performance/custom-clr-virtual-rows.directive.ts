@@ -272,10 +272,8 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
       event.preventDefault();
       event.stopImmediatePropagation();
 
-      const rowElements = Array.from(this.datagridElementRef.nativeElement.querySelectorAll('clr-dg-row'));
-      const activeRowElement = rowElements.find(row => row.contains(this.activeCellElement!));
-      const activeRowRoleElement = activeRowElement?.querySelector('[role="row"][aria-rowindex]');
-      const activeItemIndex = parseInt(activeRowRoleElement?.getAttribute('aria-rowindex')!) - 1;
+      const activeRowElement = this.activeCellElement.closest('[role="row"][aria-rowindex]')!;
+      const activeItemIndex = parseInt(activeRowElement?.getAttribute('aria-rowindex')!) - 1;
 
       if (!isNaN(activeItemIndex)) {
         const nextItemIndex =
