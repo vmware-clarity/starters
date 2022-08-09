@@ -57,6 +57,7 @@
     customClrVirtualRows
     let-vm
     [customClrVirtualRowsOf]="data.data?.vms"
+    [customClrVirtualRowsItemSize]="72"
     [customClrVirtualRowsMinBufferPx]="200"
     [customClrVirtualRowsMaxBufferPx]="400"
     [customClrVirtualRowsKeyboardScrollPageSize]="100"
@@ -64,8 +65,10 @@
   >
     <clr-dg-row [clrDgItem]="vm || {}">
       <clr-dg-cell *ngFor="let column of columns">
-        <ng-container *ngIf="vm && !column.hidden">{{ vm[column.field] }}</ng-container>
-        <ng-container *ngIf="!vm && column === firstVisibleColumn">LOADING...</ng-container>
+        <span class="cell-wrapper">
+          <ng-container *ngIf="vm && !column.hidden">{{ vm[column.field] }}</ng-container>
+          <ng-container *ngIf="!vm && column === firstVisibleColumn">LOADING...</ng-container>
+        </span>
       </clr-dg-cell>
     </clr-dg-row>
   </ng-template>
