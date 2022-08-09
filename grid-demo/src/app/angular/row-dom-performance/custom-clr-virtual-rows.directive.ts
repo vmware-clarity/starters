@@ -29,6 +29,11 @@ import {
 import { ClrDatagrid } from '@clr/angular';
 import { fromEvent, Subscription } from 'rxjs';
 
+interface CellCoordinates {
+  itemIndex: number;
+  columnIndex: number;
+}
+
 type CdkVirtualForInputKey =
   | 'cdkVirtualForOf'
   | 'cdkVirtualForTrackBy'
@@ -134,7 +139,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   private keydownEventSubscription: Subscription | undefined;
   private totalSize = 0;
   private activeCellElement: HTMLElement | undefined;
-  private nextActiveCellCoordinates: { itemIndex: number; columnIndex: number } | undefined;
+  private nextActiveCellCoordinates: CellCoordinates | undefined;
 
   constructor(
     private readonly changeDetectorRef: ChangeDetectorRef,
