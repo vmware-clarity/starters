@@ -1,20 +1,24 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
-import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostBinding, HostListener, Input, OnDestroy } from '@angular/core';
 import { ClrDatagrid } from '@clr/angular';
+import { fromEvent, Subscription } from 'rxjs';
 import { CustomClrColumnOrderingGridDirective } from './custom-clr-column-ordering-grid.directive';
 
 @Directive({
   selector: 'clr-dg-column[customClrColumnOrderingColumn]',
 })
-export class CustomClrColumnOrderingColumnDirective {
+export class CustomClrColumnOrderingColumnDirective implements AfterViewInit, OnDestroy {
   constructor(
     private readonly gridDirective: CustomClrColumnOrderingGridDirective,
     private readonly datagrid: ClrDatagrid,
-    private readonly elementRef: ElementRef,
-    cdkDrag: CdkDrag
+    private readonly elementRef: ElementRef<HTMLElement>,
+    private readonly cdkDrag: CdkDrag
   ) {
     cdkDrag.previewContainer = 'parent';
   }
+
+  private mouseEnterSubscription: Subscription | undefined;
+  private mouseLeaveSubscription: Subscription | undefined;
 
   @Input() customClrColumnOrderingColumn: any;
   @Input() columnIndex!: number;
@@ -47,6 +51,23 @@ export class CustomClrColumnOrderingColumnDirective {
         }
       }
     }
+  }
+
+  ngAfterViewInit(): void {
+    const separator = this.elementRef.nativeElement.querySelector('clr-dg-column-separator')!;
+
+    this.mouseEnterSubscription = fromEvent(separator, 'mouseenter').subscribe({
+      next: () => (this.cdkDrag.disabled = true),
+    });
+
+    this.mouseLeaveSubscription = fromEvent(separator, 'mouseleave').subscribe({
+      next: () => (this.cdkDrag.disabled = false),
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.mouseEnterSubscription?.unsubscribe();
+    this.mouseLeaveSubscription?.unsubscribe();
   }
 
   private setActiveCell() {
