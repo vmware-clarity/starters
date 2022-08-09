@@ -185,7 +185,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
 
     this.renderedRangeChangeSubscription = this.virtualScrollViewport.renderedRangeStream.subscribe(renderedRange => {
       this.renderedRangeChange.emit(renderedRange);
-      this.restoreActiveCellAfterRenderedRangeUpdate();
+      this.restoreActiveCellInNextFrame();
     });
   }
 
@@ -210,7 +210,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
     };
   }
 
-  private restoreActiveCellAfterRenderedRangeUpdate() {
+  private restoreActiveCellInNextFrame() {
     if (this.activeCellElement && this.activeCellElement.tabIndex === 0) {
       setTimeout(() => {
         this.datagridKeyNavigationController.setActiveCell(this.activeCellElement);
