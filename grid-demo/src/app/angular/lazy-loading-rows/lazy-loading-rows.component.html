@@ -4,10 +4,10 @@
     <clr-accordion-content>
       <p>
         This demo allows for the datagrid to load rows lazily. At first all rows will show a loading indication, but
-        after scrolling to a row that is loading, the data will load in. The data will not attempt to load while the
-        datagrid is scrolling, but instead waits for a pause in the scrolling to load the data. Overtime, more and more
-        rows will be loaded until all rows all loaded. You can see how many rows are loaded in the bottom right corner
-        of the footer. This demo also uses virtual scrolling to ensure good performance.
+        after scrolling to a row that is loading, the data will load in. The data will not attempt to load the data for
+        rows being scrolled passed, but instead waits for a pause in the scrolling and only loads the rows that are
+        visible when the scrolling stops. To demonstrate this, this demo shows how many rows are loaded in the bottom
+        right corner of the footer. This demo also uses virtual scrolling to ensure good performance.
       </p>
 
       <p>
