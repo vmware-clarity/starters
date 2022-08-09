@@ -138,7 +138,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   private renderedRangeChangeSubscription: Subscription | undefined;
   private keydownEventSubscription: Subscription | undefined;
   private totalSize = 0;
-  private activeCellElement: HTMLElement | undefined;
+  private activeCellCoordinates: CellCoordinates | undefined;
   private nextActiveCellCoordinates: CellCoordinates | undefined;
 
   constructor(
@@ -222,17 +222,22 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
 
     this.datagridKeyNavigationController.setActiveCell = (activeCellElement: HTMLElement) => {
       _setActiveCell.call(this.datagridKeyNavigationController, activeCellElement);
-      this.activeCellElement = activeCellElement;
+      this.activeCellCoordinates = this.getCellCoordinates(activeCellElement);
     };
   }
 
   private restoreOrUpdateActiveCellInNextFrame() {
-    if (this.activeCellElement && this.activeCellElement.tabIndex === 0) {
-      setTimeout(() => {
-        this.promoteNextActiveCell();
-        this.datagridKeyNavigationController.setActiveCell(this.activeCellElement);
-      });
-    }
+    setTimeout(() => {
+      this.promoteNextActiveCell();
+
+      const activeCellElement = this.activeCellCoordinates
+        ? this.getCellElement(this.activeCellCoordinates)
+        : undefined;
+
+      if (activeCellElement) {
+        this.datagridKeyNavigationController.setActiveCell(activeCellElement);
+      }
+    });
   }
 
   private updateCdkVirtualForInputs() {
@@ -273,12 +278,11 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   }
 
   private handlePageUpAndPageDownKeys(event: KeyboardEvent) {
-    if (this.activeCellElement && (event.code === 'PageUp' || event.code === 'PageDown')) {
+    if (this.activeCellCoordinates && (event.code === 'PageUp' || event.code === 'PageDown')) {
       event.preventDefault();
       event.stopImmediatePropagation();
 
-      const activeCellCoordinates = this.getCellCoordinates(this.activeCellElement);
-      const { itemIndex: activeItemIndex, columnIndex: activeColumnIndex } = activeCellCoordinates;
+      const { itemIndex: activeItemIndex, columnIndex: activeColumnIndex } = this.activeCellCoordinates;
 
       if (!isNaN(activeItemIndex)) {
         const nextItemIndex =
@@ -299,7 +303,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
 
   private promoteNextActiveCell() {
     if (this.nextActiveCellCoordinates) {
-      this.activeCellElement = this.getCellElement(this.nextActiveCellCoordinates);
+      this.activeCellCoordinates = this.nextActiveCellCoordinates;
       this.nextActiveCellCoordinates = undefined;
     }
   }
