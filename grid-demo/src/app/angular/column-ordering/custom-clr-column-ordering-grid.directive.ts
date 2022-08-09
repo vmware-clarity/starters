@@ -1,5 +1,6 @@
 import { CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Directive, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ClrDatagrid } from '@clr/angular';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -13,14 +14,15 @@ export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
   grabbedColumn: any;
   private subscription: Subscription | undefined;
 
-  constructor(private readonly cdkDropList: CdkDropList) {}
+  constructor(private readonly cdkDropList: CdkDropList, private readonly datagrid: ClrDatagrid) {}
 
   ngOnInit(): void {
     this.cdkDropList.orientation = 'horizontal';
     this.subscription = this.cdkDropList.dropped
       .pipe(
         tap(event => {
-          this.reorderColumn(event);
+          const mappedIndices = this.getMappedIndices(event);
+          this.reorderColumn(mappedIndices);
         })
       )
       .subscribe();
@@ -36,5 +38,24 @@ export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
       moveItemInArray(value, event.previousIndex, event.currentIndex);
       this.columnsChange.emit(value);
     }
+  }
+
+  private getMappedIndices(event: { previousIndex: number; currentIndex: number }) {
+    const grid: ElementRef<HTMLElement> = (this.datagrid as any).el;
+    const columnVisibilityStatuses = Array.from(grid.nativeElement.querySelectorAll('clr-dg-column')).map(
+      el => !el.classList.contains('datagrid-hidden-column')
+    );
+
+    let hiddenIndex = 0;
+    let visibleIndex = 0;
+    const hiddenColumns = columnVisibilityStatuses.filter(visible => !visible).length;
+    const mappedIndices = columnVisibilityStatuses.map(visible =>
+      visible ? hiddenColumns + visibleIndex++ : hiddenIndex++
+    );
+
+    const previousIndex = mappedIndices.indexOf(event.previousIndex);
+    const currentIndex = mappedIndices.indexOf(event.currentIndex);
+
+    return { previousIndex, currentIndex };
   }
 }
