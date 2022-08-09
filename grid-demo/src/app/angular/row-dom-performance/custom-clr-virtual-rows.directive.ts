@@ -277,8 +277,8 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
       event.preventDefault();
       event.stopImmediatePropagation();
 
-      const activeRowElement = this.activeCellElement.closest('[role="row"][aria-rowindex]')!;
-      const activeItemIndex = parseInt(activeRowElement?.getAttribute('aria-rowindex')!) - 1;
+      const activeCellCoordinates = this.getCellCoordinates(this.activeCellElement);
+      const { itemIndex: activeItemIndex, columnIndex: activeColumnIndex } = activeCellCoordinates;
 
       if (!isNaN(activeItemIndex)) {
         const nextItemIndex =
@@ -286,11 +286,9 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
             ? Math.max(0, activeItemIndex - this.keyboardScrollPageSize)
             : Math.min(this.totalSize - 1, activeItemIndex + this.keyboardScrollPageSize);
 
-        const activeRowCellElements = Array.from(activeRowElement?.querySelectorAll('clr-dg-cell') || []);
-
         this.nextActiveCellCoordinates = {
           itemIndex: nextItemIndex,
-          columnIndex: activeRowCellElements.indexOf(this.activeCellElement),
+          columnIndex: activeColumnIndex,
         };
 
         this.virtualScrollViewport?.scrollToIndex(nextItemIndex);
@@ -301,14 +299,37 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
 
   private promoteNextActiveCell() {
     if (this.nextActiveCellCoordinates) {
-      const nextRowIndex = this.nextActiveCellCoordinates.itemIndex + 1;
-      const nextRowElementSelector = `[role="row"][aria-rowindex="${nextRowIndex}"]`;
-      const nextRowElement = this.datagridElementRef.nativeElement?.querySelector<HTMLElement>(nextRowElementSelector);
-      const nextRowCellElements = Array.from(nextRowElement?.querySelectorAll<HTMLElement>('clr-dg-cell') || []);
-
-      this.activeCellElement = nextRowCellElements[this.nextActiveCellCoordinates.columnIndex];
+      this.activeCellElement = this.getCellElement(this.nextActiveCellCoordinates);
       this.nextActiveCellCoordinates = undefined;
     }
+  }
+
+  private getCellCoordinates(cellElement: HTMLElement) {
+    const rowElement = cellElement.closest('[role="row"][aria-rowindex]');
+    const rowIndex = parseInt(rowElement?.getAttribute('aria-rowindex')!);
+
+    // aria-rowindex starts with one, not zero, so we have to subtract one to get the zero-based index
+    const itemIndex = rowIndex - 1;
+
+    const cellElements = Array.from(rowElement?.querySelectorAll('clr-dg-cell') || []);
+
+    const cellCoordinates: CellCoordinates = {
+      itemIndex,
+      columnIndex: cellElements.indexOf(cellElement),
+    };
+
+    return cellCoordinates;
+  }
+
+  private getCellElement({ itemIndex, columnIndex }: CellCoordinates) {
+    // aria-rowindex should start with one, not zero, so we have to add one to the zero-based index
+    const rowIndex = itemIndex + 1;
+
+    const rowElementSelector = `[role="row"][aria-rowindex="${rowIndex}"]`;
+    const rowElement = this.datagridElementRef.nativeElement.querySelector(rowElementSelector);
+    const cellElements = Array.from(rowElement?.querySelectorAll<HTMLElement>('clr-dg-cell') || []);
+
+    return cellElements[columnIndex];
   }
 }
 
