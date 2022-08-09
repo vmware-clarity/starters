@@ -39,11 +39,12 @@ export class CustomClrColumnOrderingColumnDirective {
             ? null
             : this.customClrColumnOrderingColumn;
       } else if (this.gridDirective.grabbedColumn) {
-        const newIndex = isLeft
-          ? Math.max(0, this.columnIndex - 1)
-          : Math.min(this.datagrid.columns.length - 1, this.columnIndex + 1);
-        this.gridDirective.reorderColumn({ previousIndex: this.columnIndex, currentIndex: newIndex });
-        this.setActiveCell();
+        const newIndex = this.getNewIndex(isLeft);
+
+        if (newIndex !== this.columnIndex) {
+          this.gridDirective.reorderColumn({ previousIndex: this.columnIndex, currentIndex: newIndex });
+          this.setActiveCell();
+        }
       }
     }
   }
@@ -52,5 +53,20 @@ export class CustomClrColumnOrderingColumnDirective {
     setTimeout(() => {
       (this.datagrid as any).keyNavigation.setActiveCell(this.elementRef.nativeElement);
     });
+  }
+
+  private getNewIndex(isLeft: boolean) {
+    const grid: ElementRef<HTMLElement> = (this.datagrid as any).el;
+    const columnVisibilityStatuses = Array.from(grid.nativeElement.querySelectorAll('clr-dg-column')).map(
+      el => !el.classList.contains('datagrid-hidden-column')
+    );
+
+    const leftVisibleColumnIndex = columnVisibilityStatuses.slice(0, this.columnIndex).lastIndexOf(true);
+    const rightVisibleColumnIndex = columnVisibilityStatuses.slice(this.columnIndex + 1).indexOf(true);
+    const leftColumnIndex = leftVisibleColumnIndex >= 0 ? leftVisibleColumnIndex : 0;
+    const rightColumnIndex =
+      rightVisibleColumnIndex >= 0 ? this.columnIndex + 1 + rightVisibleColumnIndex : this.datagrid.columns.length - 1;
+
+    return isLeft ? leftColumnIndex : rightColumnIndex;
   }
 }
