@@ -1,3 +1,11 @@
 clr-datagrid {
   height: 500px;
 }
+
+clr-dg-cell .cell-wrapper {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  height: 50px;
+  overflow: hidden;
+}
