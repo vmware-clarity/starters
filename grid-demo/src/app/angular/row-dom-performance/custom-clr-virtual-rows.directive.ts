@@ -123,13 +123,13 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   private datagridElementRef: ElementRef<HTMLElement> = (this.datagrid as any).el;
   private datagridKeyNavigationController = (this.datagrid as any).keyNavigation;
 
-  private activeCellElement: HTMLElement | undefined;
   private gridRoleElement: HTMLElement | null | undefined;
   private virtualScrollStrategy: FixedSizeVirtualScrollStrategy | undefined;
   private virtualScrollViewport: CdkVirtualScrollViewport | undefined;
   private cdkVirtualFor: CdkVirtualForOf<T> | undefined;
   private dataStreamSubscription: Subscription | undefined;
   private renderedRangeChangeSubscription: Subscription | undefined;
+  private activeCellElement: HTMLElement | undefined;
 
   constructor(
     private readonly changeDetectorRef: ChangeDetectorRef,
