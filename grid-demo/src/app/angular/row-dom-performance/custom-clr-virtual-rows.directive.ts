@@ -124,6 +124,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   private datagridKeyNavigationController = (this.datagrid as any).keyNavigation;
 
   private activeCellElement: HTMLElement | undefined;
+  private gridRoleElement: HTMLElement | null | undefined;
   private virtualScrollStrategy: FixedSizeVirtualScrollStrategy | undefined;
   private virtualScrollViewport: CdkVirtualScrollViewport | undefined;
   private cdkVirtualFor: CdkVirtualForOf<T> | undefined;
@@ -144,6 +145,8 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
 
   ngOnInit() {
     this.patchKeyNavigationControllerSetActiveCell();
+
+    this.gridRoleElement = this.datagridElementRef.nativeElement.querySelector<HTMLElement>('[role="grid"]');
 
     this.virtualScrollStrategy = new FixedSizeVirtualScrollStrategy(
       this._cdkFixedSizeVirtualScrollInputs.itemSize,
@@ -236,9 +239,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   }
 
   private updateAriaRowCount(rowCount: number) {
-    const gridRoleElement = this.datagridElementRef.nativeElement.querySelector<HTMLElement>('[role="grid"]');
-
-    gridRoleElement?.setAttribute('aria-rowcount', rowCount.toString());
+    this.gridRoleElement?.setAttribute('aria-rowcount', rowCount.toString());
   }
 
   private updateAriaRowIndexes() {
