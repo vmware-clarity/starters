@@ -3,7 +3,8 @@ import { ApplicationRef, Directive, ElementRef, EventEmitter, Input, OnDestroy, 
 import { ClrDatagrid } from '@clr/angular';
 import { Subscription } from 'rxjs';
 
-import { getDatagridElementRef, getDatagridKeyNavigationController } from '../helpers/datagrid-private-member.helpers';
+import { fromActiveCell } from '../helpers/datagrid-active-cell.helpers';
+import { getDatagridElementRef } from '../helpers/datagrid-private-member.helpers';
 import { CustomClrColumnOrderingService } from './custom-clr-column-ordering.service';
 
 export interface ColumnOrderChangedEvent<TColumn = any> {
@@ -22,6 +23,7 @@ export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
   @Output() columnOrderChanged = new EventEmitter<ColumnOrderChangedEvent>();
 
   private droppedSubscription: Subscription | undefined;
+  private setActiveCellSubscription: Subscription | undefined;
 
   constructor(
     private readonly datagrid: ClrDatagrid,
@@ -31,16 +33,20 @@ export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.patchSetActiveCell();
     this.cdkDropList.orientation = 'horizontal';
     this.droppedSubscription = this.cdkDropList.dropped.subscribe(event => {
       const mappedIndices = this.getMappedIndices(event);
       this.reorderColumn(mappedIndices);
     });
+
+    this.setActiveCellSubscription = fromActiveCell(this.datagrid).subscribe(activeCellElement => {
+      this.handleActiveCell(activeCellElement);
+    });
   }
 
   ngOnDestroy() {
     this.droppedSubscription?.unsubscribe();
+    this.setActiveCellSubscription?.unsubscribe();
   }
 
   reorderColumn(event: { previousIndex: number; currentIndex: number }) {
@@ -72,18 +78,12 @@ export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
     return { previousIndex, currentIndex };
   }
 
-  private patchSetActiveCell() {
-    const keyNavigationController = getDatagridKeyNavigationController(this.datagrid);
-    const oldFunction: (activeCellElement: HTMLElement) => void = keyNavigationController.setActiveCell;
+  private handleActiveCell(activeCellElement: HTMLElement) {
+    const activeCellIsColumn = activeCellElement.tagName === 'CLR-DG-COLUMN';
 
-    keyNavigationController.setActiveCell = (activeCellElement: HTMLElement) => {
-      oldFunction.call(keyNavigationController, activeCellElement);
-      const activeCellIsColumn = activeCellElement.tagName === 'CLR-DG-COLUMN';
-
-      if (!activeCellIsColumn) {
-        this.columnOrderingService.grabbedColumn.next(null);
-        this.applicationRef.tick(); // hack, we shouldn't have to do this
-      }
-    };
+    if (!activeCellIsColumn) {
+      this.columnOrderingService.grabbedColumn.next(null);
+      this.applicationRef.tick(); // hack, we shouldn't have to do this
+    }
   }
 }

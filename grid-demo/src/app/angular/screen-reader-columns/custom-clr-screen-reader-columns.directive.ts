@@ -1,35 +1,38 @@
-import { Directive, ElementRef, OnInit } from '@angular/core';
+import { Directive, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { ClrDatagrid } from '@clr/angular';
+import { Subscription } from 'rxjs';
 
-import { getDatagridKeyNavigationController } from '../helpers/datagrid-private-member.helpers';
+import { fromActiveCell } from '../helpers/datagrid-active-cell.helpers';
 
 @Directive({
   selector: 'clr-datagrid[customClrScreenReaderColumns]',
 })
-export class CustomClrScreenReaderColumnsDirective implements OnInit {
+export class CustomClrScreenReaderColumnsDirective implements OnInit, OnDestroy {
+  private setActiveCellSubscription: Subscription | undefined;
+  private lastActiveCellWasColumn = true;
+
   constructor(private readonly datagrid: ClrDatagrid, private readonly elementRef: ElementRef<HTMLElement>) {}
 
   ngOnInit() {
-    this.patchSetActiveCell();
+    this.setActiveCellSubscription = fromActiveCell(this.datagrid).subscribe(activeCellElement => {
+      this.handleActiveCell(activeCellElement);
+    });
   }
 
-  private patchSetActiveCell() {
-    let lastActiveCellWasColumn = true;
-    const keyNavigationController = getDatagridKeyNavigationController(this.datagrid);
-    const oldFunction = keyNavigationController.setActiveCell;
+  ngOnDestroy() {
+    this.setActiveCellSubscription?.unsubscribe();
+  }
 
-    keyNavigationController.setActiveCell = (activeCellElement: HTMLElement) => {
-      oldFunction.call(keyNavigationController, activeCellElement);
-      const activeCellIsColumn = activeCellElement.tagName === 'CLR-DG-COLUMN';
+  private handleActiveCell(activeCellElement: HTMLElement) {
+    const activeCellIsColumn = activeCellElement.tagName === 'CLR-DG-COLUMN';
 
-      if (activeCellIsColumn && !lastActiveCellWasColumn) {
-        this.addAria();
-      } else if (!activeCellIsColumn && lastActiveCellWasColumn) {
-        this.removeAria();
-      }
+    if (activeCellIsColumn && !this.lastActiveCellWasColumn) {
+      this.addAria();
+    } else if (!activeCellIsColumn && this.lastActiveCellWasColumn) {
+      this.removeAria();
+    }
 
-      lastActiveCellWasColumn = activeCellIsColumn;
-    };
+    this.lastActiveCellWasColumn = activeCellIsColumn;
   }
 
   private addAria() {
