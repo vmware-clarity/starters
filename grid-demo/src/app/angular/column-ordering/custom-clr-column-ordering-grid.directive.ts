@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
 import { CustomClrColumnOrderingService } from './custom-clr-column-ordering.service';
 
 export interface ColumnOrderChangedEvent<TColumn = any> {
-  column: any;
+  column: TColumn;
   previousIndex: number;
   currentIndex: number;
 }
