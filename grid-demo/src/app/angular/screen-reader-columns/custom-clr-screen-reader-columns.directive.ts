@@ -14,11 +14,11 @@ export class CustomClrScreenReaderColumnsDirective implements OnInit {
   private patchSetActiveCell() {
     let lastActiveCellWasColumn = true;
     const keyNavigationController = (this.datagrid as any).keyNavigation;
-    const oldFunction: (activeCell: HTMLElement) => void = keyNavigationController.setActiveCell;
+    const oldFunction: (activeCellElement: HTMLElement) => void = keyNavigationController.setActiveCell;
 
-    keyNavigationController.setActiveCell = (activeCell: HTMLElement) => {
-      oldFunction.call(keyNavigationController, activeCell);
-      const activeCellIsColumn = activeCell.tagName === 'CLR-DG-COLUMN';
+    keyNavigationController.setActiveCell = (activeCellElement: HTMLElement) => {
+      oldFunction.call(keyNavigationController, activeCellElement);
+      const activeCellIsColumn = activeCellElement.tagName === 'CLR-DG-COLUMN';
 
       if (activeCellIsColumn && !lastActiveCellWasColumn) {
         this.addAria();
