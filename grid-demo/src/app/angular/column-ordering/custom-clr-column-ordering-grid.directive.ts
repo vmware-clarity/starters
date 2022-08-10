@@ -2,7 +2,6 @@ import { CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ApplicationRef, Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ClrDatagrid } from '@clr/angular';
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 import { CustomClrColumnOrderingService } from './custom-clr-column-ordering.service';
 
@@ -33,14 +32,10 @@ export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
   ngOnInit() {
     this.patchSetActiveCell();
     this.cdkDropList.orientation = 'horizontal';
-    this.subscription = this.cdkDropList.dropped
-      .pipe(
-        tap(event => {
-          const mappedIndices = this.getMappedIndices(event);
-          this.reorderColumn(mappedIndices);
-        })
-      )
-      .subscribe();
+    this.subscription = this.cdkDropList.dropped.subscribe(event => {
+      const mappedIndices = this.getMappedIndices(event);
+      this.reorderColumn(mappedIndices);
+    });
   }
 
   ngOnDestroy() {
