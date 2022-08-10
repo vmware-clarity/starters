@@ -29,6 +29,7 @@ import {
 import { ClrDatagrid } from '@clr/angular';
 import { fromEvent, Subscription } from 'rxjs';
 
+import { fromActiveCell } from '../helpers/datagrid-active-cell.helpers';
 import { getDatagridElementRef, getDatagridKeyNavigationController } from '../helpers/datagrid-private-member.helpers';
 
 interface CellCoordinates {
@@ -136,6 +137,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   private virtualScrollStrategy: FixedSizeVirtualScrollStrategy | undefined;
   private virtualScrollViewport: CdkVirtualScrollViewport | undefined;
   private cdkVirtualFor: CdkVirtualForOf<T> | undefined;
+  private setActiveCellSubscription: Subscription | undefined;
   private dataStreamSubscription: Subscription | undefined;
   private renderedRangeChangeSubscription: Subscription | undefined;
   private keydownEventSubscription: Subscription | undefined;
@@ -156,8 +158,6 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   ) {}
 
   ngOnInit() {
-    this.patchKeyNavigationControllerSetActiveCell();
-
     this.gridRoleElement = this.datagridElementRef.nativeElement.querySelector<HTMLElement>('[role="grid"]');
 
     this.virtualScrollStrategy = new FixedSizeVirtualScrollStrategy(
@@ -191,6 +191,10 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
 
     this.virtualScrollViewport.ngOnInit();
 
+    this.setActiveCellSubscription = fromActiveCell(this.datagrid).subscribe(activeCellElement => {
+      this.activeCellCoordinates = this.getCellCoordinates(activeCellElement);
+    });
+
     this.dataStreamSubscription = this.cdkVirtualFor.dataStream.subscribe(data => {
       this.totalSize = data.length;
       this.updateAriaRowCount(data.length);
@@ -214,18 +218,10 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   ngOnDestroy() {
     this.cdkVirtualFor?.ngOnDestroy();
     this.virtualScrollViewport?.ngOnDestroy();
+    this.setActiveCellSubscription?.unsubscribe();
     this.dataStreamSubscription?.unsubscribe();
     this.renderedRangeChangeSubscription?.unsubscribe();
     this.keydownEventSubscription?.unsubscribe();
-  }
-
-  private patchKeyNavigationControllerSetActiveCell() {
-    const _setActiveCell = this.datagridKeyNavigationController.setActiveCell;
-
-    this.datagridKeyNavigationController.setActiveCell = (activeCellElement: HTMLElement) => {
-      _setActiveCell.call(this.datagridKeyNavigationController, activeCellElement);
-      this.activeCellCoordinates = this.getCellCoordinates(activeCellElement);
-    };
   }
 
   private restoreOrUpdateActiveCellInNextFrame() {
