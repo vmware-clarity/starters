@@ -87,11 +87,15 @@ export class CustomClrColumnOrderingColumnDirective implements AfterViewInit, On
     const separator = this.elementRef.nativeElement.querySelector('clr-dg-column-separator')!;
 
     this.mouseEnterSubscription = fromEvent(separator, 'mouseenter').subscribe({
-      next: () => (this.cdkDrag.disabled = true),
+      next: () => {
+        this.cdkDrag.disabled = true;
+      },
     });
 
     this.mouseLeaveSubscription = fromEvent(separator, 'mouseleave').subscribe({
-      next: () => (this.cdkDrag.disabled = false),
+      next: () => {
+        this.cdkDrag.disabled = false;
+      },
     });
   }
 
