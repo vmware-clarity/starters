@@ -14,6 +14,7 @@ import {
 import { ClrDatagrid, ClrDatagridColumn } from '@clr/angular';
 import { fromEvent, Subscription } from 'rxjs';
 
+import { getDatagridElementRef, getDatagridKeyNavigationController } from '../helpers/datagrid-private-member.helpers';
 import { CustomClrColumnOrderingGridDirective } from './custom-clr-column-ordering-grid.directive';
 import { CustomClrColumnOrderingService } from './custom-clr-column-ordering.service';
 
@@ -101,12 +102,12 @@ export class CustomClrColumnOrderingColumnDirective implements AfterViewInit, On
 
   private setActiveCell() {
     setTimeout(() => {
-      (this.datagrid as any).keyNavigation.setActiveCell(this.elementRef.nativeElement);
+      getDatagridKeyNavigationController(this.datagrid).setActiveCell(this.elementRef.nativeElement);
     });
   }
 
   private getNewIndex(isLeft: boolean) {
-    const grid: ElementRef<HTMLElement> = (this.datagrid as any).el;
+    const grid: ElementRef<HTMLElement> = getDatagridElementRef(this.datagrid);
     const columnVisibilityStatuses = Array.from(grid.nativeElement.querySelectorAll('clr-dg-column')).map(
       el => !el.classList.contains('datagrid-hidden-column')
     );
