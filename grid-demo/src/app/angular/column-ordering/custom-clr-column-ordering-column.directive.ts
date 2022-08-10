@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { ClrDatagrid, ClrDatagridColumn } from '@clr/angular';
 import { fromEvent, Subscription } from 'rxjs';
+
 import { CustomClrColumnOrderingGridDirective } from './custom-clr-column-ordering-grid.directive';
 import { CustomClrColumnOrderingService } from './custom-clr-column-ordering.service';
 

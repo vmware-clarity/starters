@@ -3,6 +3,7 @@ import { ApplicationRef, Directive, ElementRef, EventEmitter, Input, OnDestroy, 
 import { ClrDatagrid } from '@clr/angular';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
+
 import { CustomClrColumnOrderingService } from './custom-clr-column-ordering.service';
 
 export interface ColumnOrderChangedEvent<TColumn = any> {
