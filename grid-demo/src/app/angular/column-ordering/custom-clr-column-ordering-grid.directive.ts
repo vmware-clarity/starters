@@ -20,7 +20,7 @@ export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
   @Output() columnsChange = new EventEmitter<any[]>();
   @Output() columnOrderChanged = new EventEmitter<ColumnOrderChangedEvent>();
 
-  private subscription: Subscription | undefined;
+  private droppedSubscription: Subscription | undefined;
 
   constructor(
     private readonly datagrid: ClrDatagrid,
@@ -32,14 +32,14 @@ export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
   ngOnInit() {
     this.patchSetActiveCell();
     this.cdkDropList.orientation = 'horizontal';
-    this.subscription = this.cdkDropList.dropped.subscribe(event => {
+    this.droppedSubscription = this.cdkDropList.dropped.subscribe(event => {
       const mappedIndices = this.getMappedIndices(event);
       this.reorderColumn(mappedIndices);
     });
   }
 
   ngOnDestroy() {
-    this.subscription?.unsubscribe();
+    this.droppedSubscription?.unsubscribe();
   }
 
   reorderColumn(event: { previousIndex: number; currentIndex: number }) {
