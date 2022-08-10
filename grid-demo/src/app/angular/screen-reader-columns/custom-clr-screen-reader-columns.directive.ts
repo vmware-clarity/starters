@@ -7,7 +7,7 @@ import { ClrDatagrid } from '@clr/angular';
 export class CustomClrScreenReaderColumnsDirective implements OnInit {
   constructor(private readonly datagrid: ClrDatagrid, private readonly elementRef: ElementRef<HTMLElement>) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.patchSetActiveCell();
   }
 
