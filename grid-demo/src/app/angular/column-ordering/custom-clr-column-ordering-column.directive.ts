@@ -73,7 +73,7 @@ export class CustomClrColumnOrderingColumnDirective implements AfterViewInit, On
     }
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.grabbedColumnSubscription = this.columnOrderingService.grabbedColumn.subscribe({
       next: column => {
         this.isGrabbed = column === this.customClrColumnOrderingColumn;
@@ -83,7 +83,7 @@ export class CustomClrColumnOrderingColumnDirective implements AfterViewInit, On
     });
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     const separator = this.elementRef.nativeElement.querySelector('clr-dg-column-separator')!;
 
     this.mouseEnterSubscription = fromEvent(separator, 'mouseenter').subscribe({
@@ -99,7 +99,7 @@ export class CustomClrColumnOrderingColumnDirective implements AfterViewInit, On
     });
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.mouseEnterSubscription?.unsubscribe();
     this.mouseLeaveSubscription?.unsubscribe();
     this.grabbedColumnSubscription?.unsubscribe();

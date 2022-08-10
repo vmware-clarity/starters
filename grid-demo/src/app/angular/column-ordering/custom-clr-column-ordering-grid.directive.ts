@@ -30,7 +30,7 @@ export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
     private readonly applicationRef: ApplicationRef
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.patchSetActiveCell();
     this.cdkDropList.orientation = 'horizontal';
     this.subscription = this.cdkDropList.dropped
@@ -43,7 +43,7 @@ export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.subscription?.unsubscribe();
   }
 
