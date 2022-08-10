@@ -3,6 +3,7 @@ import { ApplicationRef, Directive, ElementRef, EventEmitter, Input, OnDestroy, 
 import { ClrDatagrid } from '@clr/angular';
 import { Subscription } from 'rxjs';
 
+import { getDatagridElementRef, getDatagridKeyNavigationController } from '../helpers/datagrid-private-member.helpers';
 import { CustomClrColumnOrderingService } from './custom-clr-column-ordering.service';
 
 export interface ColumnOrderChangedEvent<TColumn = any> {
@@ -53,7 +54,7 @@ export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
   }
 
   private getMappedIndices(event: { previousIndex: number; currentIndex: number }) {
-    const grid: ElementRef<HTMLElement> = (this.datagrid as any).el;
+    const grid: ElementRef<HTMLElement> = getDatagridElementRef(this.datagrid);
     const columnVisibilityStatuses = Array.from(grid.nativeElement.querySelectorAll('clr-dg-column')).map(
       el => !el.classList.contains('datagrid-hidden-column')
     );
@@ -72,7 +73,7 @@ export class CustomClrColumnOrderingGridDirective implements OnInit, OnDestroy {
   }
 
   private patchSetActiveCell() {
-    const keyNavigationController = (this.datagrid as any).keyNavigation;
+    const keyNavigationController = getDatagridKeyNavigationController(this.datagrid);
     const oldFunction: (activeCellElement: HTMLElement) => void = keyNavigationController.setActiveCell;
 
     keyNavigationController.setActiveCell = (activeCellElement: HTMLElement) => {

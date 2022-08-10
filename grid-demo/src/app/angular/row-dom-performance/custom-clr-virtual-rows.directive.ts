@@ -29,6 +29,8 @@ import {
 import { ClrDatagrid } from '@clr/angular';
 import { fromEvent, Subscription } from 'rxjs';
 
+import { getDatagridElementRef, getDatagridKeyNavigationController } from '../helpers/datagrid-private-member.helpers';
+
 interface CellCoordinates {
   itemIndex: number;
   columnIndex: number;
@@ -127,8 +129,8 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
 
   private _cdkFixedSizeVirtualScrollInputs = { ...defaultCdkFixedSizeVirtualScrollInputs };
 
-  private datagridElementRef: ElementRef<HTMLElement> = (this.datagrid as any).el;
-  private datagridKeyNavigationController = (this.datagrid as any).keyNavigation;
+  private datagridElementRef: ElementRef<HTMLElement> = getDatagridElementRef(this.datagrid);
+  private datagridKeyNavigationController = getDatagridKeyNavigationController(this.datagrid);
 
   private gridRoleElement: HTMLElement | null | undefined;
   private virtualScrollStrategy: FixedSizeVirtualScrollStrategy | undefined;

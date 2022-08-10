@@ -1,6 +1,8 @@
 import { Directive, ElementRef, OnInit } from '@angular/core';
 import { ClrDatagrid } from '@clr/angular';
 
+import { getDatagridKeyNavigationController } from '../helpers/datagrid-private-member.helpers';
+
 @Directive({
   selector: 'clr-datagrid[customClrScreenReaderColumns]',
 })
@@ -13,8 +15,8 @@ export class CustomClrScreenReaderColumnsDirective implements OnInit {
 
   private patchSetActiveCell() {
     let lastActiveCellWasColumn = true;
-    const keyNavigationController = (this.datagrid as any).keyNavigation;
-    const oldFunction: (activeCellElement: HTMLElement) => void = keyNavigationController.setActiveCell;
+    const keyNavigationController = getDatagridKeyNavigationController(this.datagrid);
+    const oldFunction = keyNavigationController.setActiveCell;
 
     keyNavigationController.setActiveCell = (activeCellElement: HTMLElement) => {
       oldFunction.call(keyNavigationController, activeCellElement);
