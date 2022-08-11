@@ -4,6 +4,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserModule } from '@angular/platform-browser';
 import { ClarityModule } from '@clr/angular';
 import { loadCoreIconSet, loadEssentialIconSet } from '@cds/core/icon';
+import { CdsModule } from '@cds/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,14 @@ import { AngularFinalDemoComponent } from './angular/final-demo/final-demo.compo
 import { AngularLazyLoadingRowsComponent } from './angular/lazy-loading-rows/lazy-loading-rows.component';
 import { AngularRowDomPerformanceComponent } from './angular/row-dom-performance/row-dom-performance.component';
 import { AngularScreenReaderColumnsComponent } from './angular/screen-reader-columns/screen-reader-columns.component';
+import { CoreAdvancedRowSelectionComponent } from './core/advanced-row-selection/advanced-row-selection.component';
+import { CoreColumnDomPerformanceComponent } from './core/column-dom-performance/column-dom-performance.component';
+import { CoreColumnPickerComponent } from './core/column-dom-performance/column-picker.component';
+import { CoreColumnOrderingComponent } from './core/column-ordering/column-ordering.component';
+import { CoreFinalDemoComponent } from './core/final-demo/final-demo.component';
+import { CoreLazyLoadingRowsComponent } from './core/lazy-loading-rows/lazy-loading-rows.component';
+import { CoreRowDomPerformanceComponent } from './core/row-dom-performance/row-dom-performance.component';
+import { CoreScreenReaderColumnsComponent } from './core/screen-reader-columns/screen-reader-columns.component';
 import { DatagridScrollPaddingDirective } from './angular/fixes/datagrid-scroll-padding.directive';
 import { CustomClrAdvancedSelectionDirective } from './angular/advanced-row-selection/custom-clr-advanced-selection.directive';
 import { CustomClrColumnOrderingColumnDirective } from './angular/column-ordering/custom-clr-column-ordering-column.directive';
@@ -33,6 +42,14 @@ const components = [
   AngularLazyLoadingRowsComponent,
   AngularRowDomPerformanceComponent,
   AngularScreenReaderColumnsComponent,
+  CoreAdvancedRowSelectionComponent,
+  CoreColumnDomPerformanceComponent,
+  CoreColumnOrderingComponent,
+  CoreFinalDemoComponent,
+  CoreLazyLoadingRowsComponent,
+  CoreRowDomPerformanceComponent,
+  CoreScreenReaderColumnsComponent,
+  CoreColumnPickerComponent,
 ];
 
 const directives = [
@@ -46,7 +63,7 @@ const directives = [
 
 @NgModule({
   declarations: [...components, ...directives],
-  imports: [AppRoutingModule, BrowserAnimationsModule, BrowserModule, ClarityModule, DragDropModule],
+  imports: [AppRoutingModule, BrowserAnimationsModule, BrowserModule, CdsModule, ClarityModule, DragDropModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })

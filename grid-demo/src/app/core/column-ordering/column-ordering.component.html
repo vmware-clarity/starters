@@ -1,0 +1,52 @@
+<cds-grid
+  *ngIf="
+    {
+      vms: vms | async,
+      pageIndex: pageIndex | async,
+      pageCount: pageCount | async,
+      pageSize: pageSize | async,
+      columns: columns | async,
+      ariaLiveMessage: ariaLiveMessage | async
+    };
+    let data
+  "
+  (cdsDraggableChange)="sortColumns($event)"
+  aria-label="column order datagrid demo"
+  height="400"
+>
+  <ng-container *ngFor="let column of data.columns">
+    <cds-grid-column draggable="true" [attr.cds-field]="column.field">
+      {{ column.displayName }}
+      <cds-button-handle aria-label="reorder ${column.displayName} column"></cds-button-handle>
+    </cds-grid-column>
+  </ng-container>
+
+  <ng-container *ngIf="data.vms === null">
+    <cds-grid-placeholder>
+      <cds-progress-circle size="xl" status="info"></cds-progress-circle>
+      <p cds-text="subsection">Loading Data</p>
+    </cds-grid-placeholder>
+  </ng-container>
+
+  <cds-grid-row *ngFor="let vm of data.vms">
+    <ng-container *ngFor="let column of data.columns">
+      <cds-grid-cell>
+        {{ vm[column.field] }}
+      </cds-grid-cell>
+    </ng-container>
+  </cds-grid-row>
+
+  <cds-grid-footer>
+    <p cds-text="body" cds-layout="p-y:sm">
+      aria-live: <span aria-live="assertive" role="log" aria-atomic="true">{{ data.ariaLiveMessage }}</span>
+    </p>
+    <cds-grid-pagination
+      [page]="data.pageIndex"
+      [pageCount]="data.pageCount"
+      [pageSize]="data.pageSize"
+      (pageChange)="pageChange($event)"
+      (pageSizeChange)="pageSizeChange($event)"
+    >
+    </cds-grid-pagination>
+  </cds-grid-footer>
+</cds-grid>
