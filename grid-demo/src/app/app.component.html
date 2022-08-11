@@ -21,6 +21,13 @@
       >
         Angular
       </a>
+      <a
+        [routerLink]="['core', url[url.length - 1]]"
+        class="nav-link nav-text"
+        [ngClass]="{ active: url[0] === 'core' }"
+      >
+        Core
+      </a>
     </div>
   </clr-header>
   <nav class="subnav">
