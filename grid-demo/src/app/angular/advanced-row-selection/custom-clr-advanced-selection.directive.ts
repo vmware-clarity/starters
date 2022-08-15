@@ -12,7 +12,8 @@ export class CustomClrAdvancedSelectionDirective implements OnInit {
     this.datagrid.rowSelectionMode = true;
   }
 
-  @HostListener('click', ['$event']) overrideSelection(evt: MouseEvent) {
+  @HostListener('click', ['$event'])
+  overrideSelection(evt: MouseEvent) {
     const target = evt.target as HTMLElement;
 
     if (

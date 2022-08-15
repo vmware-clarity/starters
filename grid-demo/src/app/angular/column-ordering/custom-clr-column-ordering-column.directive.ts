@@ -42,7 +42,8 @@ export class CustomClrColumnOrderingColumnDirective implements AfterViewInit, On
   @Output() columnDropped = new EventEmitter<void>();
   @HostBinding('class.grabbed') isGrabbed = false;
 
-  @HostListener('keydown', ['$event']) keydown(event: KeyboardEvent) {
+  @HostListener('keydown', ['$event'])
+  keydown(event: KeyboardEvent) {
     const isColumnTarget = (event.target as HTMLElement)?.tagName === 'CLR-DG-COLUMN';
     const isSpace = event.code === 'Space';
     const isLeft = event.code === 'ArrowLeft';
