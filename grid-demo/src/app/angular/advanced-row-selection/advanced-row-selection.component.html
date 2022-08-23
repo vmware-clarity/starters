@@ -9,6 +9,18 @@
       </p>
 
       <p>
+        This feature is incompatible with datagrids that contain clickable items such as inputs, buttons, etc. in their
+        cells because it extends row selection which is incompatible with such datagrids. From the
+        <a target="_blank" href="https://clarity.design/documentation/datagrid/selection">documentation</a>:
+      </p>
+
+      <blockquote>
+        Depending on the use case, you might want to allow selection when clicking anywhere in the grid row. Note that
+        this is not recommended when the rows contain clickable items. For example, if your cells contain input,
+        buttons, etc. it is best to avoid enabling whole row selection.
+      </blockquote>
+
+      <p>
         This behavior can be added to an angular datagrid (requires ^13.5.0 or ^12.3.0) by adding the new
         <code>customClrAdvancedSelection</code> directive to the datagrid. For a full example, see the
         <a
