@@ -35,11 +35,5 @@ function elementIsCheckbox(element: HTMLElement | null) {
 }
 
 function elementHasDatagridRowParent(element: HTMLElement | null, maxParent: HTMLElement) {
-  const clrRowTagName = 'CLR-DG-ROW';
-
-  while (element && element !== maxParent && element.tagName !== clrRowTagName) {
-    element = element.parentElement;
-  }
-
-  return element?.tagName === clrRowTagName;
+  return maxParent.contains(element?.closest('clr-dg-row') || null);
 }
