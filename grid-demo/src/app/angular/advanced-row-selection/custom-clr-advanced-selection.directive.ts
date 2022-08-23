@@ -13,11 +13,11 @@ export class CustomClrAdvancedSelectionDirective implements OnInit {
   }
 
   @HostListener('click', ['$event'])
-  overrideSelection(evt: MouseEvent) {
-    const target = evt.target as HTMLElement;
+  overrideSelection(event: MouseEvent) {
+    const target = event.target as HTMLElement;
 
     if (
-      !isSpecialKeyClick(evt) &&
+      !isSpecialKeyClick(event) &&
       !isCheckboxClick(target) &&
       hasDatagridRowParent(target, this.elementRef.nativeElement)
     ) {
@@ -26,8 +26,8 @@ export class CustomClrAdvancedSelectionDirective implements OnInit {
   }
 }
 
-function isSpecialKeyClick(evt: MouseEvent) {
-  return evt.shiftKey || evt.ctrlKey || evt.metaKey;
+function isSpecialKeyClick(event: MouseEvent) {
+  return event.shiftKey || event.ctrlKey || event.metaKey;
 }
 
 function isCheckboxClick(target: HTMLElement | null) {
