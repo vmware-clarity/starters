@@ -18,7 +18,7 @@ export class CustomClrAdvancedSelectionDirective implements OnInit {
 
     if (
       !mouseEventIsSpecialKeyClick(event) &&
-      !elementIsCheckbox(target) &&
+      !elementHasSelectionCellParent(target, this.elementRef.nativeElement) &&
       elementHasDatagridRowParent(target, this.elementRef.nativeElement)
     ) {
       this.datagrid.selected = [];
@@ -30,8 +30,8 @@ function mouseEventIsSpecialKeyClick(event: MouseEvent) {
   return event.shiftKey || event.ctrlKey || event.metaKey;
 }
 
-function elementIsCheckbox(element: HTMLElement | null) {
-  return element?.parentElement?.className === 'clr-checkbox-wrapper';
+function elementHasSelectionCellParent(element: HTMLElement | null, maxParent: HTMLElement) {
+  return maxParent.contains(element?.closest('.datagrid-select') || null);
 }
 
 function elementHasDatagridRowParent(element: HTMLElement | null, maxParent: HTMLElement) {
