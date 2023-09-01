@@ -9,7 +9,7 @@
   "dependencies": {
     "modern-normalize": "^1.1.0",
     "@cds/city": "^1.1.0",
-    "@cds/core": "^6.0.0-next.6"
+    "@cds/core": "6.6.2"
   },
   "devDependencies": {
     "snowpack": "^3.8.8"
