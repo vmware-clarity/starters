@@ -21,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "@cds/city": "^1.1.0",
-    "@cds/core": "^6.0.0-next.6",
+    "@cds/core": "6.6.2",
     "del-cli": "^4.0.1",
     "modern-normalize": "^1.1.0"
   },
