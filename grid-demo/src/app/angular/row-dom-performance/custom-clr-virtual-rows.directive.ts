@@ -6,6 +6,7 @@ import {
   CdkVirtualForOf,
   CdkVirtualForOfContext,
   CdkVirtualScrollViewport,
+  CdkVirtualScrollable,
   FixedSizeVirtualScrollStrategy,
   ScrollDispatcher,
   ViewportRuler,
@@ -155,9 +156,8 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
     private readonly scrollDispatcher: ScrollDispatcher,
     private readonly viewportRuler: ViewportRuler,
     private readonly datagrid: ClrDatagrid
-  ) {}
+  ) {
 
-  ngOnInit() {
     this.gridRoleElement = this.datagridElementRef.nativeElement.querySelector<HTMLElement>('[role="grid"]');
 
     this.virtualScrollStrategy = new FixedSizeVirtualScrollStrategy(
@@ -173,7 +173,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
       this.scrollDispatcher,
       this.viewportRuler,
       this.datagridElementRef,
-      this.virtualScrollStrategy
+      this.virtualScrollStrategy,
     );
 
     const viewRepeaterStrategy = new _RecycleViewRepeaterStrategy<T, T, CdkVirtualForOfContext<T>>();
@@ -208,6 +208,10 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
     this.keydownEventSubscription = fromEvent<KeyboardEvent>(this.gridRoleElement!, 'keydown').subscribe(event => {
       this.handlePageUpAndPageDownKeys(event);
     });
+  }
+
+  ngOnInit() {
+ 
   }
 
   ngDoCheck() {
@@ -342,7 +346,7 @@ function createVirtualScrollViewportForDatagrid(
   scrollDispatcher: ScrollDispatcher,
   viewportRuler: ViewportRuler,
   datagridElementRef: ElementRef<HTMLElement>,
-  virtualScrollStrategy: FixedSizeVirtualScrollStrategy
+  virtualScrollStrategy: FixedSizeVirtualScrollStrategy,
 ) {
   const datagridDivElement = datagridElementRef.nativeElement.querySelector<HTMLElement>('.datagrid')!;
   const datagridTableElement = datagridElementRef.nativeElement.querySelector<HTMLElement>('.datagrid-table')!;
@@ -365,7 +369,8 @@ function createVirtualScrollViewportForDatagrid(
     virtualScrollStrategy,
     directionality,
     scrollDispatcher,
-    viewportRuler
+    viewportRuler,
+    null as any
   );
 
   const virtualScrollViewportContentWrapperElementRef: ElementRef = {

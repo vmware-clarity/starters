@@ -25,7 +25,7 @@
   </clr-accordion-panel>
 </clr-accordion>
 
-<clr-datagrid *ngIf="{ vms: vms | async }; let data" [clrDgLoading]="data.vms === null">
+<clr-datagrid *ngIf="{ vms: vms | async }; let data" [clrDgLoading]="data.vms === null" cdkVirtualScrollingElement>
   <clr-dg-column
     *ngFor="let column of columns"
     [clrDgField]="column.field"
@@ -37,11 +37,14 @@
     </ng-template>
   </clr-dg-column>
 
-  <clr-dg-row *customClrVirtualRows="let vm of data.vms; itemSize: 72; keyboardScrollPageSize: 100" [clrDgItem]="vm">
-    <clr-dg-cell *ngFor="let column of columns">
-      <span class="cell-wrapper">{{ vm[column.field] }}</span>
-    </clr-dg-cell>
-  </clr-dg-row>
+  <ng-container *ngIf="data.vms && data.vms.length">
+    <clr-dg-row *customClrVirtualRows="let vm of data.vms; itemSize: 72; keyboardScrollPageSize: 100" [clrDgItem]="vm">
+      <clr-dg-cell *ngFor="let column of columns">
+        <span class="cell-wrapper">{{ vm[column.field] }}</span>
+      </clr-dg-cell>
+    </clr-dg-row>
+  </ng-container>
+
 
   <clr-dg-footer>{{ data.vms?.length }} vms total</clr-dg-footer>
 </clr-datagrid>
