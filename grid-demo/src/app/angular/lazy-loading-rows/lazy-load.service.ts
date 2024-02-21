@@ -19,8 +19,7 @@ export class LazyLoadService {
           map(range => getPageIndexesInView(range)),
           switchMap(pages => from(pages)),
           distinct(),
-          mergeMap(pageIndex => generateVms({ pageIndex, pageSize })
-            .pipe(map(data => ({ vms: data.vms, pageIndex })))),
+          mergeMap(pageIndex => generateVms({ pageIndex, pageSize }).pipe(map(data => ({ vms: data.vms, pageIndex })))),
           scan(
             (allVms: Vm[], data: { vms: Vm[]; pageIndex: number }) => {
               const before = allVms.slice(0, data.pageIndex * pageSize);
