@@ -27,7 +27,7 @@ export class CustomClrAdvancedSelectionDirective implements OnInit {
 }
 
 function mouseEventIsSpecialKeyClick(event: MouseEvent) {
-  return event.shiftKey || event.ctrlKey || event.metaKey;
+  return event.shiftKey || event.ctrlKey || event.altKey;
 }
 
 function elementHasSelectionCellParent(element: HTMLElement | null, maxParent: HTMLElement) {

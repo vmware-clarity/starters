@@ -5,8 +5,8 @@ import {
   CdkFixedSizeVirtualScroll,
   CdkVirtualForOf,
   CdkVirtualForOfContext,
+  CdkVirtualScrollableElement,
   CdkVirtualScrollViewport,
-  CdkVirtualScrollable,
   FixedSizeVirtualScrollStrategy,
   ScrollDispatcher,
   ViewportRuler,
@@ -210,9 +210,7 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
     });
   }
 
-  ngOnInit() {
- 
-  }
+  ngOnInit() {}
 
   ngDoCheck() {
     this.cdkVirtualFor?.ngDoCheck();
@@ -370,10 +368,10 @@ function createVirtualScrollViewportForDatagrid(
     directionality,
     scrollDispatcher,
     viewportRuler,
-    null as any
+    null as any as CdkVirtualScrollableElement
   );
 
-  const virtualScrollViewportContentWrapperElementRef: ElementRef = {
+  virtualScrollViewport._contentWrapper = {
     nativeElement: {
       style: {
         set transform(value: any) {
@@ -382,9 +380,7 @@ function createVirtualScrollViewportForDatagrid(
         },
       },
     },
-  };
-
-  virtualScrollViewport._contentWrapper = virtualScrollViewportContentWrapperElementRef;
+  } as ElementRef;
 
   virtualScrollViewport.setTotalContentSize = (value: number) => {
     totalContentSize = value;
