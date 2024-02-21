@@ -135,9 +135,9 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
   private datagridKeyNavigationController = getDatagridKeyNavigationController(this.datagrid);
 
   private gridRoleElement: HTMLElement | null | undefined;
-  private virtualScrollStrategy: FixedSizeVirtualScrollStrategy | undefined;
-  private virtualScrollViewport: CdkVirtualScrollViewport | undefined;
-  private cdkVirtualFor: CdkVirtualForOf<T> | undefined;
+  private virtualScrollStrategy: FixedSizeVirtualScrollStrategy;
+  private virtualScrollViewport: CdkVirtualScrollViewport;
+  private cdkVirtualFor: CdkVirtualForOf<T>;
   private setActiveCellSubscription: Subscription | undefined;
   private dataStreamSubscription: Subscription | undefined;
   private renderedRangeChangeSubscription: Subscription | undefined;
@@ -157,8 +157,6 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
     private readonly viewportRuler: ViewportRuler,
     private readonly datagrid: ClrDatagrid
   ) {
-    this.gridRoleElement = this.datagridElementRef.nativeElement.querySelector<HTMLElement>('[role="grid"]');
-
     this.virtualScrollStrategy = new FixedSizeVirtualScrollStrategy(
       this._cdkFixedSizeVirtualScrollInputs.itemSize,
       this._cdkFixedSizeVirtualScrollInputs.minBufferPx,
@@ -185,6 +183,10 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
       this.virtualScrollViewport,
       this.ngZone
     );
+  }
+
+  ngOnInit() {
+    this.gridRoleElement = this.datagridElementRef.nativeElement.querySelector<HTMLElement>('[role="grid"]');
 
     this.updateCdkVirtualForInputs();
 
@@ -208,8 +210,6 @@ export class CustomClrVirtualRowsDirective<T> implements OnInit, DoCheck, OnDest
       this.handlePageUpAndPageDownKeys(event);
     });
   }
-
-  ngOnInit() {}
 
   ngDoCheck() {
     this.cdkVirtualFor?.ngDoCheck();
