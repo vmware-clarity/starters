@@ -44,6 +44,7 @@
   </clr-dg-column>
 
   <ng-template
+    *ngIf="data.data?.vms && data.data?.totalResults"
     customClrVirtualRows
     let-vm
     [customClrVirtualRowsOf]="data.data?.vms"
